@@ -16,7 +16,8 @@ namespace AAI_assignment.behaviour
 
         public override Vector2D Calculate()
         {
-            Vector2D desiredVelocity = ME.MyWorld.Target.Pos.Sub(ME.Pos).Normalize().Multiply(ME.MaxSpeed);
+            Vector2D Cpos = ME.MyWorld.Target.Pos.Clone();
+            Vector2D desiredVelocity = Cpos.Sub(ME.Pos).Normalize().Multiply(ME.MaxSpeed);
             return desiredVelocity.Sub(ME.Velocity);
         }
     }
