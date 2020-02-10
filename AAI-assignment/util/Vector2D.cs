@@ -64,7 +64,7 @@ namespace AAI_assignment
         public Vector2D Normalize()
         {
             this.X /= Length();
-            this.Y /= LengthSquared();
+            this.Y /= Length();
             return this;
         }
 
