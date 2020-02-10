@@ -9,16 +9,14 @@ namespace AAI_assignment.behaviour
 {
     class SeekBehaviour : SteeringBehaviour
     {
-        private MovingEntity target;
         // to do
-        public SeekBehaviour(MovingEntity me, MovingEntity _target) : base(me)
+        public SeekBehaviour(MovingEntity me) : base(me)
         {
-            target = _target;
         }
 
         public override Vector2D Calculate()
         {
-            Vector2D desiredVelocity = target.Pos.Sub(ME.Pos).Normalize().Multiply(ME.MaxSpeed);
+            Vector2D desiredVelocity = ME.MyWorld.Target.Pos.Sub(ME.Pos).Normalize().Multiply(ME.MaxSpeed);
             return desiredVelocity.Sub(ME.Velocity);
         }
     }
