@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -18,23 +19,28 @@ namespace AAI_assignment.entity
         public MovingEntity(Vector2D pos, World w) : base(pos, w)
         {
             Mass = 30;
-            MaxSpeed = 150;
+            MaxSpeed = 100;
             Velocity = new Vector2D();
         }
 
         public override void Update(float timeElapsed)
         {
-            // to do
-            Console.WriteLine(ToString());
-            Vector2D steeringForce = SB.Calculate();
-            //Acceleration = Force/Mass
-            Vector2D acceleration = steeringForce.divide(Mass);
-            //update velocity
-            Velocity.Add(acceleration.Multiply(timeElapsed));
-            // Make sure the velocity does not exceed maximum velocity
-            Velocity.truncate(MaxSpeed);
-            //update the position
-            Pos.Add(Velocity.Multiply(timeElapsed));
+            if (!(Pos.X >= MyWorld.Target.Pos.X - 10 && Pos.X <= MyWorld.Target.Pos.X + 10 && Pos.Y >= MyWorld.Target.Pos.Y - 10 && Pos.Y <= MyWorld.Target.Pos.Y + 10))
+            {
+                // to do
+                //Console.WriteLine(ToString());
+                Console.WriteLine("Red: " + Pos);
+                Console.WriteLine("Blue: " + MyWorld.Target.Pos);
+                Vector2D steeringForce = SB.Calculate();
+                //Acceleration = Force/Mass
+                Vector2D acceleration = steeringForce.divide(Mass);
+                //update velocity
+                Velocity.Add(acceleration.Multiply(timeElapsed));
+                // Make sure the velocity does not exceed maximum velocity
+                Velocity.truncate(MaxSpeed);
+                //update the position
+                Pos.Add(Velocity.Multiply(timeElapsed));
+            }
 
         }
 
