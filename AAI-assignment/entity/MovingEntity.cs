@@ -25,9 +25,10 @@ namespace AAI_assignment.entity
 
         public override void Update(float timeElapsed)
         {
-            if (!(Pos.X >= MyWorld.Target.Pos.X - 10 && Pos.X <= MyWorld.Target.Pos.X + 10 && Pos.Y >= MyWorld.Target.Pos.Y - 10 && Pos.Y <= MyWorld.Target.Pos.Y + 10))
+            int stopRange = 10;
+            Vector2D target = MyWorld.Target.Pos;
+            if (!(Pos.X >= target.X - stopRange && Pos.X <= target.X + stopRange && Pos.Y >= target.Y - stopRange && Pos.Y <= target.Y + stopRange))
             {
-                // to do
                 //Console.WriteLine(ToString());
                 Console.WriteLine("Red: " + Pos);
                 Console.WriteLine("Blue: " + MyWorld.Target.Pos);
