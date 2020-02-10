@@ -25,13 +25,15 @@ namespace AAI_assignment
 
         private void populate()
         {
-            Vehicle v = new Vehicle(new Vector2D(10,10), this);
-            v.VColor = Color.Blue;
-            entities.Add(v);
-
             Target = new Vehicle(new Vector2D(100, 60), this);
             Target.VColor = Color.DarkRed;
             Target.Pos = new Vector2D(100, 40);
+
+            Vehicle v = new Vehicle(new Vector2D(10, 10), this);
+            v.VColor = Color.Blue;
+            v.SB = new SeekBehaviour(v, Target);
+            entities.Add(v);
+
         }
 
         public void Update(float timeElapsed)

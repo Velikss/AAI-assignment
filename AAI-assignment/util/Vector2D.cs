@@ -25,17 +25,19 @@ namespace AAI_assignment
 
         public double Length()
         {
-            throw new NotImplementedException();
+            return Math.Sqrt(LengthSquared());
         }
 
         public double LengthSquared()
         {
-            throw new NotImplementedException();
+            return (X * X) + (Y * Y);
         }
 
         public Vector2D Add(Vector2D v)
         {
-            throw new NotImplementedException();
+            this.X += v.X;
+            this.Y += v.Y;
+            return this;
         }
 
         public Vector2D Sub(Vector2D v)
@@ -54,12 +56,16 @@ namespace AAI_assignment
 
         public Vector2D divide(double value)
         {
-            throw new NotImplementedException();
+            this.X /= value;
+            this.Y /= value;
+            return this;
         }
 
         public Vector2D Normalize()
         {
-            throw new NotImplementedException();
+            this.X /= Length();
+            this.Y /= LengthSquared();
+            return this;
         }
 
         public Vector2D truncate(double maX)
