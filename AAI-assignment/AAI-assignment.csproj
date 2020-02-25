@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="behaviour\SeekBehaviour.cs" />
     <Compile Include="behaviour\SteeringBehaviour.cs" />
+    <Compile Include="behaviour\WanderingBehaviour.cs" />
     <Compile Include="DBPanel.cs">
       <SubType>Component</SubType>
     </Compile>

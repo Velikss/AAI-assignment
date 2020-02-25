@@ -77,6 +77,12 @@ namespace AAI_assignment
             }
             return this;
         }
+
+        public static Vector2D randomPos(int maxX, int maxY)
+        {
+            Random rnd = new Random();
+            return new Vector2D(rnd.Next(1, maxX), rnd.Next(1, maxY));
+        }
         
         public Vector2D Clone()
         {

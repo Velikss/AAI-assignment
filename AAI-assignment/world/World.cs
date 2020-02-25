@@ -25,9 +25,14 @@ namespace AAI_assignment
 
         private void populate()
         {
-            Vehicle v = new Vehicle(new Vector2D(10, 10), this);
-            v.VColor = Color.Blue;
-            entities.Add(v);
+            Random r; 
+
+            for (int i = 0; i < 5; i++)
+            {
+                Vehicle v = new Vehicle(new Vector2D(i * 3, i * 8), this);
+                v.VColor = Color.Purple;
+                entities.Add(v);
+            }
 
             Target = new Vehicle(new Vector2D(100, 60), this);
             Target.VColor = Color.DarkRed;
@@ -38,7 +43,7 @@ namespace AAI_assignment
         {
             foreach (MovingEntity me in entities)
             {
-                me.SB = new SeekBehaviour(me); // restore later
+                me.SB = new WanderingBehaviour(me); // restore later
                 me.Update(timeElapsed);
             }  
         }
