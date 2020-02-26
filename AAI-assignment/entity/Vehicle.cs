@@ -14,7 +14,7 @@ namespace AAI_assignment.entity
         public Vehicle(Vector2D pos, World w) : base(pos, w)
         {
             Velocity = new Vector2D(0, 0);
-            Scale = 5;
+            Scale = 8;
 
             VColor = Color.Black;
         }
@@ -25,8 +25,10 @@ namespace AAI_assignment.entity
             double rightCorner = Pos.Y - Scale;
             double size = Scale * 2;
 
+            Rectangle entity = new Rectangle((int)leftCorner, (int)rightCorner, (int)size, (int)size);
+
             Pen p = new Pen(VColor, 2);
-            g.DrawEllipse(p, new Rectangle((int) leftCorner, (int) rightCorner, (int) size, (int) size));
+            g.DrawEllipse(p, entity);
             g.DrawLine(p, (int) Pos.X, (int) Pos.Y, (int) Pos.X + (int)(Velocity.X * 2), (int)Pos.Y + (int)(Velocity.Y * 2));
         }
     }
