@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace AAI_assignment
 {
-   
+
     public class Vector2D
     {
         public double X { get; set; }
         public double Y { get; set; }
 
-        public Vector2D() : this(0,0)
+        public Vector2D() : this(0, 0)
         {
         }
 
@@ -39,11 +39,21 @@ namespace AAI_assignment
             return this;
         }
 
+        public static Vector2D operator +(Vector2D v1, Vector2D v2)
+        {
+            return new Vector2D(v1.X + v2.X, v1.Y + v2.Y);
+        }
+
         public Vector2D Sub(Vector2D v)
         {
             this.X -= v.X;
             this.Y -= v.Y;
             return this;
+        }
+
+        public static Vector2D operator -(Vector2D v1, Vector2D v2)
+        {
+            return new Vector2D(v1.X - v2.X, v1.Y - v2.Y);
         }
 
         public Vector2D Multiply(double value)
@@ -53,11 +63,21 @@ namespace AAI_assignment
             return this;
         }
 
+        public static Vector2D operator *(Vector2D v1, double value)
+        {
+            return new Vector2D(v1.X * value, v1.Y * value);
+        }
+
         public Vector2D divide(double value)
         {
             this.X /= value;
             this.Y /= value;
             return this;
+        }
+
+        public static Vector2D operator /(Vector2D v1, double value)
+        {
+            return new Vector2D(v1.X / value, v1.Y / value);
         }
 
         public Vector2D Normalize()
@@ -80,7 +100,7 @@ namespace AAI_assignment
         public static Vector2D randomPos(int maxX, int maxY)
         {
             Random rnd = new Random();
-            return new Vector2D(rnd.Next(1, maxX), rnd.Next(1, maxY));
+            return new Vector2D(rnd.NextDouble() * maxX, rnd.NextDouble() * maxY);
         }
         
         public Vector2D Clone()
