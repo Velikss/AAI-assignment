@@ -25,24 +25,18 @@ namespace AAI_assignment.entity
 
         public override void Update(float timeElapsed)
         {
-            int stopRange = 10;
-            Vector2D target = MyWorld.Target.Pos;
-            if (!(Pos.X >= target.X - stopRange && Pos.X <= target.X + stopRange && Pos.Y >= target.Y - stopRange && Pos.Y <= target.Y + stopRange))
-            {
-                //Console.WriteLine(ToString());
-                Console.WriteLine("Red: " + Pos);
-                Console.WriteLine("Blue: " + MyWorld.Target.Pos);
-                Vector2D steeringForce = SB.Calculate();
-                //Acceleration = Force/Mass
-                Vector2D acceleration = steeringForce.divide(Mass);
-                //update velocity
-                Velocity.Add(acceleration.Multiply(timeElapsed));
-                // Make sure the velocity does not exceed maximum velocity
-                Velocity.truncate(MaxSpeed);
-                //update the position
-                Pos.Add(Velocity.Multiply(timeElapsed));
-            }
-
+            //Console.WriteLine(ToString());
+            //Console.WriteLine("Red: " + Pos);
+            //Console.WriteLine("Blue: " + MyWorld.Target.Pos);
+            Vector2D steeringForce = SB.Calculate();
+            //Acceleration = Force/Mass
+            Vector2D acceleration = steeringForce.divide(Mass);
+            //update velocity
+            Velocity.Add(acceleration.Multiply(timeElapsed));
+            // Make sure the velocity does not exceed maximum velocity
+            Velocity.truncate(MaxSpeed);
+            //update the position
+            Pos.Add(Velocity.Multiply(timeElapsed));
         }
 
         public override string ToString()

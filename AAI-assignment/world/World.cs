@@ -43,7 +43,8 @@ namespace AAI_assignment
         {
             foreach (MovingEntity me in entities)
             {
-                me.SB = new WanderingBehaviour(me); // restore later
+                me.SB = new SeekBehaviour(me);
+                //me.SB = new WanderingBehaviour(me); // restore later
                 me.Update(timeElapsed);
             }  
         }
