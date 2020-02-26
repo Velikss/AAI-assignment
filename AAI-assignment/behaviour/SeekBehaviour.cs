@@ -1,9 +1,5 @@
 ﻿using AAI_assignment.entity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace AAI_assignment.behaviour
 {
@@ -26,6 +22,12 @@ namespace AAI_assignment.behaviour
                     Vector2D desiredVelocity = Tpos.Sub(ME.Pos).Normalize().Multiply(ME.MaxSpeed);
                     return desiredVelocity.Sub(ME.Velocity);
                 }
+            }
+            else
+            {
+                Vector2D Tpos = ME.MyWorld.Target.Pos.Clone();
+                Vector2D desiredVelocity = Tpos.Sub(ME.Pos).Normalize().Multiply(ME.MaxSpeed);
+                return desiredVelocity.Sub(ME.Velocity);
             }
             return new Vector2D();
         }

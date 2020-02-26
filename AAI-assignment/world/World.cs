@@ -11,7 +11,7 @@ namespace AAI_assignment
 {
     class World
     {
-        private List<MovingEntity> entities = new List<MovingEntity>();
+        public List<MovingEntity> entities = new List<MovingEntity>();
         public Vehicle Target { get; set; }
         public int Width { get; set; }
         public int Height { get; set; }
@@ -27,8 +27,11 @@ namespace AAI_assignment
         {
             Random r = new Random(); 
 
-            for (int i = 0; i < 55; i++)
+            for (int i = 0; i < 10; i++)
             {
+                //Vehicle v = new Vehicle(new Vector2D(i * 3, i * 8), this);
+                Vehicle v = new Vehicle(new Vector2D(100 + (i*10), 100 + (i*10)), this);
+                v.VColor = Color.Purple;
                 Vehicle v = new Vehicle(new Vector2D(i * 3, i * 8), this);
                 v.VColor = Color.FromArgb(r.Next(1, 255), r.Next(1, 255), r.Next(1, 255));
                 v.MaxSpeed = r.Next(25, 650);
@@ -45,7 +48,7 @@ namespace AAI_assignment
             foreach (MovingEntity me in entities)
             {
                 //me.SB = new SeekBehaviour(me);
-                me.SB = new ArriveBehaviour(me, Target.Pos, Deceleration.slow); // restore later
+                me.SB = new WanderingBehaviour(me); // restore later
                 me.Update(timeElapsed);
             }  
         }

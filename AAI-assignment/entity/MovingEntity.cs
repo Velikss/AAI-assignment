@@ -15,7 +15,7 @@ namespace AAI_assignment.entity
 
         public float Mass { get; set; }
         public float MaxSpeed { get; set; }
-
+        public BaseGameEntity Target { get; set; }
         public SteeringBehaviour SB { get; set; }
 
         public MovingEntity(Vector2D pos, World w) : base(pos, w)
