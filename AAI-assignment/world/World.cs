@@ -31,8 +31,8 @@ namespace AAI_assignment
             {
                 //Vehicle v = new Vehicle(new Vector2D(i * 3, i * 8), this);
                 Vehicle v = new Vehicle(new Vector2D(100 + (i*10), 100 + (i*10)), this);
-                v.VColor = Color.Purple;
-                Vehicle v = new Vehicle(new Vector2D(i * 3, i * 8), this);
+                //v.VColor = Color.Purple;
+                //Vehicle v = new Vehicle(new Vector2D(i * 3, i * 8), this);
                 v.VColor = Color.FromArgb(r.Next(1, 255), r.Next(1, 255), r.Next(1, 255));
                 v.MaxSpeed = r.Next(25, 650);
                 entities.Add(v);
@@ -48,7 +48,8 @@ namespace AAI_assignment
             foreach (MovingEntity me in entities)
             {
                 //me.SB = new SeekBehaviour(me);
-                me.SB = new WanderingBehaviour(me); // restore later
+                //me.SB = new WanderingBehaviour(me); // restore later
+                me.SB = new SeparationBehaviour(me);
                 me.Update(timeElapsed);
             }  
         }
