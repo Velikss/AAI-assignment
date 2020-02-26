@@ -33,11 +33,11 @@ namespace AAI_assignment.entity
             //Console.WriteLine("Blue: " + MyWorld.Target.Pos);
             Vector2D steeringForce = SB.Calculate();
             //Acceleration = Force/Mass
-            Vector2D acceleration = steeringForce.divide(Mass);
+            Vector2D acceleration = steeringForce.Divide(Mass);
             //update velocity
             Velocity.Add(acceleration.Multiply(timeElapsed));
             // Make sure the velocity does not exceed maximum velocity
-            Velocity.truncate(MaxSpeed);
+            Velocity.Truncate(MaxSpeed);
             //update the position
             Pos.Add(Velocity.Multiply(timeElapsed));
         }

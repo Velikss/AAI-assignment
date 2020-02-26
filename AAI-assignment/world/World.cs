@@ -20,17 +20,18 @@ namespace AAI_assignment
         {
             Width = w;
             Height = h;
-            populate();
+            Populate();
         }
 
-        private void populate()
+        private void Populate()
         {
-            Random r; 
+            Random r = new Random(); 
 
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 55; i++)
             {
                 Vehicle v = new Vehicle(new Vector2D(i * 3, i * 8), this);
-                v.VColor = Color.Purple;
+                v.VColor = Color.FromArgb(r.Next(1, 255), r.Next(1, 255), r.Next(1, 255));
+                v.MaxSpeed = r.Next(25, 650);
                 entities.Add(v);
             }
 
@@ -44,7 +45,7 @@ namespace AAI_assignment
             foreach (MovingEntity me in entities)
             {
                 //me.SB = new SeekBehaviour(me);
-                me.SB = new ArriveBehaviour(me, Target.Pos, Deceleration.fast); // restore later
+                me.SB = new ArriveBehaviour(me, Target.Pos, Deceleration.slow); // restore later
                 me.Update(timeElapsed);
             }  
         }

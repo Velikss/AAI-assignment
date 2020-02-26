@@ -68,7 +68,7 @@ namespace AAI_assignment
             return new Vector2D(v1.X * value, v1.Y * value);
         }
 
-        public Vector2D divide(double value)
+        public Vector2D Divide(double value)
         {
             this.X /= value;
             this.Y /= value;
@@ -87,7 +87,7 @@ namespace AAI_assignment
             return this;
         }
 
-        public Vector2D truncate(double maX)
+        public Vector2D Truncate(double maX)
         {
             if (Length() > maX)
             {
