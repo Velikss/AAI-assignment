@@ -27,7 +27,7 @@ namespace AAI_assignment
         {
             Random r = new Random(); 
 
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 500; i++)
             {
                 //Vehicle v = new Vehicle(new Vector2D(i * 3, i * 8), this);
                 Vehicle v = new Vehicle(new Vector2D(100 + (i*10), 100 + (i*10)), this);
