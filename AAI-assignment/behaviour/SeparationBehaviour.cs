@@ -22,7 +22,7 @@ namespace AAI_assignment.behaviour
                     steeringForce = steeringForce.Add(ToAgent.Normalize().Divide(ToAgent.Length()));
                 }
             }
-            return steeringForce.Multiply(10);
+            return steeringForce.Multiply(100);
         }
     }
 }

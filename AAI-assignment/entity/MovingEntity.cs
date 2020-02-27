@@ -16,7 +16,7 @@ namespace AAI_assignment.entity
         public float Mass { get; set; }
         public float MaxSpeed { get; set; }
         public BaseGameEntity Target { get; set; }
-        public SteeringBehaviour SB { get; set; }
+        public List<SteeringBehaviour> SB = new List<SteeringBehaviour>();
 
         public MovingEntity(Vector2D pos, World w) : base(pos, w)
         {
@@ -28,18 +28,21 @@ namespace AAI_assignment.entity
 
         public override void Update(float timeElapsed)
         {
-            //Console.WriteLine(ToString());
-            //Console.WriteLine("Red: " + Pos);
-            //Console.WriteLine("Blue: " + MyWorld.Target.Pos);
-            Vector2D steeringForce = SB.Calculate();
-            //Acceleration = Force/Mass
-            Vector2D acceleration = steeringForce.Divide(Mass);
-            //update velocity
-            Velocity.Add(acceleration.Multiply(timeElapsed));
-            // Make sure the velocity does not exceed maximum velocity
-            Velocity.Truncate(MaxSpeed);
-            //update the position
-            Pos.Add(Velocity.Multiply(timeElapsed));
+            foreach (SteeringBehaviour sb in SB)
+            {
+                Vector2D steeringForce = sb.Calculate();
+                //Acceleration = Force/Mass
+                Vector2D acceleration = steeringForce.Divide(Mass);
+                //update velocity
+                Velocity.Add(acceleration.Multiply(timeElapsed));
+                // Make sure the velocity does not exceed maximum velocity
+                Velocity.Truncate(MaxSpeed);
+                //update the position
+                Pos.Add(Velocity.Multiply(timeElapsed));
+            }
+            ////Console.WriteLine(ToString());
+            ////Console.WriteLine("Red: " + Pos);
+            ////Console.WriteLine("Blue: " + MyWorld.Target.Pos);
         }
 
         public override string ToString()

@@ -5,7 +5,7 @@ namespace AAI_assignment.behaviour
 {
     class SeekBehaviour : SteeringBehaviour
     {
-        public bool Stop = true;
+        public bool Stop = false;
         public int StopRange = 10;
         public SeekBehaviour(MovingEntity me) : base(me)
         {

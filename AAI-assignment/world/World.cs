@@ -34,7 +34,7 @@ namespace AAI_assignment
                 //v.VColor = Color.Purple;
                 //Vehicle v = new Vehicle(new Vector2D(i * 3, i * 8), this);
                 v.VColor = Color.FromArgb(r.Next(1, 255), r.Next(1, 255), r.Next(1, 255));
-                v.MaxSpeed = r.Next(25, 650);
+                v.MaxSpeed = r.Next(10, 15);
                 entities.Add(v);
             }
 
@@ -49,7 +49,10 @@ namespace AAI_assignment
             {
                 //me.SB = new SeekBehaviour(me);
                 //me.SB = new WanderingBehaviour(me); // restore later
-                me.SB = new SeparationBehaviour(me);
+                //me.SB = new SeparationBehaviour(me);
+                //me.Update(timeElapsed);
+                me.SB.Add(new SeparationBehaviour(me));
+                me.SB.Add(new SeekBehaviour(me));
                 me.Update(timeElapsed);
             }  
         }
