@@ -28,6 +28,7 @@ namespace AAI_assignment.entity
 
         public override void Update(float timeElapsed)
         {
+            Vector2D temp = new Vector2D();
             foreach (SteeringBehaviour sb in SB)
             {
                 Vector2D steeringForce = sb.Calculate();
@@ -37,9 +38,13 @@ namespace AAI_assignment.entity
                 Velocity.Add(acceleration.Multiply(timeElapsed));
                 // Make sure the velocity does not exceed maximum velocity
                 Velocity.Truncate(MaxSpeed);
-                //update the position
-                Pos.Add(Velocity.Multiply(timeElapsed));
+
+                temp.Add(Velocity.Multiply(timeElapsed));
+                //Pos.Add(Velocity.Multiply(timeElapsed));
             }
+            //update the position
+            Pos.Add(temp);
+            Heading = Pos.Clone().Normalize();
             ////Console.WriteLine(ToString());
             ////Console.WriteLine("Red: " + Pos);
             ////Console.WriteLine("Blue: " + MyWorld.Target.Pos);
