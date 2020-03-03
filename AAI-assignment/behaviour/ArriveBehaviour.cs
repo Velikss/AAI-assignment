@@ -18,9 +18,9 @@ namespace AAI_assignment.behaviour
     {
         public Vector2D TargetPos;
         Deceleration decel;
-        public ArriveBehaviour(MovingEntity me, Vector2D TargetPos, Deceleration d) : base(me)
+        public ArriveBehaviour(MovingEntity me,  Deceleration d) : base(me)
         {
-            this.TargetPos = TargetPos;
+            this.TargetPos = me.MyWorld.Target.Pos;
             this.decel = d;
         }
 
