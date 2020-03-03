@@ -27,20 +27,20 @@ namespace AAI_assignment
         {
             Random r = new Random(); 
 
-            for (int i = 0; i < 500; i++)
+            for (int i = 0; i < 10; i++)
             {
                 //Vehicle v = new Vehicle(new Vector2D(i * 3, i * 8), this);
                 Vehicle v = new Vehicle(new Vector2D(100 + (i*10), 100 + (i*10)), this);
                 //v.VColor = Color.Purple;
                 //Vehicle v = new Vehicle(new Vector2D(i * 3, i * 8), this);
                 v.VColor = Color.FromArgb(r.Next(1, 255), r.Next(1, 255), r.Next(1, 255));
-                v.MaxSpeed = r.Next(10, 15);
+                v.MaxSpeed = r.Next(100, 100);
                 entities.Add(v);
             }
 
             Target = new Vehicle(new Vector2D(100, 60), this);
             Target.VColor = Color.DarkRed;
-            Target.Pos = new Vector2D(100, 40);
+            Target.Pos = new Vector2D(10, 10);
         }
 
         public void Update(float timeElapsed)
@@ -51,7 +51,12 @@ namespace AAI_assignment
                 //me.SB = new WanderingBehaviour(me); // restore later
                 //me.SB = new SeparationBehaviour(me);
                 //me.Update(timeElapsed);
-                me.SB.Add(new SeparationBehaviour(me));
+                me.SB.Clear();
+                //me.SB.Add(new SeparationBehaviour(me, 20, entities, 100));
+                //me.SB.Add(new AllignmentBehaviour(me, 10, entities, 50));
+                //me.SB.Add(new CohesionBehaviour(me, 50, entities, 20));
+                me.SB.Add(new FlockingBehaviour(me, 50, 35, 50, entities, 
+                                              20, 100, 50));
                 me.SB.Add(new SeekBehaviour(me));
                 me.Update(timeElapsed);
             }  

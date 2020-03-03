@@ -46,7 +46,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="behaviour\AllignmentBehaviour.cs" />
     <Compile Include="behaviour\ArriveBehaviour.cs" />
+    <Compile Include="behaviour\CohesionBehaviour.cs" />
+    <Compile Include="behaviour\FlockingBehaviour.cs" />
     <Compile Include="behaviour\SeekBehaviour.cs" />
     <Compile Include="behaviour\SeparationBehaviour.cs" />
     <Compile Include="behaviour\SteeringBehaviour.cs" />
