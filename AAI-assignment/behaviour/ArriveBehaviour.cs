@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AAI_assignment.behaviour
 {
-    enum Deceleration
+    public enum Deceleration
     {
         slow = 3,
         normal = 2, 
@@ -18,7 +18,7 @@ namespace AAI_assignment.behaviour
     {
         public Vector2D TargetPos;
         Deceleration decel;
-        public ArriveBehaviour(MovingEntity me,  Deceleration d) : base(me)
+        public ArriveBehaviour(MovingEntity me, Deceleration d) : base(me)
         {
             this.TargetPos = me.MyWorld.Target.Pos;
             this.decel = d;

@@ -13,7 +13,7 @@ namespace AAI_assignment
 {
     public partial class Form1 : Form
     {
-        World world;
+        public World world;
         System.Timers.Timer timer;
         public const float timeDelta = 0.8f;
         

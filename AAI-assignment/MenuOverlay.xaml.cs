@@ -21,31 +21,31 @@ namespace AAI_assignment
     /// </summary>
     partial class MenuOverlay : UserControl
     {
-        World world;
-        public MenuOverlay(World world)
+        Form1 form;
+        public MenuOverlay(Form1 world)
         {
-            this.world = world;
+            this.form = world;
             InitializeComponent();
         }
 
-        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        private void Behaviour_Box_Checked(object sender, RoutedEventArgs e)
         {
             if (sender != null)
             {
                 string type = (String)((CheckBox)sender).Content;
 
-                switch (type)
-                {
-                    case "Alignment":
-                        return;
-                    default:
-                        return;
-
-                }
+                form.world.AddBehaviour(type);
             }
+        }
 
-            
-
+        private void Behaviour_Box_UnChecked(object sender, RoutedEventArgs e)
+        {
+            if (sender != null)
+            {
+                string type = (String)((CheckBox)sender).Content;
+                
+                form.world.RemoveBehaviour(type);
+            }
         }
 
     }

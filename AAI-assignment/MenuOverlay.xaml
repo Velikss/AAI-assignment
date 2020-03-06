@@ -9,14 +9,14 @@
     <Grid Margin="10,0,-321,-53">
         <Rectangle Fill="Aqua" HorizontalAlignment="Left" Height="483" Margin="10,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="1091"/>
         <Label Content="Behaviours" HorizontalAlignment="Left" Margin="36,30,0,0" VerticalAlignment="Top" Width="203"/>
-        <CheckBox Content="Alignment" HorizontalAlignment="Left" Margin="52,61,0,0" VerticalAlignment="Top" Height="20" Width="78" Checked="CheckBox_Checked"/>
-        <CheckBox Content="Arrive" HorizontalAlignment="Left" Margin="52,81,0,0" VerticalAlignment="Top" Height="20" Width="78" Checked="CheckBox_Checked"/>
-        <CheckBox Content="Cohesion" HorizontalAlignment="Left" Margin="52,101,0,0" VerticalAlignment="Top" Height="20" Width="78" Checked="CheckBox_Checked"/>
-        <CheckBox Content="Flocking" HorizontalAlignment="Left" Margin="52,121,0,0" VerticalAlignment="Top" Height="20" Width="78" Checked="CheckBox_Checked"/>
-        <CheckBox Content="Seeking" HorizontalAlignment="Left" Margin="52,141,0,0" VerticalAlignment="Top" Height="20" Width="78" Checked="CheckBox_Checked"/>
-        <CheckBox Content="Seperation" HorizontalAlignment="Left" Margin="52,161,0,0" VerticalAlignment="Top" Height="20" Width="78" Checked="CheckBox_Checked"/>
-        <CheckBox Content="Steering" HorizontalAlignment="Left" Margin="52,181,0,0" VerticalAlignment="Top" Height="20" Width="78" Checked="CheckBox_Checked"/>
-        <CheckBox Content="Wandering" HorizontalAlignment="Left" Margin="52,201,0,0" VerticalAlignment="Top" Height="20" Width="78" Checked="CheckBox_Checked"/>
+        <CheckBox Content="Alignment" HorizontalAlignment="Left" Margin="52,61,0,0" VerticalAlignment="Top" Height="20" Width="78" Checked="Behaviour_Box_Checked" Unchecked="Behaviour_Box_UnChecked"/>
+        <CheckBox Content="Arrive" HorizontalAlignment="Left" Margin="52,81,0,0" VerticalAlignment="Top" Height="20" Width="78" Checked="Behaviour_Box_Checked" Unchecked="Behaviour_Box_UnChecked"/>
+        <CheckBox Content="Cohesion" HorizontalAlignment="Left" Margin="52,101,0,0" VerticalAlignment="Top" Height="20" Width="78" Checked="Behaviour_Box_Checked" Unchecked="Behaviour_Box_UnChecked"/>
+        <CheckBox Content="Flocking" HorizontalAlignment="Left" Margin="52,121,0,0" VerticalAlignment="Top" Height="20" Width="78" Checked="Behaviour_Box_Checked" Unchecked="Behaviour_Box_UnChecked"/>
+        <CheckBox Content="Seeking" HorizontalAlignment="Left" Margin="52,141,0,0" VerticalAlignment="Top" Height="20" Width="78" Checked="Behaviour_Box_Checked" Unchecked="Behaviour_Box_UnChecked"/>
+        <CheckBox Content="Seperation" HorizontalAlignment="Left" Margin="52,161,0,0" VerticalAlignment="Top" Height="20" Width="78" Checked="Behaviour_Box_Checked" Unchecked="Behaviour_Box_UnChecked"/>
+        <CheckBox Content="Steering" HorizontalAlignment="Left" Margin="52,181,0,0" VerticalAlignment="Top" Height="20" Width="78" Checked="Behaviour_Box_Checked" Unchecked="Behaviour_Box_UnChecked"/>
+        <CheckBox Content="Wandering" HorizontalAlignment="Left" Margin="52,201,0,0" VerticalAlignment="Top" Height="20" Width="78" Checked="Behaviour_Box_Checked" Unchecked="Behaviour_Box_UnChecked"/>
 
     </Grid>
 </UserControl>
