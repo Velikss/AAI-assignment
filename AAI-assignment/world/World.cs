@@ -12,7 +12,7 @@ namespace AAI_assignment
     public struct WorldParameters
     {
         // Behaviours
-        public static bool alignment, arrive, cohesion, flocking = true, seek, seperation, wandering;
+        public static bool alignment, arrive, cohesion, flocking, seek, seperation, wandering;
 
         // Alignment
         public static int AlignmentRadius = 2;
@@ -36,6 +36,11 @@ namespace AAI_assignment
         // Seperation
         public static float SeperationRadius = 25;
         public static float SeperationForce = 25;
+
+        // Entity
+        public static int EntityCount = 50;
+        public static int EntityMaxSpeed = 50;
+
     }
 
     public class World
@@ -54,13 +59,15 @@ namespace AAI_assignment
 
         private void Populate()
         {
+            entities.Clear();
+
             Random r = new Random();
-            for (int i = 0; i < 200; i++)
+            for (int i = 0; i < WorldParameters.EntityCount; i++)
             {
                 Random rand = new Random();
                 Vehicle v = new Vehicle(Vector2D.CreateRandomPosition(Width, Height), this, 4);
                 v.VColor = Color.FromArgb(r.Next(1, 255), r.Next(1, 255), r.Next(1, 255));
-                v.MaxSpeed = 50;
+                v.MaxSpeed = WorldParameters.EntityMaxSpeed;
                 entities.Add(v);
             }
 
@@ -72,6 +79,27 @@ namespace AAI_assignment
             Target = new Vehicle(new Vector2D(100, 60), this, 8);
             Target.VColor = Color.DarkRed;
             Target.Pos = new Vector2D(10, 10);
+        }
+
+        public void AddEntities(int n)
+        {
+            Random r = new Random();
+            for (int i = 0; i < n; i++)
+            {
+                Random rand = new Random();
+                Vehicle v = new Vehicle(Vector2D.CreateRandomPosition(Width, Height), this, 4);
+                v.VColor = Color.FromArgb(r.Next(1, 255), r.Next(1, 255), r.Next(1, 255));
+                v.MaxSpeed = WorldParameters.EntityMaxSpeed;
+                entities.Add(v);
+            }
+        }
+
+        public void RemoveEntities(int n)
+        {
+            for (int i = 0; i < n; i++)
+            {
+                entities.RemoveRange(entities.Count - n, n);
+            }
         }
 
         public void Update(float timeElapsed)

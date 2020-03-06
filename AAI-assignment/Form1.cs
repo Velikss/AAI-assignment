@@ -58,8 +58,25 @@ namespace AAI_assignment
 
         private void behaviourBox_CheckedChanged(object sender, EventArgs e)
         {
-            
+            WorldParameters.alignment = alignmentBox.Checked;
+            WorldParameters.arrive = arriveBox.Checked;
+            WorldParameters.cohesion = cohesionBox.Checked;
+            WorldParameters.flocking = flockingBox.Checked;
+            WorldParameters.seek = seekBox.Checked;
+            WorldParameters.seperation = seperationBox.Checked;
+            WorldParameters.wandering = wanderingBox.Checked;
+        }
 
+        private void entityUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            int current = WorldParameters.EntityCount;
+
+            if (current > (int)entityUpDown.Value) world.RemoveEntities(current - (int)entityUpDown.Value); else world.AddEntities((int)entityUpDown.Value - current);
+
+            WorldParameters.EntityCount = (int)entityUpDown.Value;
+
+            Console.WriteLine(WorldParameters.EntityCount);
+            Console.WriteLine(world.entities.Count);
         }
     }
 }

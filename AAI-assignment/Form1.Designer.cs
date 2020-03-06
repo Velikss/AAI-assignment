@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 
 namespace AAI_assignment
 {
@@ -32,6 +33,8 @@ namespace AAI_assignment
         {
             this.dbPanel1 = new AAI_assignment.DBPanel();
             this.dbPanel2 = new AAI_assignment.DBPanel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.entityUpDown = new System.Windows.Forms.NumericUpDown();
             this.alignmentBox = new System.Windows.Forms.CheckBox();
             this.cohesionBox = new System.Windows.Forms.CheckBox();
             this.flockingBox = new System.Windows.Forms.CheckBox();
@@ -42,6 +45,7 @@ namespace AAI_assignment
             this.menuButton = new System.Windows.Forms.Button();
             this.dbPanel1.SuspendLayout();
             this.dbPanel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.entityUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // dbPanel1
@@ -59,6 +63,8 @@ namespace AAI_assignment
             // dbPanel2
             // 
             this.dbPanel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.dbPanel2.Controls.Add(this.label1);
+            this.dbPanel2.Controls.Add(this.entityUpDown);
             this.dbPanel2.Controls.Add(this.alignmentBox);
             this.dbPanel2.Controls.Add(this.cohesionBox);
             this.dbPanel2.Controls.Add(this.flockingBox);
@@ -71,6 +77,27 @@ namespace AAI_assignment
             this.dbPanel2.Size = new System.Drawing.Size(515, 219);
             this.dbPanel2.TabIndex = 1;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(125, 18);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(41, 13);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "Entities";
+            // 
+            // numericUpDown1
+            // 
+            this.entityUpDown.Location = new System.Drawing.Point(172, 14);
+            this.entityUpDown.Name = "numericUpDown1";
+            this.entityUpDown.Size = new System.Drawing.Size(87, 20);
+            this.entityUpDown.TabIndex = 6;
+            this.entityUpDown.DecimalPlaces = 0;
+            this.entityUpDown.Maximum = 1200;
+            this.entityUpDown.Minimum = 1;
+            this.entityUpDown.Value = WorldParameters.EntityCount;
+            this.entityUpDown.ValueChanged += new System.EventHandler(this.entityUpDown_ValueChanged);
+            // 
             // alignmentBox
             // 
             this.alignmentBox.AutoSize = true;
@@ -80,6 +107,7 @@ namespace AAI_assignment
             this.alignmentBox.TabIndex = 5;
             this.alignmentBox.Text = "Alignment";
             this.alignmentBox.UseVisualStyleBackColor = true;
+            this.alignmentBox.CheckedChanged += new System.EventHandler(this.behaviourBox_CheckedChanged);
             // 
             // cohesionBox
             // 
@@ -90,6 +118,7 @@ namespace AAI_assignment
             this.cohesionBox.TabIndex = 4;
             this.cohesionBox.Text = "Cohesion";
             this.cohesionBox.UseVisualStyleBackColor = true;
+            this.cohesionBox.CheckedChanged += new System.EventHandler(this.behaviourBox_CheckedChanged);
             // 
             // flockingBox
             // 
@@ -100,6 +129,7 @@ namespace AAI_assignment
             this.flockingBox.TabIndex = 3;
             this.flockingBox.Text = "Flocking";
             this.flockingBox.UseVisualStyleBackColor = true;
+            this.flockingBox.CheckedChanged += new System.EventHandler(this.behaviourBox_CheckedChanged);
             // 
             // seekBox
             // 
@@ -110,6 +140,7 @@ namespace AAI_assignment
             this.seekBox.TabIndex = 2;
             this.seekBox.Text = "Seeking";
             this.seekBox.UseVisualStyleBackColor = true;
+            this.seekBox.CheckedChanged += new System.EventHandler(this.behaviourBox_CheckedChanged);
             // 
             // seperationBox
             // 
@@ -120,6 +151,7 @@ namespace AAI_assignment
             this.seperationBox.TabIndex = 1;
             this.seperationBox.Text = "Seperation";
             this.seperationBox.UseVisualStyleBackColor = true;
+            this.seperationBox.CheckedChanged += new System.EventHandler(this.behaviourBox_CheckedChanged);
             // 
             // arriveBox
             // 
@@ -164,8 +196,14 @@ namespace AAI_assignment
             this.dbPanel1.ResumeLayout(false);
             this.dbPanel2.ResumeLayout(false);
             this.dbPanel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.entityUpDown)).EndInit();
             this.ResumeLayout(false);
 
+        }
+
+        private void entityCount_Scroll(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion
@@ -180,6 +218,8 @@ namespace AAI_assignment
         private System.Windows.Forms.CheckBox seekBox;
         private System.Windows.Forms.CheckBox seperationBox;
         private System.Windows.Forms.CheckBox wanderingBox;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.NumericUpDown entityUpDown;
     }
 }
 
