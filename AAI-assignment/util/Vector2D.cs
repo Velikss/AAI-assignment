@@ -112,6 +112,13 @@ namespace AAI_assignment
             return this;
         }
 
+        public Vector2D SetMagnitude(double magnitude)
+        {
+            Normalize();
+            Multiply(magnitude, magnitude);
+            return this;
+        }
+
         public Vector2D WrapAround(double xMax, double yMax)
         {
             X = (X + xMax) % xMax;

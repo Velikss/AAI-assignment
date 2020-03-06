@@ -19,29 +19,6 @@ namespace AAI_assignment.behaviour
 
         public override Vector2D Calculate()
         {
-            //ME.TagNeighbors(ME.MyWorld.entities, Radius);
-
-            //Vector2D averageHeading = new Vector2D();
-
-            //int NeighbourCount = 0;
-
-            //foreach (MovingEntity neighbour in Entities)
-            //{
-            //    if (neighbour != ME && neighbour.Tagged)
-            //    {
-            //        averageHeading += neighbour.Heading;
-            //        NeighbourCount++;
-            //    }
-            //}
-
-            //if (NeighbourCount > 0)
-            //{
-            //    averageHeading /= (double)NeighbourCount;
-            //    averageHeading -= ME.Heading;
-            //}
-
-            //return averageHeading.Multiply(AllignmentForce);
-
             Vector2D averageHeading = new Vector2D();
             int neighbourCount = 0;
             foreach (MovingEntity entity in Entities)

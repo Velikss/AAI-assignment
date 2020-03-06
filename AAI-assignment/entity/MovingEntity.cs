@@ -17,7 +17,6 @@ namespace AAI_assignment.entity
         public float MaxSpeed { get; set; }
         public BaseGameEntity Target { get; set; }
         public List<SteeringBehaviour> SB = new List<SteeringBehaviour>();
-        public List<Vector2D> Feelers = new List<Vector2D>();
         public SteeringBehaviour SteeringBehaviour { get; set; }
 
         public MovingEntity(Vector2D pos, World w) : base(pos, w)
@@ -30,12 +29,12 @@ namespace AAI_assignment.entity
 
         public override void Update(float timeElapsed)
         {
-            Vector2D steeringForce = SteeringBehaviour.Calculate();
-            //Vector2D steeringForce = new Vector2D();
-            //foreach (SteeringBehaviour sb in SB)
-            //{
-            //    steeringForce += sb.Calculate();
-            //}
+            //Vector2D steeringForce = SteeringBehaviour.Calculate();
+            Vector2D steeringForce = new Vector2D();
+            for (int i = 0; i < SB.Count; i++)
+            {
+                steeringForce += SB[i].Calculate();
+            }
             UpdatePosition(timeElapsed, steeringForce);
         }
 

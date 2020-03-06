@@ -20,30 +20,6 @@ namespace AAI_assignment.behaviour
 
         public override Vector2D Calculate()
         {
-            //ME.TagNeighbors(ME.MyWorld.entities, Radius);
-
-            //Vector2D centerOfMass = new Vector2D();
-            //Vector2D steeringForce = new Vector2D();
-
-            //int neighbourCount = 0;
-
-            //foreach (MovingEntity neighbour in Entities)
-            //{
-            //    if (neighbour != ME && neighbour.Tagged)
-            //    {
-            //        centerOfMass += neighbour.Pos;
-            //        neighbourCount++;
-            //    }
-            //}
-
-            //if (neighbourCount > 0)
-            //{
-            //    centerOfMass /= neighbourCount;
-            //    steeringForce = Seek(centerOfMass);
-            //}
-
-            //return steeringForce * CohesionForce;
-
             Vector2D centerOfMass = new Vector2D();
             Vector2D steeringForce = new Vector2D();
             int neighbourCount = 0;

@@ -18,17 +18,6 @@ namespace AAI_assignment.behaviour
 
         public override Vector2D Calculate()
         {
-            //ME.TagNeighbors(ME.MyWorld.entities, Radius);
-            //Vector2D steeringForce = new Vector2D();
-            //foreach (MovingEntity neighbour in Entities)
-            //{
-            //    if (neighbour != ME && neighbour.Tagged)
-            //    {
-            //        Vector2D ToAgent = ME.Pos - neighbour.Pos;
-            //        steeringForce += ToAgent.Normalize() / ToAgent.Length();
-            //    }
-            //}
-            //return steeringForce.Multiply(SeperationForce);
             Vector2D steeringForce = new Vector2D();
             foreach (MovingEntity other in Entities)
             {

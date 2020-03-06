@@ -42,7 +42,7 @@ namespace AAI_assignment.behaviour
 
             Vector2D steeringForce = sB.Calculate() + aB.Calculate() + cB.Calculate();
 
-            return steeringForce.Truncate(ME.MaxSpeed);
+            return steeringForce.SetMagnitude(ME.MaxSpeed);
         }
 
     }

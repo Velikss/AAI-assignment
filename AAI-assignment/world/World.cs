@@ -26,10 +26,10 @@ namespace AAI_assignment
         private void Populate()
         {
             Random r = new Random();
-            for (int i = 0; i < 200; i++)
+            for (int i = 0; i < 500; i++)
             {
                 Random rand = new Random();
-                Vehicle v = new Vehicle(Vector2D.CreateRandomPosition(Width, Height), this, 4);
+                Vehicle v = new Vehicle(Vector2D.CreateRandomPosition(Width, Height), this, 5);
                 v.VColor = Color.FromArgb(r.Next(1, 255), r.Next(1, 255), r.Next(1, 255));
                 v.MaxSpeed = 50;
                 entities.Add(v);
@@ -53,8 +53,8 @@ namespace AAI_assignment
                 //me.SB.Add(new SeparationBehaviour(me, 20, entities, 10));
                 //me.SB.Add(new AllignmentBehaviour(me, 10, entities, 50));
                 //me.SB.Add(new CohesionBehaviour(me, 50, entities, 20));
-                //me.SB.Add(new FlockingBehaviour(me, 75, 25, 50, entities,
-                //                              1, 25, 1));
+                me.SB.Add(new FlockingBehaviour(me, 75, 25, 50, entities,
+                                              1.25f, 25f, 1f));
                 //me.SB.Add(new SeekBehaviour(me));
                 //me.SB.Add(new WanderingBehaviour(me));
                 me.SteeringBehaviour = new FlockingBehaviour(me, 75, 25, 50, entities,
