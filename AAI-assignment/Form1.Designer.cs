@@ -30,7 +30,7 @@
         {
             this.dbPanel1 = new AAI_assignment.DBPanel();
             this.menuHost = new System.Windows.Forms.Integration.ElementHost();
-            this.menu = new AAI_assignment.MenuOverlay(this.world);
+            this.menu = new AAI_assignment.MenuOverlay(this);
             this.menuButton = new System.Windows.Forms.Button();
             this.dbPanel1.SuspendLayout();
             this.SuspendLayout();

@@ -45,17 +45,15 @@ namespace AAI_assignment
             world.Target.Pos = new Vector2D(e.X, e.Y);
         }
 
-        private void menuButton_Click(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
             if (this.menuHost.Visible)
                 this.menuHost.Visible = false;
             else
+            {
                 this.menuHost.Visible = true;
+                this.menuHost.BackColorTransparent = true;
+            }
 
         }
     }

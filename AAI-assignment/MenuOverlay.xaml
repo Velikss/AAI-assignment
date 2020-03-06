@@ -5,9 +5,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AAI_assignment"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" IsHitTestVisible="True">
+             d:DesignHeight="450" d:DesignWidth="800" IsHitTestVisible="True" Background="Transparent">
     <Grid Margin="10,0,-321,-53">
-        <Rectangle Fill="Aqua" HorizontalAlignment="Left" Height="483" Margin="10,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="1091"/>
+        <Rectangle HorizontalAlignment="Left" Height="483" Margin="10,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="1091">
+            <Rectangle.Fill>
+                <SolidColorBrush Color="Aqua" Opacity=".5"/>
+            </Rectangle.Fill>
+        </Rectangle>
         <Label Content="Behaviours" HorizontalAlignment="Left" Margin="36,30,0,0" VerticalAlignment="Top" Width="203"/>
         <CheckBox Content="Alignment" HorizontalAlignment="Left" Margin="52,61,0,0" VerticalAlignment="Top" Height="20" Width="78" Checked="Behaviour_Box_Checked" Unchecked="Behaviour_Box_UnChecked"/>
         <CheckBox Content="Arrive" HorizontalAlignment="Left" Margin="52,81,0,0" VerticalAlignment="Top" Height="20" Width="78" Checked="Behaviour_Box_Checked" Unchecked="Behaviour_Box_UnChecked"/>
