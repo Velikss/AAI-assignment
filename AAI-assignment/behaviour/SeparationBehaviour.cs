@@ -25,7 +25,7 @@ namespace AAI_assignment.behaviour
                 if (neighbour != ME && neighbour.Tagged)
                 {
                     Vector2D ToAgent = ME.Pos.Clone().Sub(neighbour.Pos);
-                    steeringForce = steeringForce.Add(ToAgent.Normalize().Divide(ToAgent.Length()));
+                    steeringForce += ToAgent.Normalize() / ToAgent.Length();
                 }
             }
             return steeringForce.Multiply(SeperationForce);

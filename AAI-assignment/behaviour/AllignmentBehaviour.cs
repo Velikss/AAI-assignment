@@ -36,7 +36,7 @@ namespace AAI_assignment.behaviour
 
             if (NeighbourCount > 0)
             {
-                averageHeading /= NeighbourCount;
+                averageHeading /= (double)NeighbourCount;
                 averageHeading -= ME.Heading;
             }
 
