@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using AAI_assignment;
 
 namespace Huiswerk6
 {
@@ -10,8 +11,8 @@ namespace Huiswerk6
         public List<Edge> adj;
         public double dist;
         public Vertex prev;
-        public int scratch;
         public bool visited;
+        public Vector2D pos;
         public Vertex(string name)
         {
             this.name = name;
@@ -23,7 +24,6 @@ namespace Huiswerk6
         {
             prev = null;
             dist = Graph.INFINITY;
-            scratch = 0;
             visited = false;
         }
 

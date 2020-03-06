@@ -165,8 +165,25 @@ namespace AAI_assignment
             }
         }
 
+        public void DrawGrid(Graphics g)
+        {
+            float numOfCells = 50;
+            float cellSize = Width / numOfCells;
+            Pen p = new Pen(Color.LightGray, 2);
+            for (int y = 0; y < numOfCells; ++y)
+            {
+                g.DrawLine(p, 0, y * cellSize, numOfCells * cellSize, y * cellSize);
+            }
+
+            for (int x = 0; x < numOfCells; ++x)
+            {
+                g.DrawLine(p, x * cellSize, 0, x * cellSize, numOfCells * cellSize);
+            }
+        }
+
         public void Render(Graphics g)
         {
+            DrawGrid(g);
             entities.ForEach(e => e.Render(g));
             Target.Render(g);
         }
