@@ -9,8 +9,8 @@ namespace AAI_assignment.behaviour
     {
         public int Radius;
         public List<MovingEntity> Entities;
-        public int AllignmentForce;
-        public AllignmentBehaviour(MovingEntity me, int radius, List<MovingEntity> entities, int allignmentForce) : base(me)
+        public float AllignmentForce;
+        public AllignmentBehaviour(MovingEntity me, int radius, List<MovingEntity> entities, float allignmentForce) : base(me)
         {
             this.Radius = radius;
             this.Entities = entities;
@@ -19,28 +19,46 @@ namespace AAI_assignment.behaviour
 
         public override Vector2D Calculate()
         {
-            ME.TagNeighbors(ME.MyWorld.entities, Radius);
+            //ME.TagNeighbors(ME.MyWorld.entities, Radius);
+
+            //Vector2D averageHeading = new Vector2D();
+
+            //int NeighbourCount = 0;
+
+            //foreach (MovingEntity neighbour in Entities)
+            //{
+            //    if (neighbour != ME && neighbour.Tagged)
+            //    {
+            //        averageHeading += neighbour.Heading;
+            //        NeighbourCount++;
+            //    }
+            //}
+
+            //if (NeighbourCount > 0)
+            //{
+            //    averageHeading /= (double)NeighbourCount;
+            //    averageHeading -= ME.Heading;
+            //}
+
+            //return averageHeading.Multiply(AllignmentForce);
 
             Vector2D averageHeading = new Vector2D();
-
-            int NeighbourCount = 0;
-
-            foreach (MovingEntity neighbour in Entities)
+            int neighbourCount = 0;
+            foreach (MovingEntity entity in Entities)
             {
-                if (neighbour != ME && neighbour.Tagged)
+                double dist = Vector2D.DistanceSquared(ME.Pos, entity.Pos);
+                if (dist < Radius * Radius && dist > 0)
                 {
-                    averageHeading += neighbour.Heading;
-                    NeighbourCount++;
+                    Vector2D h = entity.Velocity.Clone().Normalize();
+                    averageHeading += h;
+                    neighbourCount++;
                 }
             }
-
-            if (NeighbourCount > 0)
+            if (neighbourCount > 0)
             {
-                averageHeading /= (double)NeighbourCount;
-                averageHeading -= ME.Heading;
+                averageHeading /= neighbourCount;
             }
-
-            return averageHeading.Multiply(AllignmentForce);
+            return averageHeading.Normalize() * AllignmentForce;
         }
     }
 }

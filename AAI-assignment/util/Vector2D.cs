@@ -12,6 +12,7 @@ namespace AAI_assignment
         public double X { get; set; }
         public double Y { get; set; }
 
+        private static Random random = new Random();
         public Vector2D() : this(0, 0)
         {
         }
@@ -30,6 +31,11 @@ namespace AAI_assignment
         public double LengthSquared()
         {
             return (X * X) + (Y * Y);
+        }
+
+        public static double DistanceSquared(Vector2D v1, Vector2D v2)
+        {
+            return (v1.X - v2.X) * (v1.X - v2.X) + (v1.Y - v2.Y) * (v1.Y - v2.Y);
         }
 
         public Vector2D Add(Vector2D v)
@@ -63,6 +69,13 @@ namespace AAI_assignment
             return this;
         }
 
+        public Vector2D Multiply(double xVal, double yVal)
+        {
+            X *= xVal;
+            Y *= yVal;
+            return this;
+        }
+
         public static Vector2D operator *(Vector2D v1, double value)
         {
             return new Vector2D(v1.X * value, v1.Y * value);
@@ -70,8 +83,11 @@ namespace AAI_assignment
 
         public Vector2D Divide(double value)
         {
-            this.X /= value;
-            this.Y /= value;
+            if (value > 0)
+            {
+                X /= value;
+                Y /= value;
+            }
             return this;
         }
 
@@ -82,8 +98,7 @@ namespace AAI_assignment
 
         public Vector2D Normalize()
         {
-            this.X /= Length();
-            this.Y /= Length();
+            Divide(Length());
             return this;
         }
 
@@ -97,12 +112,21 @@ namespace AAI_assignment
             return this;
         }
 
-        public static Vector2D randomPos(int maxX, int maxY)
+        public Vector2D WrapAround(double xMax, double yMax)
         {
-            Random rnd = new Random();
-            return new Vector2D(rnd.NextDouble() * maxX, rnd.NextDouble() * maxY);
+            X = (X + xMax) % xMax;
+            Y = (Y + yMax) % yMax;
+            return this;
         }
-        
+
+        public static Vector2D CreateRandomPosition(double xMax, double yMax)
+        {
+            double x = random.NextDouble();
+            double y = random.NextDouble();
+            Vector2D newVector = new Vector2D(x, y).Multiply(xMax, yMax);
+            return newVector;
+        }
+
         public Vector2D Clone()
         {
             return new Vector2D(this.X, this.Y);

@@ -8,8 +8,8 @@ namespace AAI_assignment.behaviour
     {
         public int Radius;
         public List<MovingEntity> Entities;
-        public int SeperationForce;
-        public SeparationBehaviour(MovingEntity me, int radius, List<MovingEntity> entities, int seperationForce) : base(me)
+        public float SeperationForce;
+        public SeparationBehaviour(MovingEntity me, int radius, List<MovingEntity> entities, float seperationForce) : base(me)
         {
             this.Radius = radius;
             this.Entities = entities;
@@ -18,17 +18,28 @@ namespace AAI_assignment.behaviour
 
         public override Vector2D Calculate()
         {
-            ME.TagNeighbors(ME.MyWorld.entities, Radius);
+            //ME.TagNeighbors(ME.MyWorld.entities, Radius);
+            //Vector2D steeringForce = new Vector2D();
+            //foreach (MovingEntity neighbour in Entities)
+            //{
+            //    if (neighbour != ME && neighbour.Tagged)
+            //    {
+            //        Vector2D ToAgent = ME.Pos - neighbour.Pos;
+            //        steeringForce += ToAgent.Normalize() / ToAgent.Length();
+            //    }
+            //}
+            //return steeringForce.Multiply(SeperationForce);
             Vector2D steeringForce = new Vector2D();
-            foreach (MovingEntity neighbour in Entities)
+            foreach (MovingEntity other in Entities)
             {
-                if (neighbour != ME && neighbour.Tagged)
+                double dist = Vector2D.DistanceSquared(ME.Pos, other.Pos);
+                if (dist < Radius * Radius && dist > 0)
                 {
-                    Vector2D ToAgent = ME.Pos - neighbour.Pos;
-                    steeringForce += ToAgent.Normalize() / ToAgent.Length();
+                    Vector2D separationForce = ME.Pos - other.Pos;
+                    steeringForce += separationForce / dist;
                 }
             }
-            return steeringForce.Multiply(SeperationForce);
+            return steeringForce.Normalize() * SeperationForce;
         }
     }
 }

@@ -10,8 +10,8 @@ namespace AAI_assignment.behaviour
     {
         public int Radius;
         public List<MovingEntity> Entities;
-        public int CohesionForce;
-        public CohesionBehaviour(MovingEntity me, int radius, List<MovingEntity> entities, int cohesionForce) : base(me)
+        public float CohesionForce;
+        public CohesionBehaviour(MovingEntity me, int radius, List<MovingEntity> entities, float cohesionForce) : base(me)
         {
             this.Radius = radius;
             this.Entities = entities;
@@ -20,18 +20,42 @@ namespace AAI_assignment.behaviour
 
         public override Vector2D Calculate()
         {
-            ME.TagNeighbors(ME.MyWorld.entities, Radius);
+            //ME.TagNeighbors(ME.MyWorld.entities, Radius);
+
+            //Vector2D centerOfMass = new Vector2D();
+            //Vector2D steeringForce = new Vector2D();
+
+            //int neighbourCount = 0;
+
+            //foreach (MovingEntity neighbour in Entities)
+            //{
+            //    if (neighbour != ME && neighbour.Tagged)
+            //    {
+            //        centerOfMass += neighbour.Pos;
+            //        neighbourCount++;
+            //    }
+            //}
+
+            //if (neighbourCount > 0)
+            //{
+            //    centerOfMass /= neighbourCount;
+            //    steeringForce = Seek(centerOfMass);
+            //}
+
+            //return steeringForce * CohesionForce;
 
             Vector2D centerOfMass = new Vector2D();
             Vector2D steeringForce = new Vector2D();
-
             int neighbourCount = 0;
 
-            foreach (MovingEntity neighbour in Entities)
+            foreach (MovingEntity entity in Entities)
             {
-                if (neighbour != ME && neighbour.Tagged)
+                Vector2D mePosition = ME.Pos.Clone();
+                Vector2D otherPosition = entity.Pos.Clone();
+                double dist = Vector2D.DistanceSquared(mePosition, otherPosition);
+                if (dist < Radius * Radius && dist > 0)
                 {
-                    centerOfMass += neighbour.Pos;
+                    centerOfMass += entity.Pos;
                     neighbourCount++;
                 }
             }
@@ -41,15 +65,13 @@ namespace AAI_assignment.behaviour
                 centerOfMass /= neighbourCount;
                 steeringForce = Seek(centerOfMass);
             }
-
-            return steeringForce.Multiply(CohesionForce);
+            return steeringForce.Normalize() * CohesionForce;
         }
 
         private Vector2D Seek(Vector2D target)
         {
-            Vector2D Tpos = target.Clone();
-            Vector2D desiredVelocity = Tpos.Sub(ME.Pos).Normalize().Multiply(ME.MaxSpeed);
-            return desiredVelocity.Sub(ME.Velocity);
+            Vector2D desiredVelocity = (target - ME.Pos).Normalize() * ME.MaxSpeed;
+            return desiredVelocity - ME.Velocity;
         }
     }
 }

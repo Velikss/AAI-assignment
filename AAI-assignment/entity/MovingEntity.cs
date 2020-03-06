@@ -17,6 +17,8 @@ namespace AAI_assignment.entity
         public float MaxSpeed { get; set; }
         public BaseGameEntity Target { get; set; }
         public List<SteeringBehaviour> SB = new List<SteeringBehaviour>();
+        public List<Vector2D> Feelers = new List<Vector2D>();
+        public SteeringBehaviour SteeringBehaviour { get; set; }
 
         public MovingEntity(Vector2D pos, World w) : base(pos, w)
         {
@@ -28,27 +30,25 @@ namespace AAI_assignment.entity
 
         public override void Update(float timeElapsed)
         {
-            Vector2D temp = new Vector2D();
-            Vector2D steeringForce = new Vector2D();
-            foreach (SteeringBehaviour sb in SB)
-            {
-                steeringForce += sb.Calculate();
-                //Acceleration = Force/Mass
-            }
-            Vector2D acceleration = steeringForce.Divide(Mass);
-            //update velocity
-            Velocity.Add(acceleration.Multiply(timeElapsed));
-            // Make sure the velocity does not exceed maximum velocity
-            Velocity.Truncate(MaxSpeed);
+            Vector2D steeringForce = SteeringBehaviour.Calculate();
+            //Vector2D steeringForce = new Vector2D();
+            //foreach (SteeringBehaviour sb in SB)
+            //{
+            //    steeringForce += sb.Calculate();
+            //}
+            UpdatePosition(timeElapsed, steeringForce);
+        }
 
-            temp.Add(Velocity.Multiply(timeElapsed));
+        private void UpdatePosition(float timeElapsed, Vector2D steeringForce)
+        {
+            Vector2D acceleration = steeringForce.Divide(Mass);
+            Velocity += acceleration * timeElapsed;
+            Velocity.Truncate(MaxSpeed);
+            //Velocity *= 2;
             //Pos.Add(Velocity.Multiply(timeElapsed));
-            //update the position
-            Pos.Add(temp);
-            Heading = Pos.Clone().Normalize();
-            ////Console.WriteLine(ToString());
-            ////Console.WriteLine("Red: " + Pos);
-            ////Console.WriteLine("Blue: " + MyWorld.Target.Pos);
+            Pos.Add(Velocity * timeElapsed);
+            Velocity *= 0.9;
+            Pos.WrapAround(MyWorld.Width, MyWorld.Height);
         }
 
         public override string ToString()

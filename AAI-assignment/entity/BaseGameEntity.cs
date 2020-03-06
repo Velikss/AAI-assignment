@@ -29,7 +29,7 @@ namespace AAI_assignment
 
                 double range = radius + neighbour.Scale;
 
-                if ((neighbour != this) && (to.LengthSquared() < range*range)) 
+                if ((neighbour != this) && (to.LengthSquared() < range*range) && (to.LengthSquared() > 0) )
                 {
                     neighbour.Tag();
                 }

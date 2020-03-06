@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Ports;
 using System.Security.Permissions;
 using AAI_assignment.entity;
 
@@ -14,11 +15,14 @@ namespace AAI_assignment.behaviour
         public int RadiusS;
         public int RadiusA;
         public List<MovingEntity> Entities;
-        public int CohesionForce;
-        public int SeparationForce;
-        public int AllignmentForce;
+        public float CohesionForce;
+        public float SeparationForce;
+        public float AllignmentForce;
+        private SeparationBehaviour sB;
+        private AllignmentBehaviour aB;
+        private CohesionBehaviour cB;
         public FlockingBehaviour(MovingEntity me, int radiusC, int radiusS, int radiusA, List<MovingEntity> entities, 
-            int cohesionForce, int separationForce, int allignmentForce) : base(me)
+            float cohesionForce, float separationForce, float allignmentForce) : base(me)
 
         {
             this.RadiusC = radiusC;
@@ -28,18 +32,15 @@ namespace AAI_assignment.behaviour
             this.CohesionForce = cohesionForce;
             this.SeparationForce = separationForce;
             this.AllignmentForce = allignmentForce;
+            sB = new SeparationBehaviour(ME, RadiusS, Entities, SeparationForce);
+            aB = new AllignmentBehaviour(ME, RadiusA, Entities, AllignmentForce);
+            cB = new CohesionBehaviour(ME, RadiusC, Entities, CohesionForce);
         }
 
         public override Vector2D Calculate()
         {
-            SeparationBehaviour sB = new SeparationBehaviour(ME, RadiusS, Entities, SeparationForce);
-            AllignmentBehaviour aB = new AllignmentBehaviour(ME, RadiusA, Entities, AllignmentForce);
-            CohesionBehaviour cB = new CohesionBehaviour(ME, RadiusC, Entities, CohesionForce);
 
-            Vector2D steeringForce = new Vector2D();
-            steeringForce += sB.Calculate();
-            steeringForce += aB.Calculate();
-            steeringForce += cB.Calculate();
+            Vector2D steeringForce = sB.Calculate() + aB.Calculate() + cB.Calculate();
 
             return steeringForce.Truncate(ME.MaxSpeed);
         }
