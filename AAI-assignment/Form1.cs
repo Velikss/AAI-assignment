@@ -45,15 +45,20 @@ namespace AAI_assignment
             world.Target.Pos = new Vector2D(e.X, e.Y);
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void menuButton_Click(object sender, EventArgs e)
         {
-            if (this.menuHost.Visible)
-                this.menuHost.Visible = false;
+            if (this.dbPanel2.Visible)
+                this.dbPanel2.Visible = false;
             else
             {
-                this.menuHost.Visible = true;
-                this.menuHost.BackColorTransparent = true;
+                this.dbPanel2.Visible = true;
             }
+
+        }
+
+        private void behaviourBox_CheckedChanged(object sender, EventArgs e)
+        {
+            
 
         }
     }

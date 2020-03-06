@@ -12,7 +12,7 @@ namespace AAI_assignment
     public struct WorldParameters
     {
         // Behaviours
-        public static bool alignment, arrive, cohesion, flocking, seek, seperation, wandering;
+        public static bool alignment, arrive, cohesion, flocking = true, seek, seperation, wandering;
 
         // Alignment
         public static int AlignmentRadius = 2;
