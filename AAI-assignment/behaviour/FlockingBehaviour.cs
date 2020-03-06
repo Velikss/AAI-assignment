@@ -19,7 +19,7 @@ namespace AAI_assignment.behaviour
         public float SeparationForce;
         public float AllignmentForce;
         private SeparationBehaviour sB;
-        private AllignmentBehaviour aB;
+        private AlignmentBehaviour aB;
         private CohesionBehaviour cB;
         public FlockingBehaviour(MovingEntity me, int radiusC, int radiusS, int radiusA, List<MovingEntity> entities, 
             float cohesionForce, float separationForce, float allignmentForce) : base(me)
@@ -33,7 +33,7 @@ namespace AAI_assignment.behaviour
             this.SeparationForce = separationForce;
             this.AllignmentForce = allignmentForce;
             sB = new SeparationBehaviour(ME, RadiusS, Entities, SeparationForce);
-            aB = new AllignmentBehaviour(ME, RadiusA, Entities, AllignmentForce);
+            aB = new AlignmentBehaviour(ME, RadiusA, Entities, AllignmentForce);
             cB = new CohesionBehaviour(ME, RadiusC, Entities, CohesionForce);
         }
 

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace AAI_assignment.entity
 {
 
-    abstract class MovingEntity : BaseGameEntity
+    public abstract class MovingEntity : BaseGameEntity
     {
         public Vector2D Velocity { get; set; }
         public Vector2D Heading { get; set; }

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace AAI_assignment
 {
-    class World
+    public class World
     {
         public List<MovingEntity> entities = new List<MovingEntity>();
         public Vehicle Target { get; set; }

@@ -5,12 +5,12 @@ using AAI_assignment.entity;
 
 namespace AAI_assignment.behaviour
 {
-    class AllignmentBehaviour : SteeringBehaviour
+    class AlignmentBehaviour : SteeringBehaviour
     {
         public int Radius;
         public List<MovingEntity> Entities;
         public float AllignmentForce;
-        public AllignmentBehaviour(MovingEntity me, int radius, List<MovingEntity> entities, float allignmentForce) : base(me)
+        public AlignmentBehaviour(MovingEntity me, int radius, List<MovingEntity> entities, float allignmentForce) : base(me)
         {
             this.Radius = radius;
             this.Entities = entities;

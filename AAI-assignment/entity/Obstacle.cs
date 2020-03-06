@@ -8,7 +8,7 @@ using System.Drawing;
 
 namespace AAI_assignment.world
 {
-    class Obstacle : BaseGameEntity
+    public class Obstacle : BaseGameEntity
     {
         public Color Color { get; set; }
         public Obstacle(Vector2D pos, World w) : base(pos, w)

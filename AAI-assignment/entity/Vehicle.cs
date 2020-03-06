@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AAI_assignment.entity
 {
-    class Vehicle : MovingEntity
+    public class Vehicle : MovingEntity
     {
         public Color VColor { get; set; }
 

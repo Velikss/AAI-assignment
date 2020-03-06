@@ -4,7 +4,7 @@ using AAI_assignment.entity;
 
 namespace AAI_assignment
 {
-    abstract class BaseGameEntity
+    public abstract class BaseGameEntity
     {
         public Vector2D Pos { get; set; }
         public float Scale { get; set; }

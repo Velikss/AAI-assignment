@@ -3,7 +3,7 @@
 
 namespace AAI_assignment.behaviour
 {
-    class SeekBehaviour : SteeringBehaviour
+    public class SeekBehaviour : SteeringBehaviour
     {
         public bool Stop = false;
         public int StopRange = 10;
