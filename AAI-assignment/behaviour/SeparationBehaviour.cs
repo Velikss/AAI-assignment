@@ -6,10 +6,10 @@ namespace AAI_assignment.behaviour
 {
     class SeparationBehaviour : SteeringBehaviour
     {
-        public int Radius;
+        public float Radius;
         public List<MovingEntity> Entities;
         public float SeperationForce;
-        public SeparationBehaviour(MovingEntity me, int radius, List<MovingEntity> entities, float seperationForce) : base(me)
+        public SeparationBehaviour(MovingEntity me, float radius, List<MovingEntity> entities, float seperationForce) : base(me)
         {
             this.Radius = radius;
             this.Entities = entities;

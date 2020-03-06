@@ -8,10 +8,10 @@ namespace AAI_assignment.behaviour
 {
     class CohesionBehaviour : SteeringBehaviour
     {
-        public int Radius;
+        public float Radius;
         public List<MovingEntity> Entities;
         public float CohesionForce;
-        public CohesionBehaviour(MovingEntity me, int radius, List<MovingEntity> entities, float cohesionForce) : base(me)
+        public CohesionBehaviour(MovingEntity me, float radius, List<MovingEntity> entities, float cohesionForce) : base(me)
         {
             this.Radius = radius;
             this.Entities = entities;

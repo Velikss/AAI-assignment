@@ -7,10 +7,10 @@ namespace AAI_assignment.behaviour
 {
     class AlignmentBehaviour : SteeringBehaviour
     {
-        public int Radius;
+        public float Radius;
         public List<MovingEntity> Entities;
         public float AllignmentForce;
-        public AlignmentBehaviour(MovingEntity me, int radius, List<MovingEntity> entities, float allignmentForce) : base(me)
+        public AlignmentBehaviour(MovingEntity me, float radius, List<MovingEntity> entities, float allignmentForce) : base(me)
         {
             this.Radius = radius;
             this.Entities = entities;

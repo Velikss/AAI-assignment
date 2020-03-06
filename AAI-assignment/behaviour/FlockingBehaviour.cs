@@ -11,9 +11,9 @@ namespace AAI_assignment.behaviour
 {
     class FlockingBehaviour : SteeringBehaviour
     {
-        public int RadiusC;
-        public int RadiusS;
-        public int RadiusA;
+        public float RadiusC;
+        public float RadiusS;
+        public float RadiusA;
         public List<MovingEntity> Entities;
         public float CohesionForce;
         public float SeparationForce;
@@ -21,7 +21,7 @@ namespace AAI_assignment.behaviour
         private SeparationBehaviour sB;
         private AlignmentBehaviour aB;
         private CohesionBehaviour cB;
-        public FlockingBehaviour(MovingEntity me, int radiusC, int radiusS, int radiusA, List<MovingEntity> entities, 
+        public FlockingBehaviour(MovingEntity me, float radiusC, float radiusS, float radiusA, List<MovingEntity> entities, 
             float cohesionForce, float separationForce, float allignmentForce) : base(me)
 
         {
