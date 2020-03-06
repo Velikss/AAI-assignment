@@ -12,8 +12,6 @@ namespace AAI_assignment
 
         public bool Tagged;
 
-        public List<MovingEntity> Neighbours = new List<MovingEntity>();
-
         public BaseGameEntity(Vector2D pos, World w)
         {
             Pos = pos;
@@ -24,18 +22,16 @@ namespace AAI_assignment
 
         public void TagNeighbors(List<MovingEntity> entities, double radius)
         {
-            Neighbours.Clear();
             foreach (MovingEntity neighbour in entities)
             {
                 neighbour.UnTag();
-                Vector2D to = neighbour.Pos.Clone().Sub(Pos);
+                Vector2D to = neighbour.Pos - Pos;
 
-                double range = radius + 10;
+                double range = radius + neighbour.Scale;
 
-                if ((neighbour != this) && (to.LengthSquared() < radius*100)) 
+                if ((neighbour != this) && (to.LengthSquared() < range*range)) 
                 {
                     neighbour.Tag();
-                    Neighbours.Add(neighbour);
                 }
             }
         }

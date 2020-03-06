@@ -41,7 +41,7 @@ namespace AAI_assignment.behaviour
             steeringForce += aB.Calculate();
             steeringForce += cB.Calculate();
 
-            return steeringForce;
+            return steeringForce.Truncate(ME.MaxSpeed);
         }
 
     }

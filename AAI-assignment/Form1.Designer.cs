@@ -36,7 +36,7 @@
             this.dbPanel1.BackColor = System.Drawing.Color.White;
             this.dbPanel1.Location = new System.Drawing.Point(0, 0);
             this.dbPanel1.Name = "dbPanel1";
-            this.dbPanel1.Size = new System.Drawing.Size(1509, 651);
+            this.dbPanel1.Size = new System.Drawing.Size(1920, 1080);
             this.dbPanel1.TabIndex = 0;
             this.dbPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.dbPanel1_Paint);
             this.dbPanel1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dbPanel1_MouseClick);
@@ -45,7 +45,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1508, 653);
+            this.ClientSize = new System.Drawing.Size(1904, 1041);
             this.Controls.Add(this.dbPanel1);
             this.Name = "Form1";
             this.Text = "Steering";

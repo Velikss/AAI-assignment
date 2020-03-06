@@ -22,7 +22,8 @@ namespace AAI_assignment.behaviour
         {
             ME.TagNeighbors(ME.MyWorld.entities, Radius);
 
-            Vector2D centerOfMass = new Vector2D(), steeringForce = new Vector2D();
+            Vector2D centerOfMass = new Vector2D();
+            Vector2D steeringForce = new Vector2D();
 
             int neighbourCount = 0;
 
@@ -47,7 +48,7 @@ namespace AAI_assignment.behaviour
         private Vector2D Seek(Vector2D target)
         {
             Vector2D Tpos = target.Clone();
-            Vector2D desiredVelocity = Tpos.Sub(ME.Pos).Normalize();
+            Vector2D desiredVelocity = Tpos.Sub(ME.Pos).Normalize().Multiply(ME.MaxSpeed);
             return desiredVelocity.Sub(ME.Velocity);
         }
     }
