@@ -86,16 +86,27 @@ namespace AAI_assignment
             this.label1.TabIndex = 7;
             this.label1.Text = "Entities";
             // 
-            // numericUpDown1
+            // entityUpDown
             // 
             this.entityUpDown.Location = new System.Drawing.Point(172, 14);
-            this.entityUpDown.Name = "numericUpDown1";
+            this.entityUpDown.Maximum = new decimal(new int[] {
+            1200,
+            0,
+            0,
+            0});
+            this.entityUpDown.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.entityUpDown.Name = "entityUpDown";
             this.entityUpDown.Size = new System.Drawing.Size(87, 20);
             this.entityUpDown.TabIndex = 6;
-            this.entityUpDown.DecimalPlaces = 0;
-            this.entityUpDown.Maximum = 1200;
-            this.entityUpDown.Minimum = 1;
-            this.entityUpDown.Value = WorldParameters.EntityCount;
+            this.entityUpDown.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
             this.entityUpDown.ValueChanged += new System.EventHandler(this.entityUpDown_ValueChanged);
             // 
             // alignmentBox

@@ -14,7 +14,7 @@ namespace AAI_assignment
     public struct WorldParameters
     {
         // Behaviours
-        public static bool alignment, arrive, cohesion, flocking, seek, seperation, wandering;
+        public static bool alignment, arrive, cohesion, flocking, seek, separation, wandering, obstacleSeparation = true;
 
         // Alignment
         public static int AlignmentRadius = 2;
@@ -36,8 +36,12 @@ namespace AAI_assignment
         public static float FlockingAlignmentForce = 1;
 
         // Seperation
-        public static float SeperationRadius = 25;
-        public static float SeperationForce = 25;
+        public static float SeparationRadius = 25;
+        public static float SeparationForce = 25;
+
+        // ObstacleSeperation
+        public static float ObstacleSeperationRadius = 25;
+        public static float ObstacleSeperationForce = 50;
 
         // Entity
         public static int EntityCount = 100;
@@ -129,10 +133,12 @@ namespace AAI_assignment
                     entities[i].SB.Add(new FlockingBehaviour(entities[i], WorldParameters.FlockingCohesionRadius, WorldParameters.FlockingSeperationRadius, WorldParameters.FlockingAlignmentRadius, entities, WorldParameters.FlockingCohesionForce, WorldParameters.FlockingSeperationForce, WorldParameters.FlockingAlignmentForce));
                 if (WorldParameters.seek)
                     entities[i].SB.Add(new SeekBehaviour(entities[i]));
-                if (WorldParameters.seperation)
-                    entities[i].SB.Add(new SeparationBehaviour(entities[i], WorldParameters.SeperationRadius, entities, WorldParameters.SeperationForce));
+                if (WorldParameters.separation)
+                    entities[i].SB.Add(new SeparationBehaviour(entities[i], WorldParameters.SeparationRadius, entities, WorldParameters.SeparationForce));
                 if (WorldParameters.wandering)
                     entities[i].SB.Add(new WanderingBehaviour(entities[i]));
+                if (WorldParameters.obstacleSeparation)
+                    entities[i].SB.Add(new ObstacleSeparationBehaviour(entities[i], WorldParameters.ObstacleScale + WorldParameters.ObstacleSeperationRadius, Obstacles, WorldParameters.ObstacleSeperationForce));
 
                 entities[i].Update(timeElapsed);
             }
@@ -160,7 +166,7 @@ namespace AAI_assignment
                         WorldParameters.seek = true;
                         break;
                     case "Seperation":
-                        WorldParameters.seperation = true;
+                        WorldParameters.separation = true;
                         break;
                     case "Wandering":
                         WorldParameters.wandering = true;
@@ -193,7 +199,7 @@ namespace AAI_assignment
                         WorldParameters.seek = false;
                         break;
                     case "Seperation":
-                        WorldParameters.seperation = false;
+                        WorldParameters.separation = false;
                         break;
                     case "Wandering":
                         WorldParameters.wandering = false;

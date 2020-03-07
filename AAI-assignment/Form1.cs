@@ -63,7 +63,7 @@ namespace AAI_assignment
             WorldParameters.cohesion = cohesionBox.Checked;
             WorldParameters.flocking = flockingBox.Checked;
             WorldParameters.seek = seekBox.Checked;
-            WorldParameters.seperation = seperationBox.Checked;
+            WorldParameters.separation = seperationBox.Checked;
             WorldParameters.wandering = wanderingBox.Checked;
         }
 
