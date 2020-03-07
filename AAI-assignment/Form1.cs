@@ -65,6 +65,7 @@ namespace AAI_assignment
             WorldParameters.seek = seekBox.Checked;
             WorldParameters.separation = seperationBox.Checked;
             WorldParameters.wandering = wanderingBox.Checked;
+            WorldParameters.obstacleSeparation = obstacleSeperationBox.Checked;
         }
 
         private void entityUpDown_ValueChanged(object sender, EventArgs e)

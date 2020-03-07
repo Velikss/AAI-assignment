@@ -33,6 +33,7 @@ namespace AAI_assignment
         {
             this.dbPanel1 = new AAI_assignment.DBPanel();
             this.dbPanel2 = new AAI_assignment.DBPanel();
+            this.obstacleSeperationBox = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.entityUpDown = new System.Windows.Forms.NumericUpDown();
             this.alignmentBox = new System.Windows.Forms.CheckBox();
@@ -63,6 +64,7 @@ namespace AAI_assignment
             // dbPanel2
             // 
             this.dbPanel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.dbPanel2.Controls.Add(this.obstacleSeperationBox);
             this.dbPanel2.Controls.Add(this.label1);
             this.dbPanel2.Controls.Add(this.entityUpDown);
             this.dbPanel2.Controls.Add(this.alignmentBox);
@@ -76,6 +78,17 @@ namespace AAI_assignment
             this.dbPanel2.Name = "dbPanel2";
             this.dbPanel2.Size = new System.Drawing.Size(515, 219);
             this.dbPanel2.TabIndex = 1;
+            // 
+            // obstacleSeperationBox
+            // 
+            this.obstacleSeperationBox.AutoSize = true;
+            this.obstacleSeperationBox.Location = new System.Drawing.Point(13, 175);
+            this.obstacleSeperationBox.Name = "obstacleSeperationBox";
+            this.obstacleSeperationBox.Size = new System.Drawing.Size(122, 17);
+            this.obstacleSeperationBox.TabIndex = 8;
+            this.obstacleSeperationBox.Text = "Obstacle Seperation";
+            this.obstacleSeperationBox.UseVisualStyleBackColor = true;
+            this.obstacleSeperationBox.CheckedChanged += new System.EventHandler(this.behaviourBox_CheckedChanged);
             // 
             // label1
             // 
@@ -231,6 +244,7 @@ namespace AAI_assignment
         private System.Windows.Forms.CheckBox wanderingBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.NumericUpDown entityUpDown;
+        private System.Windows.Forms.CheckBox obstacleSeperationBox;
     }
 }
 
