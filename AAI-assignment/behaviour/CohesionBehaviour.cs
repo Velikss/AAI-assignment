@@ -24,14 +24,14 @@ namespace AAI_assignment.behaviour
             Vector2D steeringForce = new Vector2D();
             int neighbourCount = 0;
 
-            foreach (MovingEntity entity in Entities)
+            for (int i = 0; i < Entities.Count; i++)
             {
                 Vector2D mePosition = ME.Pos.Clone();
-                Vector2D otherPosition = entity.Pos.Clone();
+                Vector2D otherPosition = Entities[i].Pos.Clone();
                 double dist = Vector2D.DistanceSquared(mePosition, otherPosition);
                 if (dist < Radius * Radius && dist > 0)
                 {
-                    centerOfMass += entity.Pos;
+                    centerOfMass += Entities[i].Pos;
                     neighbourCount++;
                 }
             }

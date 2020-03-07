@@ -19,12 +19,13 @@ namespace AAI_assignment.behaviour
         public override Vector2D Calculate()
         {
             Vector2D steeringForce = new Vector2D();
-            foreach (MovingEntity other in Entities)
+
+            for (int i = 0; i < Entities.Count; i++)
             {
-                double dist = Vector2D.DistanceSquared(ME.Pos, other.Pos);
+                double dist = Vector2D.DistanceSquared(ME.Pos, Entities[i].Pos);
                 if (dist < Radius * Radius && dist > 0)
                 {
-                    Vector2D separationForce = ME.Pos - other.Pos;
+                    Vector2D separationForce = ME.Pos - Entities[i].Pos;
                     steeringForce += separationForce / dist;
                 }
             }

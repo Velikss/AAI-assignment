@@ -103,27 +103,27 @@ namespace AAI_assignment
         }
 
         public void Update(float timeElapsed)
-        { 
-            foreach (MovingEntity me in entities)
+        {
+            for (int i = 0; i < entities.Count; i++)
             {
-                me.SB.Clear();
+                entities[i].SB.Clear();
 
                 if (WorldParameters.alignment)
-                    me.SB.Add(new AlignmentBehaviour(me, WorldParameters.AlignmentRadius, entities, WorldParameters.AlignmentForce));
+                    entities[i].SB.Add(new AlignmentBehaviour(entities[i], WorldParameters.AlignmentRadius, entities, WorldParameters.AlignmentForce));
                 if (WorldParameters.arrive)
-                    me.SB.Add(new ArriveBehaviour(me, WorldParameters.decel));
+                    entities[i].SB.Add(new ArriveBehaviour(entities[i], WorldParameters.decel));
                 if (WorldParameters.cohesion)
-                    me.SB.Add(new CohesionBehaviour(me, WorldParameters.CohesionRadius, entities, WorldParameters.CohesionForce));
+                    entities[i].SB.Add(new CohesionBehaviour(entities[i], WorldParameters.CohesionRadius, entities, WorldParameters.CohesionForce));
                 if (WorldParameters.flocking)
-                    me.SB.Add(new FlockingBehaviour(me, WorldParameters.FlockingCohesionRadius, WorldParameters.FlockingSeperationRadius, WorldParameters.FlockingAlignmentRadius, entities, WorldParameters.FlockingCohesionForce, WorldParameters.FlockingSeperationForce, WorldParameters.FlockingAlignmentForce));
+                    entities[i].SB.Add(new FlockingBehaviour(entities[i], WorldParameters.FlockingCohesionRadius, WorldParameters.FlockingSeperationRadius, WorldParameters.FlockingAlignmentRadius, entities, WorldParameters.FlockingCohesionForce, WorldParameters.FlockingSeperationForce, WorldParameters.FlockingAlignmentForce));
                 if (WorldParameters.seek)
-                    me.SB.Add(new SeekBehaviour(me));
+                    entities[i].SB.Add(new SeekBehaviour(entities[i]));
                 if (WorldParameters.seperation)
-                    me.SB.Add(new SeparationBehaviour(me, WorldParameters.SeperationRadius, entities, WorldParameters.SeperationForce));
+                    entities[i].SB.Add(new SeparationBehaviour(entities[i], WorldParameters.SeperationRadius, entities, WorldParameters.SeperationForce));
                 if (WorldParameters.wandering)
-                    me.SB.Add(new WanderingBehaviour(me));
+                    entities[i].SB.Add(new WanderingBehaviour(entities[i]));
 
-                me.Update(timeElapsed);
+                entities[i].Update(timeElapsed);
             }
         }
 

@@ -21,12 +21,13 @@ namespace AAI_assignment.behaviour
         {
             Vector2D averageHeading = new Vector2D();
             int neighbourCount = 0;
-            foreach (MovingEntity entity in Entities)
+
+            for (int i = 0; i < Entities.Count; i++)
             {
-                double dist = Vector2D.DistanceSquared(ME.Pos, entity.Pos);
+                double dist = Vector2D.DistanceSquared(ME.Pos, Entities[i].Pos);
                 if (dist < Radius * Radius && dist > 0)
                 {
-                    Vector2D h = entity.Velocity.Clone().Normalize();
+                    Vector2D h = Entities[i].Velocity.Clone().Normalize();
                     averageHeading += h;
                     neighbourCount++;
                 }
