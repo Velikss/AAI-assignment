@@ -79,5 +79,12 @@ namespace AAI_assignment
             Console.WriteLine(WorldParameters.EntityCount);
             Console.WriteLine(world.entities.Count);
         }
+
+        private void speedSlider_Scroll(object sender, EventArgs e)
+        {
+            WorldParameters.EntityMaxSpeed = speedSlider.Value;
+            speedLabel.Text = "Max speed: " + WorldParameters.EntityMaxSpeed;
+            world.UpdateSpeed();
+        }
     }
 }

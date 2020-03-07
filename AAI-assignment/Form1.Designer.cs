@@ -33,6 +33,8 @@ namespace AAI_assignment
         {
             this.dbPanel1 = new AAI_assignment.DBPanel();
             this.dbPanel2 = new AAI_assignment.DBPanel();
+            this.speedSlider = new System.Windows.Forms.TrackBar();
+            this.speedLabel = new System.Windows.Forms.Label();
             this.obstacleSeperationBox = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.entityUpDown = new System.Windows.Forms.NumericUpDown();
@@ -46,6 +48,7 @@ namespace AAI_assignment
             this.menuButton = new System.Windows.Forms.Button();
             this.dbPanel1.SuspendLayout();
             this.dbPanel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.speedSlider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.entityUpDown)).BeginInit();
             this.SuspendLayout();
             // 
@@ -64,6 +67,8 @@ namespace AAI_assignment
             // dbPanel2
             // 
             this.dbPanel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.dbPanel2.Controls.Add(this.speedSlider);
+            this.dbPanel2.Controls.Add(this.speedLabel);
             this.dbPanel2.Controls.Add(this.obstacleSeperationBox);
             this.dbPanel2.Controls.Add(this.label1);
             this.dbPanel2.Controls.Add(this.entityUpDown);
@@ -76,13 +81,34 @@ namespace AAI_assignment
             this.dbPanel2.Controls.Add(this.wanderingBox);
             this.dbPanel2.Location = new System.Drawing.Point(12, 32);
             this.dbPanel2.Name = "dbPanel2";
-            this.dbPanel2.Size = new System.Drawing.Size(515, 219);
+            this.dbPanel2.Size = new System.Drawing.Size(601, 421);
             this.dbPanel2.TabIndex = 1;
+            // 
+            // speedSlider
+            // 
+            this.speedSlider.Location = new System.Drawing.Point(380, 9);
+            this.speedSlider.Maximum = 500;
+            this.speedSlider.Minimum = 10;
+            this.speedSlider.Name = "speedSlider";
+            this.speedSlider.Size = new System.Drawing.Size(210, 45);
+            this.speedSlider.TabIndex = 10;
+            this.speedSlider.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.speedSlider.Value = 50;
+            this.speedSlider.Scroll += new System.EventHandler(this.speedSlider_Scroll);
+            // 
+            // speedLabel
+            // 
+            this.speedLabel.AutoSize = true;
+            this.speedLabel.Location = new System.Drawing.Point(293, 21);
+            this.speedLabel.Name = "speedLabel";
+            this.speedLabel.Size = new System.Drawing.Size(65, 13);
+            this.speedLabel.TabIndex = 9;
+            this.speedLabel.Text = "Max speed: ";
             // 
             // obstacleSeperationBox
             // 
             this.obstacleSeperationBox.AutoSize = true;
-            this.obstacleSeperationBox.Location = new System.Drawing.Point(13, 175);
+            this.obstacleSeperationBox.Location = new System.Drawing.Point(12, 152);
             this.obstacleSeperationBox.Name = "obstacleSeperationBox";
             this.obstacleSeperationBox.Size = new System.Drawing.Size(122, 17);
             this.obstacleSeperationBox.TabIndex = 8;
@@ -93,7 +119,7 @@ namespace AAI_assignment
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(125, 18);
+            this.label1.Location = new System.Drawing.Point(125, 21);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(41, 13);
             this.label1.TabIndex = 7;
@@ -101,7 +127,7 @@ namespace AAI_assignment
             // 
             // entityUpDown
             // 
-            this.entityUpDown.Location = new System.Drawing.Point(172, 14);
+            this.entityUpDown.Location = new System.Drawing.Point(172, 19);
             this.entityUpDown.Maximum = new decimal(new int[] {
             1200,
             0,
@@ -125,7 +151,7 @@ namespace AAI_assignment
             // alignmentBox
             // 
             this.alignmentBox.AutoSize = true;
-            this.alignmentBox.Location = new System.Drawing.Point(13, 37);
+            this.alignmentBox.Location = new System.Drawing.Point(12, 37);
             this.alignmentBox.Name = "alignmentBox";
             this.alignmentBox.Size = new System.Drawing.Size(72, 17);
             this.alignmentBox.TabIndex = 5;
@@ -136,7 +162,7 @@ namespace AAI_assignment
             // cohesionBox
             // 
             this.cohesionBox.AutoSize = true;
-            this.cohesionBox.Location = new System.Drawing.Point(13, 60);
+            this.cohesionBox.Location = new System.Drawing.Point(12, 60);
             this.cohesionBox.Name = "cohesionBox";
             this.cohesionBox.Size = new System.Drawing.Size(70, 17);
             this.cohesionBox.TabIndex = 4;
@@ -147,7 +173,7 @@ namespace AAI_assignment
             // flockingBox
             // 
             this.flockingBox.AutoSize = true;
-            this.flockingBox.Location = new System.Drawing.Point(13, 83);
+            this.flockingBox.Location = new System.Drawing.Point(12, 175);
             this.flockingBox.Name = "flockingBox";
             this.flockingBox.Size = new System.Drawing.Size(66, 17);
             this.flockingBox.TabIndex = 3;
@@ -158,7 +184,7 @@ namespace AAI_assignment
             // seekBox
             // 
             this.seekBox.AutoSize = true;
-            this.seekBox.Location = new System.Drawing.Point(13, 106);
+            this.seekBox.Location = new System.Drawing.Point(12, 83);
             this.seekBox.Name = "seekBox";
             this.seekBox.Size = new System.Drawing.Size(65, 17);
             this.seekBox.TabIndex = 2;
@@ -169,7 +195,7 @@ namespace AAI_assignment
             // seperationBox
             // 
             this.seperationBox.AutoSize = true;
-            this.seperationBox.Location = new System.Drawing.Point(13, 129);
+            this.seperationBox.Location = new System.Drawing.Point(12, 106);
             this.seperationBox.Name = "seperationBox";
             this.seperationBox.Size = new System.Drawing.Size(77, 17);
             this.seperationBox.TabIndex = 1;
@@ -191,7 +217,7 @@ namespace AAI_assignment
             // wanderingBox
             // 
             this.wanderingBox.AutoSize = true;
-            this.wanderingBox.Location = new System.Drawing.Point(12, 152);
+            this.wanderingBox.Location = new System.Drawing.Point(12, 129);
             this.wanderingBox.Name = "wanderingBox";
             this.wanderingBox.Size = new System.Drawing.Size(78, 17);
             this.wanderingBox.TabIndex = 0;
@@ -220,14 +246,10 @@ namespace AAI_assignment
             this.dbPanel1.ResumeLayout(false);
             this.dbPanel2.ResumeLayout(false);
             this.dbPanel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.speedSlider)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.entityUpDown)).EndInit();
             this.ResumeLayout(false);
 
-        }
-
-        private void entityCount_Scroll(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
         }
 
         #endregion
@@ -245,6 +267,8 @@ namespace AAI_assignment
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.NumericUpDown entityUpDown;
         private System.Windows.Forms.CheckBox obstacleSeperationBox;
+        private System.Windows.Forms.TrackBar speedSlider;
+        private System.Windows.Forms.Label speedLabel;
     }
 }
 

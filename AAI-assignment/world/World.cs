@@ -80,6 +80,7 @@ namespace AAI_assignment
 
             // Entities
             AddEntities(WorldParameters.EntityCount);
+
             // Obstacles
             for (int i = 0; i < WorldParameters.ObstacleCount; i++)
             {
@@ -114,6 +115,14 @@ namespace AAI_assignment
             for (int i = 0; i < n; i++)
             {
                 entities.RemoveRange(entities.Count - n, n);
+            }
+        }
+
+        public void UpdateSpeed()
+        {
+            for(int i = 0; i < entities.Count; i++)
+            {
+                entities[i].MaxSpeed = WorldParameters.EntityMaxSpeed;
             }
         }
 
