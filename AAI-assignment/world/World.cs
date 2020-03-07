@@ -6,6 +6,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AAI_assignment.util;
+using AAI_assignment.world;
 
 namespace AAI_assignment
 {
@@ -38,14 +40,24 @@ namespace AAI_assignment
         public static float SeperationForce = 25;
 
         // Entity
-        public static int EntityCount = 50;
+        public static int EntityCount = 100;
+        public static int EntityScale = 4;
         public static int EntityMaxSpeed = 50;
+
+        // Obstacle
+        public static bool ObstacleAvoidance = true;
+        public static int ObstacleCount = 20;
+        public static int ObstacleScale = 30;
+
+        // Navigation Grid
+        public static bool GridOn = true;
 
     }
 
     public class World
     {
         public List<MovingEntity> entities = new List<MovingEntity>();
+        public List<BaseGameEntity> Obstacles = new List<BaseGameEntity>();
         public Vehicle Target { get; set; }
         public int Width { get; set; }
         public int Height { get; set; }
@@ -60,15 +72,15 @@ namespace AAI_assignment
         private void Populate()
         {
             entities.Clear();
+            //Obstacles.Clear();
 
-            Random r = new Random();
-            for (int i = 0; i < WorldParameters.EntityCount; i++)
+            // Entities
+            AddEntities(WorldParameters.EntityCount);
+            // Obstacles
+            for (int i = 0; i < WorldParameters.ObstacleCount; i++)
             {
-                Random rand = new Random();
-                Vehicle v = new Vehicle(Vector2D.CreateRandomPosition(Width, Height), this, 4);
-                v.VColor = Color.FromArgb(r.Next(1, 255), r.Next(1, 255), r.Next(1, 255));
-                v.MaxSpeed = WorldParameters.EntityMaxSpeed;
-                entities.Add(v);
+                Obstacle v = new Obstacle(Vector2D.CreateRandomPosition(Width, Height), this, WorldParameters.ObstacleScale);
+                Obstacles.Add(v);
             }
 
             //Vehicle d = new Vehicle(new Vector2D(1000, 60), this, 4);
@@ -86,8 +98,7 @@ namespace AAI_assignment
             Random r = new Random();
             for (int i = 0; i < n; i++)
             {
-                Random rand = new Random();
-                Vehicle v = new Vehicle(Vector2D.CreateRandomPosition(Width, Height), this, 4);
+                Vehicle v = new Vehicle(Vector2D.CreateRandomPosition(Width, Height), this, WorldParameters.EntityScale);
                 v.VColor = Color.FromArgb(r.Next(1, 255), r.Next(1, 255), r.Next(1, 255));
                 v.MaxSpeed = WorldParameters.EntityMaxSpeed;
                 entities.Add(v);
@@ -195,25 +206,17 @@ namespace AAI_assignment
 
         public void DrawGrid(Graphics g)
         {
-            float numOfCells = 50;
-            float cellSize = Width / numOfCells;
-            Pen p = new Pen(Color.LightGray, 2);
-            for (int y = 0; y < numOfCells; ++y)
-            {
-                g.DrawLine(p, 0, y * cellSize, numOfCells * cellSize, y * cellSize);
-            }
-
-            for (int x = 0; x < numOfCells; ++x)
-            {
-                g.DrawLine(p, x * cellSize, 0, x * cellSize, numOfCells * cellSize);
-            }
+            NavigationGrid nG = new NavigationGrid(this);
+            nG.Create(g);
         }
 
         public void Render(Graphics g)
         {
-            DrawGrid(g);
+            if(WorldParameters.GridOn)
+                DrawGrid(g);
             entities.ForEach(e => e.Render(g));
             Target.Render(g);
+            Obstacles.ForEach(e => e.Render(g));
         }
     }
 }

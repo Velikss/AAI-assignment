@@ -11,9 +11,9 @@ namespace AAI_assignment.world
     public class Obstacle : BaseGameEntity
     {
         public Color Color { get; set; }
-        public Obstacle(Vector2D pos, World w) : base(pos, w)
+        public Obstacle(Vector2D pos, World w, float scale) : base(pos, w)
         {
-            Scale = 20;
+            Scale = scale;
             Color = Color.Black;
         }
         public override void Render(Graphics g)
@@ -25,7 +25,8 @@ namespace AAI_assignment.world
             Rectangle entity = new Rectangle((int)leftCorner, (int)rightCorner, (int)size, (int)size);
 
             Pen p = new Pen(Color, 2);
-            g.DrawEllipse(p, entity);
+            SolidBrush myBrush = new SolidBrush(Color.Red);
+            g.FillEllipse(myBrush, entity);
         }
 
         public override void Update(float delta)

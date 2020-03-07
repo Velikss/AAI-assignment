@@ -11,7 +11,7 @@ namespace AAI_assignment.entity
     {
         public Color VColor { get; set; }
 
-        public Vehicle(Vector2D pos, World w, int scale) : base(pos, w)
+        public Vehicle(Vector2D pos, World w, float scale) : base(pos, w)
         {
             Velocity = new Vector2D(0, 0);
             Scale = scale;
