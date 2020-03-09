@@ -1,8 +1,10 @@
-﻿using System.Drawing;
+﻿using System.Collections.Generic;
+using System.Drawing;
+using AAI_assignment.entity;
 
 namespace AAI_assignment
 {
-    abstract class BaseGameEntity
+    public abstract class BaseGameEntity
     {
         public Vector2D Pos { get; set; }
         public float Scale { get; set; }
@@ -18,15 +20,9 @@ namespace AAI_assignment
 
         public virtual void Render(Graphics g)
         {
-            g.FillEllipse(Brushes.Blue, new Rectangle((int) Pos.X,(int) Pos.Y, 10, 10));
+            g.FillEllipse(Brushes.Blue, new Rectangle((int)Pos.X, (int)Pos.Y, 10, 10));
         }
-        
-
-    }
-    
 
 
-    
-
-    
+    }  
 }

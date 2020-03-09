@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AAI_assignment
 {
-    abstract class SteeringBehaviour
+    public abstract class SteeringBehaviour
     {
         public MovingEntity ME { get; set; }
         public abstract Vector2D Calculate();
