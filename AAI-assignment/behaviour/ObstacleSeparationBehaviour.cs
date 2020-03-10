@@ -26,7 +26,7 @@ namespace AAI_assignment.behaviour
             for (int i = 0; i < Entities.Count; i++)
             {
                 double dist = Vector2D.DistanceSquared(ME.Pos, Entities[i].Pos);
-                if (dist < Radius * Radius && dist > 0)
+                if (dist < (Radius + WorldParameters.ObstacleScale) * (Radius + WorldParameters.ObstacleScale) && dist > 0)
                 {
                     Vector2D separationForce = ME.Pos - Entities[i].Pos;
                     steeringForce += separationForce / dist;
