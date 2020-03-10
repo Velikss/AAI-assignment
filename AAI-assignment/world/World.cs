@@ -165,7 +165,7 @@ namespace AAI_assignment
                 if (WorldParameters.wandering)
                     Entities[i].SB.Add(new WanderingBehaviour(Entities[i]));
                 if (WorldParameters.obstacleSeparation)
-                    Entities[i].SB.Add(new ObstacleSeparationBehaviour(Entities[i], WorldParameters.ObstacleScale + WorldParameters.ObstacleSeperationRadius, world.Obstacles, WorldParameters.ObstacleSeperationForce));
+                    Entities[i].SB.Add(new ObstacleSeparationBehaviour(Entities[i], WorldParameters.ObstacleScale + WorldParameters.ObstacleSeperationRadius, Obstacles, WorldParameters.ObstacleSeperationForce));
             }
         }
 
