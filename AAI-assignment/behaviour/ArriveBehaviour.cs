@@ -16,17 +16,17 @@ namespace AAI_assignment.behaviour
 
     class ArriveBehaviour : SteeringBehaviour
     {
-        public Vector2D TargetPos;
         Deceleration decel;
+        MovingEntity me;
         public ArriveBehaviour(MovingEntity me, Deceleration d) : base(me)
         {
-            this.TargetPos = me.MyWorld.Target.Pos;
+            this.me = me;
             this.decel = d;
         }
 
         public override Vector2D Calculate()
         {
-            Vector2D ToTarget = TargetPos - ME.Pos;
+            Vector2D ToTarget = me.MyWorld.Target.Pos - ME.Pos;
 
             double dist = ToTarget.Length();
 

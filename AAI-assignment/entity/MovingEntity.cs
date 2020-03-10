@@ -29,6 +29,7 @@ namespace AAI_assignment.entity
 
         public override void Update(float timeElapsed)
         {
+            //Console.WriteLine(SB.Count);
             //Vector2D steeringForce = SteeringBehaviour.Calculate();
             Vector2D steeringForce = new Vector2D();
             for (int i = 0; i < SB.Count; i++)

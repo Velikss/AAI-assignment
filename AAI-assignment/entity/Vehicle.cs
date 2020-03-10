@@ -23,7 +23,7 @@ namespace AAI_assignment.entity
         {
             double leftCorner = Pos.X - Scale;
             double rightCorner = Pos.Y - Scale;
-            double size = Scale * 4;
+            double size = Scale * 2;
 
             Rectangle entity = new Rectangle((int)leftCorner, (int)rightCorner, (int)size, (int)size);
 

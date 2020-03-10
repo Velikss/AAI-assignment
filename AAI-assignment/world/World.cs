@@ -41,7 +41,7 @@ namespace AAI_assignment
 
         // ObstacleSeperation
         public static float ObstacleSeperationRadius = 25;
-        public static float ObstacleSeperationForce = 50;
+        public static float ObstacleSeperationForce = 1000;
 
         // Entity
         public static int EntityCount = 100;
@@ -50,7 +50,7 @@ namespace AAI_assignment
 
         // Obstacle
         public static bool ObstacleAvoidance = true;
-        public static int ObstacleCount = 20;
+        public static int ObstacleCount = 80;
         public static int ObstacleScale = 30;
 
         // Navigation Grid
@@ -60,7 +60,7 @@ namespace AAI_assignment
 
     public class World
     {
-        public List<MovingEntity> entities = new List<MovingEntity>();
+        public List<MovingEntity> Entities = new List<MovingEntity>();
         public List<BaseGameEntity> Obstacles = new List<BaseGameEntity>();
         public Vehicle Target { get; set; }
         public int Width { get; set; }
@@ -75,7 +75,7 @@ namespace AAI_assignment
 
         private void Populate()
         {
-            entities.Clear();
+            Entities.Clear();
             //Obstacles.Clear();
 
             // Entities
@@ -106,7 +106,7 @@ namespace AAI_assignment
                 Vehicle v = new Vehicle(Vector2D.CreateRandomPosition(Width, Height), this, WorldParameters.EntityScale);
                 v.VColor = Color.FromArgb(r.Next(1, 255), r.Next(1, 255), r.Next(1, 255));
                 v.MaxSpeed = WorldParameters.EntityMaxSpeed;
-                entities.Add(v);
+                Entities.Add(v);
             }
         }
 
@@ -114,108 +114,31 @@ namespace AAI_assignment
         {
             for (int i = 0; i < n; i++)
             {
-                entities.RemoveRange(entities.Count - n, n);
+                Entities.RemoveRange(Entities.Count - n, n);
             }
         }
 
         public void UpdateSpeed()
         {
-            for(int i = 0; i < entities.Count; i++)
+            for(int i = 0; i < Entities.Count; i++)
             {
-                entities[i].MaxSpeed = WorldParameters.EntityMaxSpeed;
+                Entities[i].MaxSpeed = WorldParameters.EntityMaxSpeed;
+            }
+        }
+
+        public void UpdateScale()
+        {
+            for (int i = 0; i < Entities.Count; i++)
+            {
+                Entities[i].Scale = WorldParameters.EntityScale;
             }
         }
 
         public void Update(float timeElapsed)
         {
-            for (int i = 0; i < entities.Count; i++)
+            for (int i = 0; i < Entities.Count; i++)
             {
-                entities[i].SB.Clear();
-
-                if (WorldParameters.alignment)
-                    entities[i].SB.Add(new AlignmentBehaviour(entities[i], WorldParameters.AlignmentRadius, entities, WorldParameters.AlignmentForce));
-                if (WorldParameters.arrive)
-                    entities[i].SB.Add(new ArriveBehaviour(entities[i], WorldParameters.decel));
-                if (WorldParameters.cohesion)
-                    entities[i].SB.Add(new CohesionBehaviour(entities[i], WorldParameters.CohesionRadius, entities, WorldParameters.CohesionForce));
-                if (WorldParameters.flocking)
-                    entities[i].SB.Add(new FlockingBehaviour(entities[i], WorldParameters.FlockingCohesionRadius, WorldParameters.FlockingSeperationRadius, WorldParameters.FlockingAlignmentRadius, entities, WorldParameters.FlockingCohesionForce, WorldParameters.FlockingSeperationForce, WorldParameters.FlockingAlignmentForce));
-                if (WorldParameters.seek)
-                    entities[i].SB.Add(new SeekBehaviour(entities[i]));
-                if (WorldParameters.separation)
-                    entities[i].SB.Add(new SeparationBehaviour(entities[i], WorldParameters.SeparationRadius, entities, WorldParameters.SeparationForce));
-                if (WorldParameters.wandering)
-                    entities[i].SB.Add(new WanderingBehaviour(entities[i]));
-                if (WorldParameters.obstacleSeparation)
-                    entities[i].SB.Add(new ObstacleSeparationBehaviour(entities[i], WorldParameters.ObstacleScale + WorldParameters.ObstacleSeperationRadius, Obstacles, WorldParameters.ObstacleSeperationForce));
-
-                entities[i].Update(timeElapsed);
-            }
-        }
-
-        public void AddBehaviour(string behaviour)
-        {
-            foreach (MovingEntity me in entities)
-            {
-                switch (behaviour)
-                {
-                    case "Alignment":
-                        WorldParameters.alignment = true;
-                        break;
-                    case "Arrive":
-                        WorldParameters.arrive = true;
-                        break;
-                    case "Cohesion":
-                        WorldParameters.cohesion = true;
-                        break;
-                    case "Flocking":
-                        WorldParameters.flocking = true;
-                        break;
-                    case "Seeking":
-                        WorldParameters.seek = true;
-                        break;
-                    case "Seperation":
-                        WorldParameters.separation = true;
-                        break;
-                    case "Wandering":
-                        WorldParameters.wandering = true;
-                        break;
-                    default:
-                        return;
-                }
-            }
-        }
-
-        public void RemoveBehaviour(string behaviour)
-        {
-            foreach (MovingEntity me in entities)
-            {
-                switch (behaviour)
-                {
-                    case "Alignment":
-                        WorldParameters.alignment = false;
-                        break;
-                    case "Arrive":
-                        WorldParameters.arrive = false;
-                        break;
-                    case "Cohesion":
-                        WorldParameters.cohesion = false;
-                        break;
-                    case "Flocking":
-                        WorldParameters.flocking = false;
-                        break;
-                    case "Seeking":
-                        WorldParameters.seek = false;
-                        break;
-                    case "Seperation":
-                        WorldParameters.separation = false;
-                        break;
-                    case "Wandering":
-                        WorldParameters.wandering = false;
-                        break;
-                    default:
-                        return;
-                }
+                Entities[i].Update(timeElapsed);
             }
         }
 
@@ -229,9 +152,17 @@ namespace AAI_assignment
         {
             if(WorldParameters.GridOn)
                 DrawGrid(g);
-            entities.ForEach(e => e.Render(g));
+            Entities.ForEach(e => e.Render(g));
             Target.Render(g);
             Obstacles.ForEach(e => e.Render(g));
+        }
+
+        internal void UpdateObstacleScale()
+        {
+            for (int i = 0; i < Obstacles.Count; i++)
+            {
+                Obstacles[i].Scale = WorldParameters.ObstacleScale;
+            }
         }
     }
 }
