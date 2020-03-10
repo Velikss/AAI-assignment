@@ -23,12 +23,14 @@ namespace AAI_assignment.entity
         {
             double leftCorner = Pos.X - Scale;
             double rightCorner = Pos.Y - Scale;
-            double size = Scale * 2;
+            double size = Scale * 4;
 
             Rectangle entity = new Rectangle((int)leftCorner, (int)rightCorner, (int)size, (int)size);
 
             Pen p = new Pen(VColor, 2);
-            g.DrawEllipse(p, entity);
+            SolidBrush b = new SolidBrush(VColor);
+
+            g.FillEllipse(b, entity);
             g.DrawLine(p, (int) Pos.X, (int) Pos.Y, (int) Pos.X + (int)(Velocity.X * 2), (int)Pos.Y + (int)(Velocity.Y * 2));
         }
     }
