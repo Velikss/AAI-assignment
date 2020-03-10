@@ -16,6 +16,7 @@ namespace AAI_assignment
         public World world;
         System.Timers.Timer timer;
         public const float timeDelta = 0.8f;
+        public int defaultWidth = 1920, defaultHeight = 980;
 
         public Form1()
         {
@@ -100,5 +101,15 @@ namespace AAI_assignment
             world.UpdateObstacleScale();
         }
 
+        private void Form1_Resize(object sender, EventArgs e)
+        {
+            this.menuPanel.Height = this.Height;
+            this.worldPanel.Height = this.Height;
+            this.world.Height = this.Height;
+
+            this.worldPanel.Width = this.Width;
+            this.world.Width = this.Width;
+
+        }
     }
 }

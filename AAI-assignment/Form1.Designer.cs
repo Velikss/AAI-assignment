@@ -66,7 +66,7 @@ namespace AAI_assignment
             this.worldPanel.Controls.Add(this.menuPanel);
             this.worldPanel.Location = new System.Drawing.Point(0, 0);
             this.worldPanel.Name = "worldPanel";
-            this.worldPanel.Size = new System.Drawing.Size(1445, 1080);
+            this.worldPanel.Size = new System.Drawing.Size(1900, 980);
             this.worldPanel.TabIndex = 0;
             this.worldPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.dbPanel1_Paint);
             this.worldPanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dbPanel1_MouseClick);
@@ -306,11 +306,12 @@ namespace AAI_assignment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1443, 766);
+            this.ClientSize = new System.Drawing.Size(1900, 980);
             this.Controls.Add(this.worldPanel);
             this.DoubleBuffered = true;
             this.Name = "Form1";
             this.Text = "Steering";
+            this.Resize += new System.EventHandler(this.Form1_Resize);
             this.worldPanel.ResumeLayout(false);
             this.menuPanel.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
