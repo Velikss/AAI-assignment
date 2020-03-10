@@ -40,11 +40,11 @@ namespace AAI_assignment
         public static float SeparationForce = 25;
 
         // ObstacleSeperation
-        public static float ObstacleSeperationRadius = 5;
+        public static float ObstacleSeperationRadius = 10;
         public static float ObstacleSeperationForce = 50;
 
         // Entity
-        public static int EntityCount = 100;
+        public static int EntityCount = 200;
         public static int EntityScale = 4;
         public static int EntityMaxSpeed = 50;
 
@@ -55,6 +55,7 @@ namespace AAI_assignment
 
         // Navigation Grid
         public static bool GridOn = true;
+        public static float NumOfCells = 50;
 
     }
 
@@ -62,6 +63,7 @@ namespace AAI_assignment
     {
         public List<MovingEntity> Entities = new List<MovingEntity>();
         public List<BaseGameEntity> Obstacles = new List<BaseGameEntity>();
+        public NavigationGrid NavGrid;
         public Vehicle Target { get; set; }
         public int Width { get; set; }
         public int Height { get; set; }
@@ -71,6 +73,7 @@ namespace AAI_assignment
             Width = w;
             Height = h;
             Populate();
+            NavGrid = new NavigationGrid(this, WorldParameters.NumOfCells);
         }
 
         private void Populate()
@@ -179,17 +182,17 @@ namespace AAI_assignment
 
         public void DrawGrid(Graphics g)
         {
-            NavigationGrid nG = new NavigationGrid(this);
-            nG.Create(g);
+            //NavGrid = new NavigationGrid(this, WorldParameters.NumOfCells);
+            NavGrid.DrawGrid(g);
         }
 
         public void Render(Graphics g)
         {
-            if(WorldParameters.GridOn)
-                DrawGrid(g);
             Entities.ForEach(e => e.Render(g));
             Target.Render(g);
             Obstacles.ForEach(e => e.Render(g));
+            if (WorldParameters.GridOn)
+                DrawGrid(g);
         }
 
     }

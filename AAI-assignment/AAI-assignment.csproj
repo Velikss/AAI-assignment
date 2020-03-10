@@ -91,9 +91,7 @@
     </Compile>
     <Compile Include="graph\Edge.cs" />
     <Compile Include="graph\Graph.cs" />
-    <Compile Include="graph\IGraph.cs" />
-    <Compile Include="graph\IVertex.cs" />
-    <Compile Include="graph\Vertex.cs" />
+    <Compile Include="graph\Node.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="util\NavigationGrid.cs" />

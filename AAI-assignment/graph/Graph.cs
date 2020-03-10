@@ -5,11 +5,11 @@ using System.Text;
 
 namespace Huiswerk6
 {
-    public class Graph : IGraph
+    public class Graph
     {
         public static readonly double INFINITY = System.Double.MaxValue;
 
-        private Dictionary<string, Vertex> vertexMap;
+        private Dictionary<string, Node> NodeMap;
 
 
         //----------------------------------------------------------------------
@@ -18,7 +18,7 @@ namespace Huiswerk6
 
         public Graph()
         {
-            vertexMap = new Dictionary<string, Vertex>();
+            NodeMap = new Dictionary<string, Node>();
         }
 
 
@@ -26,27 +26,27 @@ namespace Huiswerk6
         // Interface methods that have to be implemented for exam
         //----------------------------------------------------------------------
 
-        public Vertex GetVertex(string name)
+        public Node GetVertex(string name)
         {
-//            Vertex v = vertexMap[name];
-            if (!vertexMap.ContainsKey(name))
+//            Node v = NodeMap[name];
+            if (!NodeMap.ContainsKey(name))
             {
-                vertexMap.Add(name, new Vertex(name));
+                NodeMap.Add(name, new Node(name));
             }
 
-            return vertexMap[name];
+            return NodeMap[name];
         }
 
         public void AddEdge(string source, string dest, double cost)
         {
-            Vertex srcVertex = GetVertex(source);
-            Vertex destVertex = GetVertex(dest);
-            srcVertex.adj.Add(new Edge(destVertex, cost));
+            Node srcNode = GetVertex(source);
+            Node destNode = GetVertex(dest);
+            srcNode.adj.Add(new Edge(destNode, cost));
         }
     
         public void ClearAll()
         {
-            foreach (Vertex v in vertexMap.Values)
+            foreach (Node v in NodeMap.Values)
                 v.Reset();
         }
 
@@ -58,7 +58,7 @@ namespace Huiswerk6
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            foreach (Vertex v in vertexMap.Values)
+            foreach (Node v in NodeMap.Values)
                 sb.AppendLine(v.ToString());
             return sb.ToString();
         }
@@ -72,22 +72,22 @@ namespace Huiswerk6
         {
             ClearAll();
 
-            Vertex startVertex = vertexMap[name];
-            if (startVertex == null)
-                return; // starting vertex not found
+            Node startNode = NodeMap[name];
+            if (startNode == null)
+                return; // starting node not found
 
-            Queue<Vertex> queue = new Queue<Vertex>();
+            Queue<Node> queue = new Queue<Node>();
 
-            startVertex.dist = 0;
-            queue.Enqueue(startVertex);
+            startNode.dist = 0;
+            queue.Enqueue(startNode);
 
             while (queue.Count != 0)
             {
-                Vertex v1 = queue.Dequeue();
+                Node v1 = queue.Dequeue();
 
                 foreach(Edge e in v1.adj)
                 {
-                    Vertex v2 = e.dest;
+                    Node v2 = e.dest;
 
                     if (v2.dist == Graph.INFINITY)
                     {
@@ -103,34 +103,34 @@ namespace Huiswerk6
         {
             PriorityQueue<Edge> queue = new PriorityQueue<Edge>();
 
-            Vertex startVertex = vertexMap[name];
-            if (startVertex == null)
-                return; // starting vertex not found
+            Node startNode = NodeMap[name];
+            if (startNode == null)
+                return; // starting node not found
 
             ClearAll();
-            queue.Add(new Edge(startVertex, 0));
-            startVertex.dist = 0; 
+            queue.Add(new Edge(startNode, 0));
+            startNode.dist = 0; 
 
             while (queue.Size() != 0)
             {
                 Edge edge = queue.Remove();
 
-                Vertex vertex = edge.dest;
+                Node node = edge.dest;
 
-                if(vertex.visited && vertex.dist != 0) continue;
+                if(node.visited && node.dist != 0) continue;
 
-                foreach (Edge vertexEdge in vertex.adj)
+                foreach (Edge vertexEdge in node.adj)
                 {
-                    Vertex neighbor = vertexEdge.dest;
+                    Node neighbor = vertexEdge.dest;
                     double vertexEdgeCost = vertexEdge.cost;
 
                     if (vertexEdgeCost < 0)
                         return;
 
-                    if (neighbor.dist > vertex.dist + vertexEdgeCost)
+                    if (neighbor.dist > node.dist + vertexEdgeCost)
                     {
-                        neighbor.dist = vertex.dist + vertexEdgeCost;
-                        neighbor.prev = vertex;
+                        neighbor.dist = node.dist + vertexEdgeCost;
+                        neighbor.prev = node;
                         queue.Add(new Edge(neighbor, neighbor.dist));
                     }
                 }
@@ -139,12 +139,12 @@ namespace Huiswerk6
 
         public bool IsConnected()
         {
-            foreach (Vertex v in vertexMap.Values)
+            foreach (Node v in NodeMap.Values)
             {
-                int count = vertexMap.Count;
+                int count = NodeMap.Count;
                 foreach (Edge e in v.adj)
                 {
-                    if (vertexMap.ContainsKey(e.dest.name))
+                    if (NodeMap.ContainsKey(e.dest.name))
                         count--;
                 }
 

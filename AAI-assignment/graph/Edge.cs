@@ -4,10 +4,10 @@ namespace Huiswerk6
 {
     public class Edge : IComparable<Edge>
     {
-        public Vertex dest;
+        public Node dest;
         public double cost;
 
-        public Edge(Vertex d, double c)
+        public Edge(Node d, double c)
         {
             dest = d;
             cost = c;

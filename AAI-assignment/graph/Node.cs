@@ -5,18 +5,26 @@ using AAI_assignment;
 
 namespace Huiswerk6
 {
-    public class Vertex : IVertex
+    public class Node
     {
         public String name;
         public List<Edge> adj;
         public double dist;
-        public Vertex prev;
+        public Node prev;
         public bool visited;
-        public Vector2D pos;
-        public Vertex(string name)
+        public Vector2D Pos;
+        public Node(string name)
         {
             this.name = name;
             adj = new List<Edge>();
+            Reset();
+        }
+
+        public Node(string name, Vector2D v)
+        {
+            this.name = name;
+            adj = new List<Edge>();
+            Pos = v;
             Reset();
         }
 
