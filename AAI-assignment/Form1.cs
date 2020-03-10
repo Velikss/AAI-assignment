@@ -67,27 +67,7 @@ namespace AAI_assignment
             WorldParameters.wandering = wanderingBox.Checked;
             WorldParameters.obstacleSeparation = obstacleSeperationBox.Checked;
 
-            for (int i = 0; world.Entities.Count > i; i++)
-            {
-                world.Entities[i].SB.Clear();
-
-                if (WorldParameters.alignment)
-                    world.Entities[i].SB.Add(new AlignmentBehaviour(world.Entities[i], WorldParameters.AlignmentRadius, world.Entities, WorldParameters.AlignmentForce));
-                if (WorldParameters.arrive)
-                    world.Entities[i].SB.Add(new ArriveBehaviour(world.Entities[i], WorldParameters.decel));
-                if (WorldParameters.cohesion)
-                    world.Entities[i].SB.Add(new CohesionBehaviour(world.Entities[i], WorldParameters.CohesionRadius, world.Entities, WorldParameters.CohesionForce));
-                if (WorldParameters.flocking)
-                    world.Entities[i].SB.Add(new FlockingBehaviour(world.Entities[i], WorldParameters.FlockingCohesionRadius, WorldParameters.FlockingSeperationRadius, WorldParameters.FlockingAlignmentRadius, world.Entities, WorldParameters.FlockingCohesionForce, WorldParameters.FlockingSeperationForce, WorldParameters.FlockingAlignmentForce));
-                if (WorldParameters.seek)
-                    world.Entities[i].SB.Add(new SeekBehaviour(world.Entities[i]));
-                if (WorldParameters.separation)
-                    world.Entities[i].SB.Add(new SeparationBehaviour(world.Entities[i], WorldParameters.SeparationRadius, world.Entities, WorldParameters.SeparationForce));
-                if (WorldParameters.wandering)
-                    world.Entities[i].SB.Add(new WanderingBehaviour(world.Entities[i]));
-                if (WorldParameters.obstacleSeparation)
-                    world.Entities[i].SB.Add(new ObstacleSeparationBehaviour(world.Entities[i], WorldParameters.ObstacleScale + WorldParameters.ObstacleSeperationRadius, world.Obstacles, WorldParameters.ObstacleSeperationForce));
-            }
+            world.RefreshBehaviours();
 
         }
 

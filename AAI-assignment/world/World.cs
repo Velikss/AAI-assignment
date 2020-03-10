@@ -108,6 +108,8 @@ namespace AAI_assignment
                 v.MaxSpeed = WorldParameters.EntityMaxSpeed;
                 Entities.Add(v);
             }
+
+            RefreshBehaviours();
         }
 
         public void RemoveEntities(int n)
@@ -134,6 +136,39 @@ namespace AAI_assignment
             }
         }
 
+        public void UpdateObstacleScale()
+        {
+            for (int i = 0; i < Obstacles.Count; i++)
+            {
+                Obstacles[i].Scale = WorldParameters.ObstacleScale;
+            }
+        }
+
+        public void RefreshBehaviours()
+        {
+            for (int i = 0; Entities.Count > i; i++)
+            {
+                Entities[i].SB.Clear();
+
+                if (WorldParameters.alignment)
+                    Entities[i].SB.Add(new AlignmentBehaviour(Entities[i], WorldParameters.AlignmentRadius, Entities, WorldParameters.AlignmentForce));
+                if (WorldParameters.arrive)
+                    Entities[i].SB.Add(new ArriveBehaviour(Entities[i], WorldParameters.decel));
+                if (WorldParameters.cohesion)
+                    Entities[i].SB.Add(new CohesionBehaviour(Entities[i], WorldParameters.CohesionRadius, Entities, WorldParameters.CohesionForce));
+                if (WorldParameters.flocking)
+                    Entities[i].SB.Add(new FlockingBehaviour(Entities[i], WorldParameters.FlockingCohesionRadius, WorldParameters.FlockingSeperationRadius, WorldParameters.FlockingAlignmentRadius, Entities, WorldParameters.FlockingCohesionForce, WorldParameters.FlockingSeperationForce, WorldParameters.FlockingAlignmentForce));
+                if (WorldParameters.seek)
+                    Entities[i].SB.Add(new SeekBehaviour(Entities[i]));
+                if (WorldParameters.separation)
+                    Entities[i].SB.Add(new SeparationBehaviour(Entities[i], WorldParameters.SeparationRadius, Entities, WorldParameters.SeparationForce));
+                if (WorldParameters.wandering)
+                    Entities[i].SB.Add(new WanderingBehaviour(Entities[i]));
+                if (WorldParameters.obstacleSeparation)
+                    Entities[i].SB.Add(new ObstacleSeparationBehaviour(Entities[i], WorldParameters.ObstacleScale + WorldParameters.ObstacleSeperationRadius, world.Obstacles, WorldParameters.ObstacleSeperationForce));
+            }
+        }
+
         public void Update(float timeElapsed)
         {
             for (int i = 0; i < Entities.Count; i++)
@@ -157,12 +192,5 @@ namespace AAI_assignment
             Obstacles.ForEach(e => e.Render(g));
         }
 
-        internal void UpdateObstacleScale()
-        {
-            for (int i = 0; i < Obstacles.Count; i++)
-            {
-                Obstacles[i].Scale = WorldParameters.ObstacleScale;
-            }
-        }
     }
 }
