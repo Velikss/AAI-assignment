@@ -16,30 +16,31 @@ namespace AAI_assignment
         public World world;
         System.Timers.Timer timer;
         public const float timeDelta = 0.8f;
-        
+
         public Form1()
         {
             InitializeComponent();
 
-            world = new World(w: dbPanel1.Width, h: dbPanel1.Height);
-            
+            world = new World(w: worldPanel.Width, h: worldPanel.Height);
+
             timer = new System.Timers.Timer();
             timer.Elapsed += Timer_Elapsed;
             timer.Interval = 20;
             timer.Enabled = true;
+
         }
 
         private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             world.Update(timeDelta);
-            dbPanel1.Invalidate();
+            worldPanel.Invalidate();
         }
 
         private void dbPanel1_Paint(object sender, PaintEventArgs e)
         {
             world.Render(e.Graphics);
         }
-        
+
         private void dbPanel1_MouseClick(object sender, MouseEventArgs e)
         {
             world.Target.Pos = new Vector2D(e.X, e.Y);
@@ -47,11 +48,11 @@ namespace AAI_assignment
 
         private void menuButton_Click(object sender, EventArgs e)
         {
-            if (this.dbPanel2.Visible)
-                this.dbPanel2.Visible = false;
+            if (this.menuPanel.Visible)
+                this.menuPanel.Visible = false;
             else
             {
-                this.dbPanel2.Visible = true;
+                this.menuPanel.Visible = true;
             }
 
         }
@@ -98,5 +99,6 @@ namespace AAI_assignment
             WorldParameters.ObstacleScale = obstacleScaleSlider.Value;
             world.UpdateObstacleScale();
         }
+
     }
 }
