@@ -38,7 +38,7 @@ namespace AAI_assignment
 
         // ObstacleSeperation
         public static float ObstacleSeperationRadius = 10;
-        public static float ObstacleSeperationForce = 50;
+        public static float ObstacleSeperationForce = 80;
 
         // Entity
         public static int EntityCount = 200;
@@ -52,6 +52,7 @@ namespace AAI_assignment
 
         // Navigation Grid
         public static bool GridOn = true;
+        public static bool DrawNodes = true;
         public static float NumOfCells = 50;
 
     }

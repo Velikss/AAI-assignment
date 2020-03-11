@@ -10,7 +10,7 @@ namespace AAI_assignment.util
         public float NumOfCells;
         public float CellSize;
         public SolidBrush myBrush = new SolidBrush(Color.DeepSkyBlue);
-        public Node[,] mat;
+        public Node[,] Mat;
 
         const int DEC = 1; // Default Edge Cost
 
@@ -19,7 +19,7 @@ namespace AAI_assignment.util
             this.World = world;
             NumOfCells = numOfCells;
             CellSize = World.Width / NumOfCells;
-            mat = new Node[(int)(NumOfCells + 1), (int)(NumOfCells + 1)];
+            Mat = new Node[(int)(NumOfCells + 1), (int)(NumOfCells + 1)];
             FloodFill();
             CreateEdges();
         }
@@ -28,7 +28,7 @@ namespace AAI_assignment.util
         //{
         //    FloodFill(g);
         //    CreateEdges(g);
-        //    Console.WriteLine(mat);
+        //    Console.WriteLine(Mat);
         //}
 
         public void FloodFill()
@@ -41,7 +41,7 @@ namespace AAI_assignment.util
                     Vector2D v = new Vector2D(x * CellSize, y * CellSize);
                     if (!InsideObstacle(v))
                     {
-                        mat[x, y] = new Node($"{x},{y}", v);
+                        Mat[x, y] = new Node($"{x},{y}", v);
                         //double leftCorner = x * CellSize - PointScale / 2;
                         //double rightCorner = y * CellSize - PointScale / 2;
 
@@ -49,7 +49,7 @@ namespace AAI_assignment.util
                         //g.FillEllipse(myBrush, entity);
                     }
                     else
-                        mat[x, y] = null;
+                        Mat[x, y] = null;
                 }
             }
         }
@@ -60,57 +60,57 @@ namespace AAI_assignment.util
             {
                 for (int y = 0; y <= NumOfCells; y++)
                 {
-                    if (mat[x, y] != null)
+                    if (Mat[x, y] != null)
                     {
                         // straight sides
                         if (x > 0)
-                            if (mat[x - 1, y] != null)
+                            if (Mat[x - 1, y] != null)
                             {
-                                mat[x, y].adj.Add(new Edge(mat[x - 1, y], DEC));
-                                //DrawEdge(g, mat[x, y], mat[x - 1, y]);
+                                Mat[x, y].adj.Add(new Edge(Mat[x - 1, y], DEC));
+                                //DrawEdge(g, Mat[x, y], Mat[x - 1, y]);
                             }
                         if (x < NumOfCells)
-                            if (mat[x + 1, y] != null)
+                            if (Mat[x + 1, y] != null)
                             {
-                                mat[x, y].adj.Add(new Edge(mat[x + 1, y], DEC));
-                                //DrawEdge(g, mat[x, y], mat[x + 1, y]);
+                                Mat[x, y].adj.Add(new Edge(Mat[x + 1, y], DEC));
+                                //DrawEdge(g, Mat[x, y], Mat[x + 1, y]);
                             }
                         if (y > 0)
-                            if (mat[x, y - 1] != null)
+                            if (Mat[x, y - 1] != null)
                             {
-                                mat[x, y].adj.Add(new Edge(mat[x, y - 1], DEC));
-                                //DrawEdge(g, mat[x, y], mat[x, y - 1]);
+                                Mat[x, y].adj.Add(new Edge(Mat[x, y - 1], DEC));
+                                //DrawEdge(g, Mat[x, y], Mat[x, y - 1]);
                             }
                         if (y < NumOfCells)
-                            if (mat[x, y + 1] != null)
+                            if (Mat[x, y + 1] != null)
                             {
-                                mat[x, y].adj.Add(new Edge(mat[x, y + 1], DEC));
-                                //DrawEdge(g, mat[x, y], mat[x, y + 1]);
+                                Mat[x, y].adj.Add(new Edge(Mat[x, y + 1], DEC));
+                                //DrawEdge(g, Mat[x, y], Mat[x, y + 1]);
                             }
                         // diagonal sides
                         if (x > 0 && y > 0)
-                            if (mat[x - 1, y - 1] != null)
+                            if (Mat[x - 1, y - 1] != null)
                             {
-                                mat[x, y].adj.Add(new Edge(mat[x - 1, y - 1], DEC));
-                                //DrawEdge(g, mat[x, y], mat[x - 1, y - 1]);
+                                Mat[x, y].adj.Add(new Edge(Mat[x - 1, y - 1], DEC));
+                                //DrawEdge(g, Mat[x, y], Mat[x - 1, y - 1]);
                             }
                         if (x < NumOfCells && y > 0)
-                            if (mat[x + 1, y - 1] != null)
+                            if (Mat[x + 1, y - 1] != null)
                             {
-                                mat[x, y].adj.Add(new Edge(mat[x + 1, y - 1], DEC));
-                                //DrawEdge(g, mat[x, y], mat[x + 1, y - 1]);
+                                Mat[x, y].adj.Add(new Edge(Mat[x + 1, y - 1], DEC));
+                                //DrawEdge(g, Mat[x, y], Mat[x + 1, y - 1]);
                             }
                         if (x > 0 && y < NumOfCells)
-                            if (mat[x - 1, y + 1] != null)
+                            if (Mat[x - 1, y + 1] != null)
                             {
-                                mat[x, y].adj.Add(new Edge(mat[x - 1, y + 1], DEC));
-                                //DrawEdge(g, mat[x, y], mat[x - 1, y + 1]);
+                                Mat[x, y].adj.Add(new Edge(Mat[x - 1, y + 1], DEC));
+                                //DrawEdge(g, Mat[x, y], Mat[x - 1, y + 1]);
                             }
                         if (x < NumOfCells && y < NumOfCells)
-                            if (mat[x + 1, y + 1] != null)
+                            if (Mat[x + 1, y + 1] != null)
                             {
-                                mat[x, y].adj.Add(new Edge(mat[x + 1, y + 1], DEC));
-                                //DrawEdge(g, mat[x, y], mat[x + 1, y + 1]);
+                                Mat[x, y].adj.Add(new Edge(Mat[x + 1, y + 1], DEC));
+                                //DrawEdge(g, Mat[x, y], Mat[x + 1, y + 1]);
                             }
                     }
                 }
@@ -124,55 +124,32 @@ namespace AAI_assignment.util
             {
                 for (int y = 0; y <= NumOfCells; y++)
                 {
-                    if (mat[x, y] != null)
+                    if (Mat[x, y] != null)
                     {
                         // straight sides
-                        if (x > 0)
-                            if (mat[x - 1, y] != null)
-                            {
-                                DrawEdge(g, mat[x, y], mat[x - 1, y]);
-                            }
-                        //if (x < NumOfCells)
-                        //    if (mat[x + 1, y] != null)
-                        //    {
-                        //        DrawEdge(g, mat[x, y], mat[x + 1, y]);
-                        //    }
-                        //if (y > 0)
-                        //    if (mat[x, y - 1] != null)
-                        //    {
-                        //        DrawEdge(g, mat[x, y], mat[x, y - 1]);
-                        //    }
+                        if (x >= 0 && x < NumOfCells)
+                            if (Mat[x + 1, y] != null)
+                                DrawEdge(g, Mat[x, y], Mat[x + 1, y]);
                         if (y < NumOfCells)
-                            if (mat[x, y + 1] != null)
-                            {
-                                DrawEdge(g, mat[x, y], mat[x, y + 1]);
-                            }
-                        // diagonal sides
-                        if (x > 0 && y > 0)
-                            if (mat[x - 1, y - 1] != null)
-                            {
-                                DrawEdge(g, mat[x, y], mat[x - 1, y - 1]);
-                            }
+                            if (Mat[x, y + 1] != null)
+                                DrawEdge(g, Mat[x, y], Mat[x, y + 1]);
+                        // diagonal
                         if (x < NumOfCells && y > 0)
-                            if (mat[x + 1, y - 1] != null)
-                            {
-                                DrawEdge(g, mat[x, y], mat[x + 1, y - 1]);
-                            }
-                        //if (x > 0 && y < NumOfCells)
-                        //    if (mat[x - 1, y + 1] != null)
-                        //    {
-                        //        DrawEdge(g, mat[x, y], mat[x - 1, y + 1]);
-                        //    }
-                        //if (x < NumOfCells && y < NumOfCells)
-                        //    if (mat[x + 1, y + 1] != null)
-                        //    {
-                        //        DrawEdge(g, mat[x, y], mat[x + 1, y + 1]);
-                        //    }
-                        double leftCorner = x * CellSize - PointScale / 2;
-                        double rightCorner = y * CellSize - PointScale / 2;
+                            if (Mat[x + 1, y - 1] != null)
+                                DrawEdge(g, Mat[x, y], Mat[x + 1, y - 1]);
+                        if (y < NumOfCells && x < NumOfCells)
+                            if (Mat[x + 1, y + 1] != null)
+                                DrawEdge(g, Mat[x, y], Mat[x + 1, y + 1]);
 
-                        Rectangle entity = new Rectangle((int)leftCorner, (int)rightCorner, (int)PointScale, (int)PointScale);
-                        g.FillEllipse(myBrush, entity);
+                        // Node ellipses
+                        if (WorldParameters.DrawNodes)
+                        {
+                            double leftCorner = x * CellSize - PointScale / 2;
+                            double rightCorner = y * CellSize - PointScale / 2;
+
+                            Rectangle entity = new Rectangle((int)leftCorner, (int)rightCorner, (int)PointScale, (int)PointScale);
+                            g.FillEllipse(myBrush, entity);
+                        }
                     }
                 }
             }
