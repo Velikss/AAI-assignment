@@ -105,7 +105,7 @@ namespace AAI_assignment
         {
             try
             {
-                this.menuPanel.Height = this.Height;
+                this.menuPanel.Height = this.Height - 100;
                 this.worldPanel.Height = this.Height;
                 this.world.Height = this.Height;
 
