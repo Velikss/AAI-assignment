@@ -103,13 +103,18 @@ namespace AAI_assignment
 
         private void Form1_Resize(object sender, EventArgs e)
         {
-            this.menuPanel.Height = this.Height;
-            this.worldPanel.Height = this.Height;
-            this.world.Height = this.Height;
+            try
+            {
+                this.menuPanel.Height = this.Height;
+                this.worldPanel.Height = this.Height;
+                this.world.Height = this.Height;
 
-            this.worldPanel.Width = this.Width;
-            this.world.Width = this.Width;
-
+                this.worldPanel.Width = this.Width;
+                this.world.Width = this.Width;
+            } catch(NullReferenceException)
+            {
+                Console.WriteLine($"Could not resize ({this.Width} x {this.Height})");
+            }
         }
     }
 }
