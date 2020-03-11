@@ -1,6 +1,5 @@
-﻿using System;
+﻿using AAI_assignment;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using AAI_assignment;
 
 namespace Unit_Tests
 {

@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Drawing;
-using AAI_assignment.entity;
+﻿using System.Drawing;
 
 namespace AAI_assignment
 {
@@ -24,5 +22,5 @@ namespace AAI_assignment
         }
 
 
-    }  
+    }
 }

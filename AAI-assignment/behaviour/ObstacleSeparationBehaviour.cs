@@ -1,9 +1,5 @@
-﻿using System;
+﻿using AAI_assignment.entity;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AAI_assignment.entity;
 
 namespace AAI_assignment.behaviour
 {

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 
 namespace AAI_assignment.entity
 {
@@ -18,7 +13,7 @@ namespace AAI_assignment.entity
 
             VColor = Color.Black;
         }
-        
+
         public override void Render(Graphics g)
         {
             double leftCorner = Pos.X - Scale;
@@ -31,7 +26,7 @@ namespace AAI_assignment.entity
             SolidBrush b = new SolidBrush(VColor);
 
             g.FillEllipse(b, entity);
-            g.DrawLine(p, (int) Pos.X, (int) Pos.Y, (int) Pos.X + (int)(Velocity.X * 2), (int)Pos.Y + (int)(Velocity.Y * 2));
+            g.DrawLine(p, (int)Pos.X, (int)Pos.Y, (int)Pos.X + (int)(Velocity.X * 2), (int)Pos.Y + (int)(Velocity.Y * 2));
         }
     }
 }

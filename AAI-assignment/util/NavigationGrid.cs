@@ -1,7 +1,5 @@
-﻿using System;
+﻿using Huiswerk6;
 using System.Drawing;
-using System.Windows;
-using Huiswerk6;
 
 namespace AAI_assignment.util
 {
@@ -21,7 +19,7 @@ namespace AAI_assignment.util
             this.World = world;
             NumOfCells = numOfCells;
             CellSize = World.Width / NumOfCells;
-            mat = new Node[(int) (NumOfCells + 1), (int) (NumOfCells + 1)];
+            mat = new Node[(int)(NumOfCells + 1), (int)(NumOfCells + 1)];
             FloodFill();
             CreateEdges();
         }
@@ -65,7 +63,7 @@ namespace AAI_assignment.util
                     if (mat[x, y] != null)
                     {
                         // straight sides
-                        if(x > 0)
+                        if (x > 0)
                             if (mat[x - 1, y] != null)
                             {
                                 mat[x, y].adj.Add(new Edge(mat[x - 1, y], DEC));
@@ -90,7 +88,7 @@ namespace AAI_assignment.util
                                 //DrawEdge(g, mat[x, y], mat[x, y + 1]);
                             }
                         // diagonal sides
-                        if(x > 0 && y > 0)
+                        if (x > 0 && y > 0)
                             if (mat[x - 1, y - 1] != null)
                             {
                                 mat[x, y].adj.Add(new Edge(mat[x - 1, y - 1], DEC));
@@ -121,6 +119,7 @@ namespace AAI_assignment.util
 
         public void DrawGrid(Graphics g)
         {
+
             for (int x = 0; x <= NumOfCells; x++)
             {
                 for (int y = 0; y <= NumOfCells; y++)

@@ -28,7 +28,7 @@ namespace Huiswerk6
 
         public Node GetVertex(string name)
         {
-//            Node v = NodeMap[name];
+            //            Node v = NodeMap[name];
             if (!NodeMap.ContainsKey(name))
             {
                 NodeMap.Add(name, new Node(name));
@@ -43,7 +43,7 @@ namespace Huiswerk6
             Node destNode = GetVertex(dest);
             srcNode.adj.Add(new Edge(destNode, cost));
         }
-    
+
         public void ClearAll()
         {
             foreach (Node v in NodeMap.Values)
@@ -85,7 +85,7 @@ namespace Huiswerk6
             {
                 Node v1 = queue.Dequeue();
 
-                foreach(Edge e in v1.adj)
+                foreach (Edge e in v1.adj)
                 {
                     Node v2 = e.dest;
 
@@ -109,7 +109,7 @@ namespace Huiswerk6
 
             ClearAll();
             queue.Add(new Edge(startNode, 0));
-            startNode.dist = 0; 
+            startNode.dist = 0;
 
             while (queue.Size() != 0)
             {
@@ -117,7 +117,7 @@ namespace Huiswerk6
 
                 Node node = edge.dest;
 
-                if(node.visited && node.dist != 0) continue;
+                if (node.visited && node.dist != 0) continue;
 
                 foreach (Edge vertexEdge in node.adj)
                 {

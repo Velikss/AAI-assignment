@@ -1,9 +1,5 @@
 ﻿using AAI_assignment.entity;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AAI_assignment.behaviour
 {
@@ -11,7 +7,7 @@ namespace AAI_assignment.behaviour
     {
         public double WanderJitter, WanderRadius, WanderDistance;
         public Vector2D WanderTarget;
-        
+
         // to do
         public WanderingBehaviour(MovingEntity me) : base(me)
         {

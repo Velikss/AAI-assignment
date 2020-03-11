@@ -1,7 +1,7 @@
+using AAI_assignment;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using AAI_assignment;
 
 namespace Huiswerk6
 {

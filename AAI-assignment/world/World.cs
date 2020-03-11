@@ -1,13 +1,10 @@
 ﻿using AAI_assignment.behaviour;
 using AAI_assignment.entity;
+using AAI_assignment.util;
+using AAI_assignment.world;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AAI_assignment.util;
-using AAI_assignment.world;
 
 namespace AAI_assignment
 {
@@ -125,7 +122,7 @@ namespace AAI_assignment
 
         public void UpdateSpeed()
         {
-            for(int i = 0; i < Entities.Count; i++)
+            for (int i = 0; i < Entities.Count; i++)
             {
                 Entities[i].MaxSpeed = WorldParameters.EntityMaxSpeed;
             }

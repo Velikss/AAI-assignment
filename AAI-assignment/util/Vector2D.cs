@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AAI_assignment
 {
@@ -138,7 +134,7 @@ namespace AAI_assignment
         {
             return new Vector2D(this.X, this.Y);
         }
-        
+
         public override string ToString()
         {
             return String.Format("({0},{1})", X, Y);

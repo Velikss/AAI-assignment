@@ -1,12 +1,4 @@
-﻿using AAI_assignment.behaviour;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 using System.Windows.Forms;
 
 namespace AAI_assignment
@@ -111,7 +103,8 @@ namespace AAI_assignment
 
                 this.worldPanel.Width = this.Width;
                 this.world.Width = this.Width;
-            } catch(NullReferenceException)
+            }
+            catch (NullReferenceException)
             {
                 Console.WriteLine($"Could not resize ({this.Width} x {this.Height})");
             }

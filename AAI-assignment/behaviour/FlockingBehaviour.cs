@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections;
+﻿using AAI_assignment.entity;
 using System.Collections.Generic;
-using System.IO;
-using System.IO.Ports;
-using System.Security.Permissions;
-using AAI_assignment.entity;
 
 
 namespace AAI_assignment.behaviour
@@ -21,7 +16,7 @@ namespace AAI_assignment.behaviour
         private SeparationBehaviour sB;
         private AlignmentBehaviour aB;
         private CohesionBehaviour cB;
-        public FlockingBehaviour(MovingEntity me, float radiusC, float radiusS, float radiusA, List<MovingEntity> entities, 
+        public FlockingBehaviour(MovingEntity me, float radiusC, float radiusS, float radiusA, List<MovingEntity> entities,
             float cohesionForce, float separationForce, float allignmentForce) : base(me)
 
         {
