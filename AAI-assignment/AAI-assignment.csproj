@@ -82,6 +82,7 @@
     <Compile Include="entity\BaseGameEntity.cs" />
     <Compile Include="entity\MovingEntity.cs" />
     <Compile Include="entity\Obstacle.cs" />
+    <Compile Include="entity\Target.cs" />
     <Compile Include="entity\Vehicle.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>

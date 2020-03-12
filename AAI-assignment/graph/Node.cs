@@ -7,52 +7,39 @@ namespace Huiswerk6
 {
     public class Node
     {
-        public String name;
-        public List<Edge> adj;
-        public double dist;
-        public Node prev;
-        public bool visited;
         public Vector2D Pos;
+        public List<Edge> Adj;
+        public Node Prev;
+        public int Dist;    // G
+        public int H;       // Heuristic
+        public int F;       // Dist + Heuristic
         public Node(string name)
         {
-            this.name = name;
-            adj = new List<Edge>();
+            //this.name = name;
+            Adj = new List<Edge>(8);
             Reset();
         }
 
-        public Node(string name, Vector2D v)
+        public Node(Vector2D v)
         {
-            this.name = name;
-            adj = new List<Edge>();
+            //this.name = name;
+            Adj = new List<Edge>();
             Pos = v;
             Reset();
         }
 
+        public void ComputeHScore(Vector2D target)
+        {
+            H = Math.Abs((int)target.X - (int)Pos.X) + Math.Abs((int)target.Y - (int)Pos.Y);
+        }
+
         public void Reset()
         {
-            prev = null;
-            dist = Graph.INFINITY;
-            visited = false;
+            Prev = null;
+            Dist = 0;
+            H = 0;
+            F = 0;
         }
 
-        public override string ToString()
-        {
-            StringBuilder sb = new StringBuilder(name);
-            if (dist != Graph.INFINITY)
-                sb.Append($"({dist}) ");
-            if (adj.Count > 0)
-            {
-                sb.Append(" [ ");
-                foreach (Edge edge in adj)
-                {
-                    sb.Append($"{edge.dest.name}");
-                    sb.Append($"({edge.cost}) ");
-                }
-
-                sb.Append("]");
-            }
-
-            return sb.ToString();
-        }
     }
 }

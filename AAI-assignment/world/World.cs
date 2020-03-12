@@ -5,6 +5,8 @@ using AAI_assignment.world;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Windows.Controls;
+using Huiswerk6;
 
 namespace AAI_assignment
 {
@@ -52,8 +54,13 @@ namespace AAI_assignment
 
         // Navigation Grid
         public static bool GridOn = true;
-        public static bool DrawNodes = true;
+        public static bool DrawNodes = false;
+        public static bool DrawPath = true;
         public static float NumOfCells = 50;
+        public static float PointScale = 6;
+
+        // Target Starting location
+        public static Node TargetNodeStartingLoc = new Node(new Vector2D());
 
     }
 
@@ -62,7 +69,10 @@ namespace AAI_assignment
         public List<MovingEntity> Entities = new List<MovingEntity>();
         public List<BaseGameEntity> Obstacles = new List<BaseGameEntity>();
         public NavigationGrid NavGrid;
+        public Stack<Node> Path;
         public Vehicle Target { get; set; }
+        public int TargetNodeX = 1;
+        public int TargetNodeY = 1;
         public int Width { get; set; }
         public int Height { get; set; }
 
@@ -72,6 +82,7 @@ namespace AAI_assignment
             Height = h;
             Populate();
             NavGrid = new NavigationGrid(this, WorldParameters.NumOfCells);
+            CreateTarget();
         }
 
         private void Populate()
@@ -88,15 +99,17 @@ namespace AAI_assignment
                 Obstacle v = new Obstacle(Vector2D.CreateRandomPosition(Width, Height), this, WorldParameters.ObstacleScale);
                 Obstacles.Add(v);
             }
+        }
 
-            //Vehicle d = new Vehicle(new Vector2D(1000, 60), this, 4);
-            //d.VColor = Color.Red;
-            //d.MaxSpeed = r.Next(100, 100);
-            //entities.Add(d);
-
-            Target = new Vehicle(new Vector2D(100, 60), this, 8);
+        private void CreateTarget()
+        {
+            while (NavGrid.NavGraph[TargetNodeX, TargetNodeY] == null)
+            {
+                TargetNodeX++;
+                TargetNodeY++;
+            }
+            Target = new Vehicle(new Vector2D(TargetNodeX * NavGrid.CellSize, TargetNodeX * NavGrid.CellSize), this, 8);
             Target.VColor = Color.DarkRed;
-            Target.Pos = new Vector2D(10, 10);
         }
 
         public void AddEntities(int n)
@@ -184,13 +197,41 @@ namespace AAI_assignment
             NavGrid.DrawGrid(g);
         }
 
+        public void DrawPath(Graphics g)
+        {
+            var path = Path.ToArray();
+            for (int i = 0; i < path.Length; i++)
+            {
+                g.FillEllipse(Brushes.DarkRed, (int)(path[i].Pos.X - WorldParameters.PointScale / 2), (int)(path[i].Pos.Y - WorldParameters.PointScale / 2), WorldParameters.PointScale, WorldParameters.PointScale);
+                if (i < path.Length - 1)
+                    NavigationGrid.DrawEdge(g, path[i], path[i + 1], Pens.Red);
+            }
+
+            for (int i = 0; i < NavGrid.VisitedNodes.Count; i++)
+            {
+                g.FillEllipse(Brushes.DarkBlue, (int)(NavGrid.VisitedNodes[i].Pos.X - WorldParameters.PointScale / 2), (int)(NavGrid.VisitedNodes[i].Pos.Y - WorldParameters.PointScale / 2), WorldParameters.PointScale, WorldParameters.PointScale);
+            }
+        }
+
+        public void PathFinding(int x, int y)
+        {
+            double gridX = Math.Round((double)x / NavGrid.CellSize);
+            double gridY = Math.Round((double)y / NavGrid.CellSize);
+            if(NavGrid.NavGraph[(int)gridX, (int)gridY] != null)
+                Path = NavGrid.AStar(NavGrid.NavGraph[TargetNodeX, TargetNodeY], NavGrid.NavGraph[(int) gridX, (int) gridY]);
+            //TargetNodeX = (int)gridX;
+            //TargetNodeY = (int)gridY;
+        }
+
         public void Render(Graphics g)
         {
+            if (WorldParameters.GridOn)
+                DrawGrid(g);
+            if(WorldParameters.DrawPath && Path != null)
+                DrawPath(g);
             Entities.ForEach(e => e.Render(g));
             Target.Render(g);
             Obstacles.ForEach(e => e.Render(g));
-            if (WorldParameters.GridOn)
-                DrawGrid(g);
         }
 
     }
