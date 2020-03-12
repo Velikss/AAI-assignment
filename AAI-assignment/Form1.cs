@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace AAI_assignment
@@ -13,6 +14,7 @@ namespace AAI_assignment
         public Form1()
         {
             InitializeComponent();
+            PrepareSliderPanel();
 
             world = new World(w: worldPanel.Width, h: worldPanel.Height);
 
@@ -27,6 +29,45 @@ namespace AAI_assignment
         {
             world.Update(timeDelta);
             worldPanel.Invalidate();
+        }
+
+        private void PrepareSliderPanel()
+        {
+            var fields = typeof(WorldParameters).GetFields();
+            int index = 0;
+            foreach (var field in fields)
+            {
+                if (!field.Name.Contains("Force")) continue;
+
+                Label l = new Label();
+                l.Text = field.Name.ToString();
+                l.Left = 5;
+                l.Top = index * 40 + 5;
+                tabPage2.Controls.Add(l);
+
+                if (field.FieldType.Equals(typeof(float)))
+                {
+                    TrackBar bar = new TrackBar();
+                    bar.Left = 140;
+                    bar.Top = index * 40 + 5;
+                    bar.Minimum = 0;
+                    bar.Maximum = 1000;
+                    bar.TickStyle = TickStyle.None;
+                    bar.Name = field.Name;
+                    bar.ValueChanged += (object sender, EventArgs e) =>
+                    {
+                        Console.WriteLine(bar.Name + WorldParameters.FlockingSeperationForce);
+                        fields.First(o => o.Name == bar.Name).SetValue(null, bar.Value);
+                    };
+                    bar.Value = Convert.ToInt32(field.GetValue(null));
+                    tabPage2.Controls.Add(bar);
+                }
+                else
+                {
+                    throw new Exception("non implemented type.");
+                }
+                index++;
+            }
         }
 
         private void dbPanel1_Paint(object sender, PaintEventArgs e)
