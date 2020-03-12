@@ -1,6 +1,5 @@
-﻿using System;
+﻿using Huiswerk6;
 using System.Collections.Generic;
-using Huiswerk6;
 using System.Drawing;
 using System.Linq;
 
@@ -126,7 +125,7 @@ namespace AAI_assignment.util
 
         public static void DrawEdge(Graphics g, Node n1, Node n2, Pen p = null)
         {
-            if(p == null)
+            if (p == null)
                 p = new Pen(Color.LightGray, 1);
             g.DrawLine(p, (float)n1.Pos.X, (float)n1.Pos.Y, (float)n2.Pos.X, (float)n2.Pos.Y);
         }

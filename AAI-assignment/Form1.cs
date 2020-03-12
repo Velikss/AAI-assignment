@@ -37,36 +37,39 @@ namespace AAI_assignment
             int index = 0;
             foreach (var field in fields)
             {
-                if (!field.Name.Contains("Force")) continue;
-
-                Label l = new Label();
-                l.Text = field.Name.ToString();
-                l.Left = 5;
-                l.Top = index * 40 + 5;
-                tabPage2.Controls.Add(l);
-
-                if (field.FieldType.Equals(typeof(float)))
+                if (field.Name.Contains("Force") || field.Name.Contains("Radius"))
                 {
-                    TrackBar bar = new TrackBar();
-                    bar.Left = 140;
-                    bar.Top = index * 40 + 5;
-                    bar.Minimum = 0;
-                    bar.Maximum = 1000;
-                    bar.TickStyle = TickStyle.None;
-                    bar.Name = field.Name;
-                    bar.ValueChanged += (object sender, EventArgs e) =>
+
+                    Label l = new Label();
+                    l.Text = field.Name.ToString();
+                    l.Left = 5;
+                    l.Top = index * 65 + 10;
+                    l.Size = new System.Drawing.Size(150, 15);
+                    sliderPage.Controls.Add(l);
+
+                    if (field.FieldType.Equals(typeof(float)) || field.FieldType.Equals(typeof(int)))
                     {
-                        Console.WriteLine(bar.Name + WorldParameters.FlockingSeperationForce);
-                        fields.First(o => o.Name == bar.Name).SetValue(null, bar.Value);
-                    };
-                    bar.Value = Convert.ToInt32(field.GetValue(null));
-                    tabPage2.Controls.Add(bar);
+                        TrackBar bar = new TrackBar();
+                        bar.Left = 5;
+                        bar.Top = index * 65 + 25;
+                        bar.Minimum = 0;
+                        bar.Maximum = 1000;
+                        bar.TickStyle = TickStyle.None;
+                        bar.Name = field.Name;
+                        bar.ValueChanged += (object sender, EventArgs e) =>
+                        {
+                            Console.WriteLine(bar.Name + WorldParameters.FlockingSeperationForce);
+                            fields.First(o => o.Name == bar.Name).SetValue(null, bar.Value);
+                        };
+                        bar.Value = Convert.ToInt32(field.GetValue(null));
+                        sliderPage.Controls.Add(bar);
+                    }
+                    else
+                    {
+                        throw new Exception("non implemented type.");
+                    }
+                    index++;
                 }
-                else
-                {
-                    throw new Exception("non implemented type.");
-                }
-                index++;
             }
         }
 
@@ -78,7 +81,7 @@ namespace AAI_assignment
         private void dbPanel1_MouseClick(object sender, MouseEventArgs e)
         {
             //world.Target.Pos = new Vector2D(e.X, e.Y);
-            world.PathFinding(e.X , e.Y);
+            world.PathFinding(e.X, e.Y);
         }
 
         private void menuButton_Click(object sender, EventArgs e)

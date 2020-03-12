@@ -32,7 +32,7 @@ namespace AAI_assignment
         private void InitializeComponent()
         {
             this.menuPanel = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.behaviourPage = new System.Windows.Forms.TabPage();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.obstacleScaleSlider = new System.Windows.Forms.TrackBar();
@@ -49,10 +49,10 @@ namespace AAI_assignment
             this.seperationBox = new System.Windows.Forms.CheckBox();
             this.flockingBox = new System.Windows.Forms.CheckBox();
             this.wanderingBox = new System.Windows.Forms.CheckBox();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.sliderPage = new System.Windows.Forms.TabPage();
             this.worldPanel = new AAI_assignment.DBPanel();
             this.menuPanel.SuspendLayout();
-            this.tabPage1.SuspendLayout();
+            this.behaviourPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.obstacleScaleSlider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.scaleSlider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.speedSlider)).BeginInit();
@@ -61,8 +61,8 @@ namespace AAI_assignment
             // 
             // menuPanel
             // 
-            this.menuPanel.Controls.Add(this.tabPage1);
-            this.menuPanel.Controls.Add(this.tabPage2);
+            this.menuPanel.Controls.Add(this.behaviourPage);
+            this.menuPanel.Controls.Add(this.sliderPage);
             this.menuPanel.Location = new System.Drawing.Point(3, 11);
             this.menuPanel.Name = "menuPanel";
             this.menuPanel.SelectedIndex = 0;
@@ -71,29 +71,29 @@ namespace AAI_assignment
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.label3);
-            this.tabPage1.Controls.Add(this.label2);
-            this.tabPage1.Controls.Add(this.obstacleScaleSlider);
-            this.tabPage1.Controls.Add(this.arriveBox);
-            this.tabPage1.Controls.Add(this.scaleSlider);
-            this.tabPage1.Controls.Add(this.alignmentBox);
-            this.tabPage1.Controls.Add(this.speedSlider);
-            this.tabPage1.Controls.Add(this.cohesionBox);
-            this.tabPage1.Controls.Add(this.speedLabel);
-            this.tabPage1.Controls.Add(this.seekBox);
-            this.tabPage1.Controls.Add(this.entityUpDown);
-            this.tabPage1.Controls.Add(this.label1);
-            this.tabPage1.Controls.Add(this.obstacleSeperationBox);
-            this.tabPage1.Controls.Add(this.seperationBox);
-            this.tabPage1.Controls.Add(this.flockingBox);
-            this.tabPage1.Controls.Add(this.wanderingBox);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
-            this.tabPage1.Size = new System.Drawing.Size(246, 742);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Behaviour";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.behaviourPage.Controls.Add(this.label3);
+            this.behaviourPage.Controls.Add(this.label2);
+            this.behaviourPage.Controls.Add(this.obstacleScaleSlider);
+            this.behaviourPage.Controls.Add(this.arriveBox);
+            this.behaviourPage.Controls.Add(this.scaleSlider);
+            this.behaviourPage.Controls.Add(this.alignmentBox);
+            this.behaviourPage.Controls.Add(this.speedSlider);
+            this.behaviourPage.Controls.Add(this.cohesionBox);
+            this.behaviourPage.Controls.Add(this.speedLabel);
+            this.behaviourPage.Controls.Add(this.seekBox);
+            this.behaviourPage.Controls.Add(this.entityUpDown);
+            this.behaviourPage.Controls.Add(this.label1);
+            this.behaviourPage.Controls.Add(this.obstacleSeperationBox);
+            this.behaviourPage.Controls.Add(this.seperationBox);
+            this.behaviourPage.Controls.Add(this.flockingBox);
+            this.behaviourPage.Controls.Add(this.wanderingBox);
+            this.behaviourPage.Location = new System.Drawing.Point(4, 22);
+            this.behaviourPage.Name = "tabPage1";
+            this.behaviourPage.Padding = new System.Windows.Forms.Padding(3);
+            this.behaviourPage.Size = new System.Drawing.Size(246, 742);
+            this.behaviourPage.TabIndex = 0;
+            this.behaviourPage.Text = "Behaviour";
+            this.behaviourPage.UseVisualStyleBackColor = true;
             // 
             // label3
             // 
@@ -116,7 +116,7 @@ namespace AAI_assignment
             // obstacleScaleSlider
             // 
             this.obstacleScaleSlider.Location = new System.Drawing.Point(8, 347);
-            this.obstacleScaleSlider.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.obstacleScaleSlider.Margin = new System.Windows.Forms.Padding(2);
             this.obstacleScaleSlider.Maximum = 500;
             this.obstacleScaleSlider.Minimum = 5;
             this.obstacleScaleSlider.Name = "obstacleScaleSlider";
@@ -140,7 +140,7 @@ namespace AAI_assignment
             // scaleSlider
             // 
             this.scaleSlider.Location = new System.Drawing.Point(8, 276);
-            this.scaleSlider.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.scaleSlider.Margin = new System.Windows.Forms.Padding(2);
             this.scaleSlider.Maximum = 300;
             this.scaleSlider.Minimum = 4;
             this.scaleSlider.Name = "scaleSlider";
@@ -280,15 +280,16 @@ namespace AAI_assignment
             this.wanderingBox.UseVisualStyleBackColor = true;
             this.wanderingBox.CheckedChanged += new System.EventHandler(this.behaviourBox_CheckedChanged);
             // 
-            // tabPage2
+            // sliderPage
             // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
-            this.tabPage2.Size = new System.Drawing.Size(246, 742);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Forces";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.sliderPage.AutoScroll = true;
+            this.sliderPage.Location = new System.Drawing.Point(4, 22);
+            this.sliderPage.Name = "sliderPage";
+            this.sliderPage.Padding = new System.Windows.Forms.Padding(3);
+            this.sliderPage.Size = new System.Drawing.Size(246, 742);
+            this.sliderPage.TabIndex = 1;
+            this.sliderPage.Text = "Forces";
+            this.sliderPage.UseVisualStyleBackColor = true;
             // 
             // worldPanel
             // 
@@ -312,8 +313,8 @@ namespace AAI_assignment
             this.Text = "Steering";
             this.Resize += new System.EventHandler(this.Form1_Resize);
             this.menuPanel.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
+            this.behaviourPage.ResumeLayout(false);
+            this.behaviourPage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.obstacleScaleSlider)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.scaleSlider)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.speedSlider)).EndInit();
@@ -340,8 +341,8 @@ namespace AAI_assignment
         private System.Windows.Forms.TrackBar scaleSlider;
         private System.Windows.Forms.TrackBar obstacleScaleSlider;
         private System.Windows.Forms.TabControl menuPanel;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage behaviourPage;
+        private System.Windows.Forms.TabPage sliderPage;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
     }

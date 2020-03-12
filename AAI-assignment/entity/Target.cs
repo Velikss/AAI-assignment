@@ -1,5 +1,5 @@
-﻿using System.Drawing;
-using Huiswerk6;
+﻿using Huiswerk6;
+using System.Drawing;
 
 namespace AAI_assignment.entity
 {

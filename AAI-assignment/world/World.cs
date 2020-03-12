@@ -2,11 +2,10 @@
 using AAI_assignment.entity;
 using AAI_assignment.util;
 using AAI_assignment.world;
+using Huiswerk6;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Windows.Controls;
-using Huiswerk6;
 
 namespace AAI_assignment
 {
@@ -217,8 +216,8 @@ namespace AAI_assignment
         {
             double gridX = Math.Round((double)x / NavGrid.CellSize);
             double gridY = Math.Round((double)y / NavGrid.CellSize);
-            if(NavGrid.NavGraph[(int)gridX, (int)gridY] != null)
-                Path = NavGrid.AStar(NavGrid.NavGraph[TargetNodeX, TargetNodeY], NavGrid.NavGraph[(int) gridX, (int) gridY]);
+            if (NavGrid.NavGraph[(int)gridX, (int)gridY] != null)
+                Path = NavGrid.AStar(NavGrid.NavGraph[TargetNodeX, TargetNodeY], NavGrid.NavGraph[(int)gridX, (int)gridY]);
             //TargetNodeX = (int)gridX;
             //TargetNodeY = (int)gridY;
         }
@@ -227,7 +226,7 @@ namespace AAI_assignment
         {
             if (WorldParameters.GridOn)
                 DrawGrid(g);
-            if(WorldParameters.DrawPath && Path != null)
+            if (WorldParameters.DrawPath && Path != null)
                 DrawPath(g);
             Entities.ForEach(e => e.Render(g));
             Target.Render(g);
