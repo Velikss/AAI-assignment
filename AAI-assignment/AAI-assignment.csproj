@@ -72,6 +72,7 @@
     <Compile Include="behaviour\CohesionBehaviour.cs" />
     <Compile Include="behaviour\FlockingBehaviour.cs" />
     <Compile Include="behaviour\ObstacleSeparationBehaviour.cs" />
+    <Compile Include="behaviour\PointToPointBehaviour.cs" />
     <Compile Include="behaviour\SeekBehaviour.cs" />
     <Compile Include="behaviour\SeparationBehaviour.cs" />
     <Compile Include="behaviour\SteeringBehaviour.cs" />

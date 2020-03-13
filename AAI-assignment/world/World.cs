@@ -6,6 +6,7 @@ using Huiswerk6;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace AAI_assignment
 {
@@ -51,15 +52,20 @@ namespace AAI_assignment
         public static int ObstacleCount = 30;
         public static int ObstacleScale = 30;
 
+        // Target
+        public static int TargetMaxSpeed = 30;
+        public static int TargetStopRange = 8;
+
+        // PathFinding draw
+        public static bool PathRemove = true;
+        public static bool DrawVisitedNodes = false;
+
         // Navigation Grid
         public static bool GridOn = true;
         public static bool DrawNodes = false;
         public static bool DrawPath = true;
         public static float NumOfCells = 50;
         public static float PointScale = 6;
-
-        // Target Starting location
-        public static Node TargetNodeStartingLoc = new Node(new Vector2D());
 
     }
 
@@ -68,7 +74,9 @@ namespace AAI_assignment
         public List<MovingEntity> Entities = new List<MovingEntity>();
         public List<BaseGameEntity> Obstacles = new List<BaseGameEntity>();
         public NavigationGrid NavGrid;
+        public Stack<Node> DrawnPath;
         public Stack<Node> Path;
+        public bool Pathfinding;
         public Vehicle Target { get; set; }
         public int TargetNodeX = 1;
         public int TargetNodeY = 1;
@@ -82,6 +90,7 @@ namespace AAI_assignment
             Populate();
             NavGrid = new NavigationGrid(this, WorldParameters.NumOfCells);
             CreateTarget();
+            Pathfinding = true;
         }
 
         private void Populate()
@@ -109,6 +118,7 @@ namespace AAI_assignment
             }
             Target = new Vehicle(new Vector2D(TargetNodeX * NavGrid.CellSize, TargetNodeX * NavGrid.CellSize), this, 8);
             Target.VColor = Color.DarkRed;
+            Target.MaxSpeed = WorldParameters.TargetMaxSpeed;
         }
 
         public void AddEntities(int n)
@@ -188,6 +198,7 @@ namespace AAI_assignment
             {
                 Entities[i].Update(timeElapsed);
             }
+            Target.Update(timeElapsed);
         }
 
         public void DrawGrid(Graphics g)
@@ -198,35 +209,48 @@ namespace AAI_assignment
 
         public void DrawPath(Graphics g)
         {
-            var path = Path.ToArray();
+            var path = DrawnPath.ToArray();
             for (int i = 0; i < path.Length; i++)
             {
                 g.FillEllipse(Brushes.DarkRed, (int)(path[i].Pos.X - WorldParameters.PointScale / 2), (int)(path[i].Pos.Y - WorldParameters.PointScale / 2), WorldParameters.PointScale, WorldParameters.PointScale);
                 if (i < path.Length - 1)
                     NavigationGrid.DrawEdge(g, path[i], path[i + 1], Pens.Red);
             }
-
-            for (int i = 0; i < NavGrid.VisitedNodes.Count; i++)
-            {
-                g.FillEllipse(Brushes.DarkBlue, (int)(NavGrid.VisitedNodes[i].Pos.X - WorldParameters.PointScale / 2), (int)(NavGrid.VisitedNodes[i].Pos.Y - WorldParameters.PointScale / 2), WorldParameters.PointScale, WorldParameters.PointScale);
-            }
+            // draw visited nodes by A* algorithm
+            if(WorldParameters.DrawVisitedNodes)
+                for (int i = 0; i < NavGrid.VisitedNodes.Count; i++)
+                {
+                    g.FillEllipse(Brushes.DarkBlue, (int)(NavGrid.VisitedNodes[i].Pos.X - WorldParameters.PointScale / 2), (int)(NavGrid.VisitedNodes[i].Pos.Y - WorldParameters.PointScale / 2), WorldParameters.PointScale, WorldParameters.PointScale);
+                }
         }
 
         public void PathFinding(int x, int y)
         {
-            double gridX = Math.Round((double)x / NavGrid.CellSize);
-            double gridY = Math.Round((double)y / NavGrid.CellSize);
-            if (NavGrid.NavGraph[(int)gridX, (int)gridY] != null)
-                Path = NavGrid.AStar(NavGrid.NavGraph[TargetNodeX, TargetNodeY], NavGrid.NavGraph[(int)gridX, (int)gridY]);
-            //TargetNodeX = (int)gridX;
-            //TargetNodeY = (int)gridY;
+            if (Pathfinding)
+            {
+                double gridX = Math.Round((double)x / NavGrid.CellSize);
+                double gridY = Math.Round((double)y / NavGrid.CellSize);
+                if (NavGrid.NavGraph[(int)gridX, (int)gridY] != null)
+                {
+                    DrawnPath = NavGrid.AStar(NavGrid.NavGraph[TargetNodeX, TargetNodeY], NavGrid.NavGraph[(int)gridX, (int)gridY]);
+                    if (Path == null || Path.Count == 0)
+                    {
+                        Pathfinding = false;
+                        if (WorldParameters.PathRemove)
+                            Path = DrawnPath;
+                        else
+                            Path = new Stack<Node>(new Stack<Node>(DrawnPath));
+                        Target.SB.Add(new PointToPointBehaviour(Target, ref Path));
+                    }
+                }
+            }
         }
 
         public void Render(Graphics g)
         {
             if (WorldParameters.GridOn)
                 DrawGrid(g);
-            if (WorldParameters.DrawPath && Path != null)
+            if (WorldParameters.DrawPath && DrawnPath != null)
                 DrawPath(g);
             Entities.ForEach(e => e.Render(g));
             Target.Render(g);
