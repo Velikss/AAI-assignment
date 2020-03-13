@@ -36,7 +36,7 @@ namespace AAI_assignment
 
         // Seperation
         public static float SeparationRadius = 25;
-        public static float SeparationForce = 25;
+        public static float SeparationForce = 50;
 
         // ObstacleSeperation
         public static float ObstacleSeperationRadius = 10;
@@ -64,6 +64,7 @@ namespace AAI_assignment
         public static bool GridOn = true;
         public static bool DrawNodes = false;
         public static bool DrawPath = true;
+        public static bool GridUpdate = false;
         public static float NumOfCells = 50;
         public static float PointScale = 6;
 
@@ -203,7 +204,8 @@ namespace AAI_assignment
 
         public void DrawGrid(Graphics g)
         {
-            //NavGrid = new NavigationGrid(this, WorldParameters.NumOfCells);
+            if(WorldParameters.GridUpdate)
+                NavGrid = new NavigationGrid(this, WorldParameters.NumOfCells);
             NavGrid.DrawGrid(g);
         }
 

@@ -18,14 +18,14 @@ namespace AAI_assignment.behaviour
             {
                 if (!(ME.Pos.X >= target.X - StopRange && ME.Pos.X <= target.X + StopRange && ME.Pos.Y >= target.Y - StopRange && ME.Pos.Y <= target.Y + StopRange))
                 {
-                    Vector2D Tpos = ME.MyWorld.Target.Pos.Clone();
+                    Vector2D Tpos = target.Clone();
                     Vector2D desiredVelocity = Tpos.Sub(ME.Pos).Normalize().Multiply(ME.MaxSpeed);
                     return desiredVelocity.Sub(ME.Velocity);
                 }
             }
             else
             {
-                Vector2D Tpos = ME.MyWorld.Target.Pos.Clone();
+                Vector2D Tpos = target.Clone();
                 Vector2D desiredVelocity = Tpos.Sub(ME.Pos).Normalize().Multiply(ME.MaxSpeed);
                 return desiredVelocity.Sub(ME.Velocity);
             }
