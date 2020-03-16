@@ -6,25 +6,23 @@ namespace AAI_assignment.behaviour
 {
     class AlignmentBehaviour : SteeringBehaviour
     {
-        public float Radius;
         public List<MovingEntity> Entities;
-        public float AllignmentForce;
-        public AlignmentBehaviour(MovingEntity me, float radius, List<MovingEntity> entities, float allignmentForce) : base(me)
+        public AlignmentBehaviour(MovingEntity me, List<MovingEntity> entities) : base(me)
         {
-            this.Radius = radius;
             this.Entities = entities;
-            this.AllignmentForce = allignmentForce;
         }
 
         public override Vector2D Calculate()
         {
             Vector2D averageHeading = new Vector2D();
             int neighbourCount = 0;
+            float radius = WorldParameters.AlignmentRadius;
+            float force = WorldParameters.AlignmentForce;
 
             for (int i = 0; i < Entities.Count; i++)
             {
                 double dist = Vector2D.DistanceSquared(ME.Pos, Entities[i].Pos);
-                if (dist < Radius * Radius && dist > 0)
+                if (dist < WorldParameters.AlignmentRadius * WorldParameters.AlignmentRadius && dist > 0)
                 {
                     Vector2D h = Entities[i].Velocity.Clone().Normalize();
                     averageHeading += h;
@@ -35,7 +33,31 @@ namespace AAI_assignment.behaviour
             {
                 averageHeading /= neighbourCount;
             }
-            return averageHeading.Normalize() * AllignmentForce;
+            return averageHeading.Normalize() * WorldParameters.AlignmentForce;
+        }
+
+        public Vector2D CalculateFlocking()
+        {
+            Vector2D averageHeading = new Vector2D();
+            int neighbourCount = 0;
+            float radius = WorldParameters.FlockingAlignmentRadius;
+            float force = WorldParameters.FlockingAlignmentForce;
+
+            for (int i = 0; i < Entities.Count; i++)
+            {
+                double dist = Vector2D.DistanceSquared(ME.Pos, Entities[i].Pos);
+                if (dist < WorldParameters.AlignmentRadius * WorldParameters.AlignmentRadius && dist > 0)
+                {
+                    Vector2D h = Entities[i].Velocity.Clone().Normalize();
+                    averageHeading += h;
+                    neighbourCount++;
+                }
+            }
+            if (neighbourCount > 0)
+            {
+                averageHeading /= neighbourCount;
+            }
+            return averageHeading.Normalize() * WorldParameters.AlignmentForce;
         }
     }
 }

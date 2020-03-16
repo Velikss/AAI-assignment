@@ -20,7 +20,7 @@ namespace AAI_assignment
         public static float AlignmentForce = 50;
 
         // Arrive
-        public static Deceleration decel = Deceleration.normal;
+        public static Deceleration ArriveDecel = Deceleration.normal;
 
         // Cohesion
         public static int CohesionRadius = 75;
@@ -28,10 +28,10 @@ namespace AAI_assignment
 
         // Flocking
         public static float FlockingCohesionRadius = 75;
-        public static float FlockingSeperationRadius = 25;
+        public static float FlockingSeparationRadius = 25;
         public static float FlockingAlignmentRadius = 50;
         public static float FlockingCohesionForce = 1.25f;
-        public static float FlockingSeperationForce = 25;
+        public static float FlockingSeparationForce = 25;
         public static float FlockingAlignmentForce = 1;
 
         // Seperation
@@ -175,21 +175,21 @@ namespace AAI_assignment
                 Entities[i].SB.Clear();
 
                 if (WorldParameters.alignment)
-                    Entities[i].SB.Add(new AlignmentBehaviour(Entities[i], WorldParameters.AlignmentRadius, Entities, WorldParameters.AlignmentForce));
+                    Entities[i].SB.Add(new AlignmentBehaviour(Entities[i], Entities));
                 if (WorldParameters.arrive)
-                    Entities[i].SB.Add(new ArriveBehaviour(Entities[i], WorldParameters.decel));
+                    Entities[i].SB.Add(new ArriveBehaviour(Entities[i]));
                 if (WorldParameters.cohesion)
-                    Entities[i].SB.Add(new CohesionBehaviour(Entities[i], WorldParameters.CohesionRadius, Entities, WorldParameters.CohesionForce));
+                    Entities[i].SB.Add(new CohesionBehaviour(Entities[i], Entities));
                 if (WorldParameters.flocking)
-                    Entities[i].SB.Add(new FlockingBehaviour(Entities[i], WorldParameters.FlockingCohesionRadius, WorldParameters.FlockingSeperationRadius, WorldParameters.FlockingAlignmentRadius, Entities, WorldParameters.FlockingCohesionForce, WorldParameters.FlockingSeperationForce, WorldParameters.FlockingAlignmentForce));
+                    Entities[i].SB.Add(new FlockingBehaviour(Entities[i], Entities));
                 if (WorldParameters.seek)
                     Entities[i].SB.Add(new SeekBehaviour(Entities[i]));
                 if (WorldParameters.separation)
-                    Entities[i].SB.Add(new SeparationBehaviour(Entities[i], WorldParameters.SeparationRadius, Entities, WorldParameters.SeparationForce));
+                    Entities[i].SB.Add(new SeparationBehaviour(Entities[i], Entities));
                 if (WorldParameters.wandering)
                     Entities[i].SB.Add(new WanderingBehaviour(Entities[i]));
                 if (WorldParameters.obstacleSeparation)
-                    Entities[i].SB.Add(new ObstacleSeparationBehaviour(Entities[i], WorldParameters.ObstacleScale + WorldParameters.ObstacleSeperationRadius, Obstacles, WorldParameters.ObstacleSeperationForce));
+                    Entities[i].SB.Add(new ObstacleSeparationBehaviour(Entities[i], Obstacles));
             }
         }
 

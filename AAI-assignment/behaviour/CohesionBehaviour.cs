@@ -6,14 +6,10 @@ namespace AAI_assignment.behaviour
 {
     class CohesionBehaviour : SteeringBehaviour
     {
-        public float Radius;
         public List<MovingEntity> Entities;
-        public float CohesionForce;
-        public CohesionBehaviour(MovingEntity me, float radius, List<MovingEntity> entities, float cohesionForce) : base(me)
+        public CohesionBehaviour(MovingEntity me,  List<MovingEntity> entities) : base(me)
         {
-            this.Radius = radius;
             this.Entities = entities;
-            this.CohesionForce = cohesionForce;
         }
 
         public override Vector2D Calculate()
@@ -21,13 +17,15 @@ namespace AAI_assignment.behaviour
             Vector2D centerOfMass = new Vector2D();
             Vector2D steeringForce = new Vector2D();
             int neighbourCount = 0;
+            float radius = WorldParameters.CohesionRadius;
+            float force = WorldParameters.CohesionForce;
 
             for (int i = 0; i < Entities.Count; i++)
             {
                 Vector2D mePosition = ME.Pos.Clone();
                 Vector2D otherPosition = Entities[i].Pos.Clone();
                 double dist = Vector2D.DistanceSquared(mePosition, otherPosition);
-                if (dist < Radius * Radius && dist > 0)
+                if (dist < radius * radius && dist > 0)
                 {
                     centerOfMass += Entities[i].Pos;
                     neighbourCount++;
@@ -39,12 +37,40 @@ namespace AAI_assignment.behaviour
                 centerOfMass /= neighbourCount;
                 steeringForce = Seek(centerOfMass);
             }
-            return steeringForce.Normalize() * CohesionForce;
+            return steeringForce.Normalize() * force;
+        }
+
+        public Vector2D CalculateFlocking()
+        {
+            Vector2D centerOfMass = new Vector2D();
+            Vector2D steeringForce = new Vector2D();
+            int neighbourCount = 0;
+            float radius = WorldParameters.FlockingCohesionRadius;
+            float force = WorldParameters.FlockingCohesionForce;
+
+            for (int i = 0; i < Entities.Count; i++)
+            {
+                Vector2D mePosition = ME.Pos.Clone();
+                Vector2D otherPosition = Entities[i].Pos.Clone();
+                double dist = Vector2D.DistanceSquared(mePosition, otherPosition);
+                if (dist < radius * radius && dist > 0)
+                {
+                    centerOfMass += Entities[i].Pos;
+                    neighbourCount++;
+                }
+            }
+
+            if (neighbourCount > 0)
+            {
+                centerOfMass /= neighbourCount;
+                steeringForce = Seek(centerOfMass);
+            }
+            return steeringForce.Normalize() * force;
         }
 
         private Vector2D Seek(Vector2D target)
         {
-            Vector2D desiredVelocity = (target - ME.Pos).Normalize() * ME.MaxSpeed;
+            Vector2D desiredVelocity = (target - ME.Pos).Normalize() * WorldParameters.EntityMaxSpeed;
             return desiredVelocity - ME.Velocity;
         }
     }

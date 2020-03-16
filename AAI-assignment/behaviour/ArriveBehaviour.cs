@@ -12,12 +12,10 @@ namespace AAI_assignment.behaviour
 
     class ArriveBehaviour : SteeringBehaviour
     {
-        Deceleration decel;
         MovingEntity me;
-        public ArriveBehaviour(MovingEntity me, Deceleration d) : base(me)
+        public ArriveBehaviour(MovingEntity me) : base(me)
         {
             this.me = me;
-            this.decel = d;
         }
 
         public override Vector2D Calculate()
@@ -30,7 +28,7 @@ namespace AAI_assignment.behaviour
             {
                 const double DecelerationTweak = 0.7;
 
-                double speed = dist / ((double)decel * DecelerationTweak);
+                double speed = dist / ((double)WorldParameters.ArriveDecel * DecelerationTweak);
 
                 speed = Math.Min(speed, ME.MaxSpeed);
 

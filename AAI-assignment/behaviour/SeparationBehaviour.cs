@@ -6,30 +6,46 @@ namespace AAI_assignment.behaviour
 {
     class SeparationBehaviour : SteeringBehaviour
     {
-        public float Radius;
         public List<MovingEntity> Entities;
-        public float SeperationForce;
-        public SeparationBehaviour(MovingEntity me, float radius, List<MovingEntity> entities, float seperationForce) : base(me)
+        public SeparationBehaviour(MovingEntity me, List<MovingEntity> entities) : base(me)
         {
-            this.Radius = radius;
             this.Entities = entities;
-            this.SeperationForce = seperationForce;
         }
 
         public override Vector2D Calculate()
         {
             Vector2D steeringForce = new Vector2D();
+            float radius = WorldParameters.SeparationRadius;
+            float force = WorldParameters.SeparationForce;
 
             for (int i = 0; i < Entities.Count; i++)
             {
                 double dist = Vector2D.DistanceSquared(ME.Pos, Entities[i].Pos);
-                if (dist < Radius * Radius && dist > 0)
+                if (dist < radius * radius && dist > 0)
                 {
                     Vector2D separationForce = ME.Pos - Entities[i].Pos;
                     steeringForce += separationForce / dist;
                 }
             }
-            return steeringForce.Normalize() * SeperationForce;
+            return steeringForce.Normalize() * force;
+        }
+
+        public Vector2D CalculateFlocking()
+        {
+            Vector2D steeringForce = new Vector2D();
+            float radius = WorldParameters.FlockingSeparationRadius;
+            float force = WorldParameters.FlockingSeparationForce;
+
+            for (int i = 0; i < Entities.Count; i++)
+            {
+                double dist = Vector2D.DistanceSquared(ME.Pos, Entities[i].Pos);
+                if (dist < radius * radius && dist > 0)
+                {
+                    Vector2D separationForce = ME.Pos - Entities[i].Pos;
+                    steeringForce += separationForce / dist;
+                }
+            }
+            return steeringForce.Normalize() * force;
         }
     }
 }

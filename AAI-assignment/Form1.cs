@@ -53,12 +53,12 @@ namespace AAI_assignment
                         bar.Left = 5;
                         bar.Top = index * 65 + 25;
                         bar.Minimum = 0;
-                        bar.Maximum = 1000;
+                        bar.Maximum = 100;
                         bar.TickStyle = TickStyle.None;
                         bar.Name = field.Name;
                         bar.ValueChanged += (object sender, EventArgs e) =>
                         {
-                            Console.WriteLine(bar.Name + WorldParameters.FlockingSeperationForce);
+                            Console.WriteLine(bar.Name + WorldParameters.FlockingSeparationForce);
                             fields.First(o => o.Name == bar.Name).SetValue(null, bar.Value);
                         };
                         bar.Value = Convert.ToInt32(field.GetValue(null));
