@@ -6,7 +6,7 @@ namespace AAI_assignment.behaviour
     class ObstacleSeparationBehaviour : SteeringBehaviour
     {
         public List<BaseGameEntity> Entities;
-        public ObstacleSeparationBehaviour(MovingEntity me,  List<BaseGameEntity> entities) : base(me)
+        public ObstacleSeparationBehaviour(MovingEntity me, List<BaseGameEntity> entities) : base(me)
         {
             this.Entities = entities;
         }

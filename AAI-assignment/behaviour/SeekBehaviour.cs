@@ -5,18 +5,17 @@ namespace AAI_assignment.behaviour
 {
     public class SeekBehaviour : SteeringBehaviour
     {
-        public bool Stop = false;
-        public int StopRange = 10;
-        public SeekBehaviour(MovingEntity me) : base(me)
-        {
-        }
+        public SeekBehaviour(MovingEntity me) : base(me) { }
 
         public override Vector2D Calculate()
         {
             Vector2D target = ME.MyWorld.Target.Pos;
-            if (Stop)
+            if (WorldParameters.SeekStop)
             {
-                if (!(ME.Pos.X >= target.X - StopRange && ME.Pos.X <= target.X + StopRange && ME.Pos.Y >= target.Y - StopRange && ME.Pos.Y <= target.Y + StopRange))
+                if (!(ME.Pos.X >= target.X - WorldParameters.SeekStopRadius
+                      && ME.Pos.X <= target.X + WorldParameters.SeekStopRadius
+                      && ME.Pos.Y >= target.Y - WorldParameters.SeekStopRadius
+                      && ME.Pos.Y <= target.Y + WorldParameters.SeekStopRadius))
                 {
                     Vector2D Tpos = target.Clone();
                     Vector2D desiredVelocity = Tpos.Sub(ME.Pos).Normalize().Multiply(ME.MaxSpeed);

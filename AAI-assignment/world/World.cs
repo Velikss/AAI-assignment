@@ -6,7 +6,6 @@ using Huiswerk6;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Windows.Forms;
 
 namespace AAI_assignment
 {
@@ -25,6 +24,10 @@ namespace AAI_assignment
         // Cohesion
         public static int CohesionRadius = 75;
         public static float CohesionForce = 1.25f;
+
+        // Seek
+        public static bool SeekStop = false;
+        public static float SeekStopRadius = 10;
 
         // Flocking
         public static float FlockingCohesionRadius = 75;
@@ -204,7 +207,7 @@ namespace AAI_assignment
 
         public void DrawGrid(Graphics g)
         {
-            if(WorldParameters.GridUpdate)
+            if (WorldParameters.GridUpdate)
                 NavGrid = new NavigationGrid(this, WorldParameters.NumOfCells);
             NavGrid.DrawGrid(g);
         }
@@ -219,7 +222,7 @@ namespace AAI_assignment
                     NavigationGrid.DrawEdge(g, path[i], path[i + 1], Pens.Red);
             }
             // draw visited nodes by A* algorithm
-            if(WorldParameters.DrawVisitedNodes)
+            if (WorldParameters.DrawVisitedNodes)
                 for (int i = 0; i < NavGrid.VisitedNodes.Count; i++)
                 {
                     g.FillEllipse(Brushes.DarkBlue, (int)(NavGrid.VisitedNodes[i].Pos.X - WorldParameters.PointScale / 2), (int)(NavGrid.VisitedNodes[i].Pos.Y - WorldParameters.PointScale / 2), WorldParameters.PointScale, WorldParameters.PointScale);

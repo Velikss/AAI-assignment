@@ -7,7 +7,7 @@ namespace AAI_assignment.behaviour
     class CohesionBehaviour : SteeringBehaviour
     {
         public List<MovingEntity> Entities;
-        public CohesionBehaviour(MovingEntity me,  List<MovingEntity> entities) : base(me)
+        public CohesionBehaviour(MovingEntity me, List<MovingEntity> entities) : base(me)
         {
             this.Entities = entities;
         }

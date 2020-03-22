@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using AAI_assignment.entity;
+﻿using AAI_assignment.entity;
 using Huiswerk6;
+using System;
+using System.Collections.Generic;
 
 namespace AAI_assignment.behaviour
 {
