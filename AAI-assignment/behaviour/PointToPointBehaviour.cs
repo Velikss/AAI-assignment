@@ -7,7 +7,6 @@ namespace AAI_assignment.behaviour
 {
     class PointToPointBehaviour : SteeringBehaviour
     {
-        public int StopRange = WorldParameters.TargetStopRange;
         public Stack<Node> Path;
         public Node Target;
         public PointToPointBehaviour(MovingEntity me, ref Stack<Node> path) : base(me)
@@ -22,7 +21,10 @@ namespace AAI_assignment.behaviour
             if (Target == null)
                 Target = Path.Pop();
 
-            if (!(ME.Pos.X >= Target.Pos.X - StopRange && ME.Pos.X <= Target.Pos.X + StopRange && ME.Pos.Y >= Target.Pos.Y - StopRange && ME.Pos.Y <= Target.Pos.Y + StopRange))
+            if (!(ME.Pos.X >= Target.Pos.X - WorldParameters.TargetStopRange 
+                  && ME.Pos.X <= Target.Pos.X + WorldParameters.TargetStopRange 
+                  && ME.Pos.Y >= Target.Pos.Y - WorldParameters.TargetStopRange 
+                  && ME.Pos.Y <= Target.Pos.Y + WorldParameters.TargetStopRange))
             {
                 Vector2D Tpos = Target.Pos.Clone();
                 Vector2D desiredVelocity = Tpos.Sub(ME.Pos).Normalize().Multiply(ME.MaxSpeed);

@@ -134,9 +134,6 @@ namespace AAI_assignment.util
         {
             for (int i = 0; i < World.Obstacles.Count; i++)
             {
-                //double dist = Vector2D.DistanceSquared(v, World.Obstacles[i].Pos);
-                //if (dist < (WorldParameters.ObstacleSeperationRadius + WorldParameters.ObstacleScale) * (WorldParameters.ObstacleSeperationRadius + WorldParameters.ObstacleScale) && dist > 0)
-                //    return true;
                 double dist = Vector2D.DistanceSquared(v, World.Obstacles[i].Pos);
                 double maxDist = Vector2D.DistanceSquared(new Vector2D(World.Obstacles[i].Pos.X - WorldParameters.ObstacleScale, World.Obstacles[i].Pos.Y - WorldParameters.ObstacleScale), World.Obstacles[i].Pos);
                 if (dist < maxDist)
@@ -148,7 +145,6 @@ namespace AAI_assignment.util
 
         public Stack<Node> AStar(Node start, Node target)
         {
-            // algorithm  
             Node current = null;
             List<Node> openList = new List<Node>();
             List<Node> closedList = new List<Node>();

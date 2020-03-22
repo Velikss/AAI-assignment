@@ -60,8 +60,8 @@ namespace AAI_assignment
         public static int TargetStopRange = 8;
 
         // PathFinding draw
-        public static bool PathRemove = true;
-        public static bool DrawVisitedNodes = false;
+        public static bool PathRemove = false;
+        public static bool DrawVisitedNodes = true;
 
         // Navigation Grid
         public static bool GridOn = true;

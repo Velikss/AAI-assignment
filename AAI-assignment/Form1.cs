@@ -80,7 +80,6 @@ namespace AAI_assignment
 
         private void dbPanel1_MouseClick(object sender, MouseEventArgs e)
         {
-            //world.Target.Pos = new Vector2D(e.X, e.Y);
             world.PathFinding(e.X, e.Y);
         }
 
