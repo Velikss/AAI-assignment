@@ -51,6 +51,14 @@ namespace AAI_assignment
             this.wanderingBox = new System.Windows.Forms.CheckBox();
             this.sliderPage = new System.Windows.Forms.TabPage();
             this.behaviourBox = new System.Windows.Forms.ComboBox();
+            this.gridPage = new System.Windows.Forms.TabPage();
+            this.gridLabel = new System.Windows.Forms.Label();
+            this.removePathBox = new System.Windows.Forms.CheckBox();
+            this.drawVisitedNodesBox = new System.Windows.Forms.CheckBox();
+            this.drawPathBox = new System.Windows.Forms.CheckBox();
+            this.pathfindingLabel = new System.Windows.Forms.Label();
+            this.drawNodesBox = new System.Windows.Forms.CheckBox();
+            this.gridDrawBox = new System.Windows.Forms.CheckBox();
             this.worldPanel = new AAI_assignment.DBPanel();
             this.menuPanel.SuspendLayout();
             this.behaviourPage.SuspendLayout();
@@ -59,12 +67,14 @@ namespace AAI_assignment
             ((System.ComponentModel.ISupportInitialize)(this.speedSlider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.entityUpDown)).BeginInit();
             this.sliderPage.SuspendLayout();
+            this.gridPage.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuPanel
             // 
             this.menuPanel.Controls.Add(this.behaviourPage);
             this.menuPanel.Controls.Add(this.sliderPage);
+            this.menuPanel.Controls.Add(this.gridPage);
             this.menuPanel.Location = new System.Drawing.Point(3, 11);
             this.menuPanel.Name = "menuPanel";
             this.menuPanel.SelectedIndex = 0;
@@ -303,6 +313,97 @@ namespace AAI_assignment
             this.behaviourBox.TabIndex = 0;
             this.behaviourBox.SelectedIndexChanged += new System.EventHandler(this.behaviourBox_SelectedIndexChanged);
             // 
+            // gridPage
+            // 
+            this.gridPage.Controls.Add(this.gridLabel);
+            this.gridPage.Controls.Add(this.removePathBox);
+            this.gridPage.Controls.Add(this.drawVisitedNodesBox);
+            this.gridPage.Controls.Add(this.drawPathBox);
+            this.gridPage.Controls.Add(this.pathfindingLabel);
+            this.gridPage.Controls.Add(this.drawNodesBox);
+            this.gridPage.Controls.Add(this.gridDrawBox);
+            this.gridPage.Location = new System.Drawing.Point(4, 22);
+            this.gridPage.Name = "gridPage";
+            this.gridPage.Padding = new System.Windows.Forms.Padding(3);
+            this.gridPage.Size = new System.Drawing.Size(246, 742);
+            this.gridPage.TabIndex = 2;
+            this.gridPage.Text = "Grid";
+            this.gridPage.UseVisualStyleBackColor = true;
+            // 
+            // gridLabel
+            // 
+            this.gridLabel.AutoSize = true;
+            this.gridLabel.Location = new System.Drawing.Point(5, 8);
+            this.gridLabel.Name = "gridLabel";
+            this.gridLabel.Size = new System.Drawing.Size(32, 13);
+            this.gridLabel.TabIndex = 14;
+            this.gridLabel.Text = "Grid: ";
+            // 
+            // removePathBox
+            // 
+            this.removePathBox.AutoSize = true;
+            this.removePathBox.Location = new System.Drawing.Point(6, 149);
+            this.removePathBox.Name = "removePathBox";
+            this.removePathBox.Size = new System.Drawing.Size(90, 17);
+            this.removePathBox.TabIndex = 13;
+            this.removePathBox.Text = "Remove path";
+            this.removePathBox.UseVisualStyleBackColor = true;
+            this.removePathBox.CheckedChanged += new System.EventHandler(this.GridBox_CheckedChanged);
+            // 
+            // drawVisitedNodesBox
+            // 
+            this.drawVisitedNodesBox.AutoSize = true;
+            this.drawVisitedNodesBox.Location = new System.Drawing.Point(6, 126);
+            this.drawVisitedNodesBox.Name = "drawVisitedNodesBox";
+            this.drawVisitedNodesBox.Size = new System.Drawing.Size(118, 17);
+            this.drawVisitedNodesBox.TabIndex = 12;
+            this.drawVisitedNodesBox.Text = "Draw visited Nodes";
+            this.drawVisitedNodesBox.UseVisualStyleBackColor = true;
+            this.drawVisitedNodesBox.CheckedChanged += new System.EventHandler(this.GridBox_CheckedChanged);
+            // 
+            // drawPathBox
+            // 
+            this.drawPathBox.AutoSize = true;
+            this.drawPathBox.Location = new System.Drawing.Point(6, 103);
+            this.drawPathBox.Name = "drawPathBox";
+            this.drawPathBox.Size = new System.Drawing.Size(76, 17);
+            this.drawPathBox.TabIndex = 11;
+            this.drawPathBox.Text = "Draw Path";
+            this.drawPathBox.UseVisualStyleBackColor = true;
+            this.drawPathBox.CheckedChanged += new System.EventHandler(this.GridBox_CheckedChanged);
+            // 
+            // pathfindingLabel
+            // 
+            this.pathfindingLabel.AutoSize = true;
+            this.pathfindingLabel.Location = new System.Drawing.Point(3, 87);
+            this.pathfindingLabel.Name = "pathfindingLabel";
+            this.pathfindingLabel.Size = new System.Drawing.Size(69, 13);
+            this.pathfindingLabel.TabIndex = 10;
+            this.pathfindingLabel.Text = "Path finding: ";
+            this.pathfindingLabel.Click += new System.EventHandler(this.pathfindingLabel_Click);
+            // 
+            // drawNodesBox
+            // 
+            this.drawNodesBox.AutoSize = true;
+            this.drawNodesBox.Location = new System.Drawing.Point(6, 47);
+            this.drawNodesBox.Name = "drawNodesBox";
+            this.drawNodesBox.Size = new System.Drawing.Size(233, 17);
+            this.drawNodesBox.TabIndex = 2;
+            this.drawNodesBox.Text = "Draw Nodes (Requires Grid to be turned on)";
+            this.drawNodesBox.UseVisualStyleBackColor = true;
+            this.drawNodesBox.CheckedChanged += new System.EventHandler(this.GridBox_CheckedChanged);
+            // 
+            // gridDrawBox
+            // 
+            this.gridDrawBox.AutoSize = true;
+            this.gridDrawBox.Location = new System.Drawing.Point(6, 24);
+            this.gridDrawBox.Name = "gridDrawBox";
+            this.gridDrawBox.Size = new System.Drawing.Size(71, 17);
+            this.gridDrawBox.TabIndex = 1;
+            this.gridDrawBox.Text = "Draw grid";
+            this.gridDrawBox.UseVisualStyleBackColor = true;
+            this.gridDrawBox.CheckedChanged += new System.EventHandler(this.GridBox_CheckedChanged);
+            // 
             // worldPanel
             // 
             this.worldPanel.BackColor = System.Drawing.Color.White;
@@ -332,6 +433,8 @@ namespace AAI_assignment
             ((System.ComponentModel.ISupportInitialize)(this.speedSlider)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.entityUpDown)).EndInit();
             this.sliderPage.ResumeLayout(false);
+            this.gridPage.ResumeLayout(false);
+            this.gridPage.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -359,6 +462,14 @@ namespace AAI_assignment
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox behaviourBox;
+        private System.Windows.Forms.TabPage gridPage;
+        private System.Windows.Forms.CheckBox gridDrawBox;
+        private System.Windows.Forms.CheckBox drawNodesBox;
+        private System.Windows.Forms.Label pathfindingLabel;
+        private System.Windows.Forms.CheckBox drawPathBox;
+        private System.Windows.Forms.CheckBox drawVisitedNodesBox;
+        private System.Windows.Forms.CheckBox removePathBox;
+        private System.Windows.Forms.Label gridLabel;
     }
 }
 

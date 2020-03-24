@@ -61,11 +61,11 @@ namespace AAI_assignment
         // PathFinding draw
         public static bool PathRemove = false;
         public static bool DrawVisitedNodes = true;
+        public static bool DrawPath = false;
 
         // Navigation Grid
-        public static bool GridOn = true;
-        public static bool DrawNodes = false;
-        public static bool DrawPath = true;
+        public static bool DrawGrid;
+        public static bool DrawNodes;
         public static bool GridUpdate = false;
         public static float NumOfCells = 50;
         public static float PointScale = 6;
@@ -252,7 +252,7 @@ namespace AAI_assignment
 
         public void Render(Graphics g)
         {
-            if (WorldParameters.GridOn)
+            if (WorldParameters.DrawGrid)
                 DrawGrid(g);
             if (WorldParameters.DrawPath && DrawnPath != null)
                 DrawPath(g);

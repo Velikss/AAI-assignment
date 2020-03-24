@@ -128,7 +128,21 @@ namespace AAI_assignment
             WorldParameters.obstacleSeparation = obstacleSeparationBox.Checked;
 
             world.RefreshBehaviours();
+        }
 
+        private void GridBox_CheckedChanged(object sender, EventArgs e)
+        {
+            WorldParameters.DrawGrid = gridDrawBox.Checked;
+            WorldParameters.DrawNodes = drawNodesBox.Checked;
+            if (drawNodesBox.Checked)
+            {
+                WorldParameters.DrawGrid = true;
+                gridDrawBox.Checked = true;
+            }
+
+            WorldParameters.DrawPath = drawPathBox.Checked;
+            WorldParameters.DrawVisitedNodes = drawVisitedNodesBox.Checked;
+            WorldParameters.PathRemove = removePathBox.Checked;
         }
 
         private void entityUpDown_ValueChanged(object sender, EventArgs e)
@@ -164,6 +178,11 @@ namespace AAI_assignment
             sliderPage.Controls.Clear();
             sliderPage.Controls.Add(behaviourBox);
             PrepareSliderPanel(behaviourBox.SelectedItem.ToString());
+        }
+
+        private void pathfindingLabel_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void Form1_Resize(object sender, EventArgs e)
