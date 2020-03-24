@@ -21,7 +21,10 @@ namespace AAI_assignment.goaldriven
         public void Activate() { }
         public int Process() { return 0; }
         public void Terminate() { }
-        public bool HandleMessage() {  }
+
+        public bool HandleMessage()
+        {
+            return true;  }
 
         public bool IsActive()
         {

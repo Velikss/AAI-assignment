@@ -22,7 +22,7 @@ namespace AAI_assignment.behaviour
             for (int i = 0; i < Entities.Count; i++)
             {
                 double dist = Vector2D.DistanceSquared(ME.Pos, Entities[i].Pos);
-                if (dist < WorldParameters.AlignmentRadius * WorldParameters.AlignmentRadius && dist > 0)
+                if (dist < radius * radius && dist > 0)
                 {
                     Vector2D h = Entities[i].Velocity.Clone().Normalize();
                     averageHeading += h;
@@ -33,7 +33,7 @@ namespace AAI_assignment.behaviour
             {
                 averageHeading /= neighbourCount;
             }
-            return averageHeading.Normalize() * WorldParameters.AlignmentForce;
+            return averageHeading.Normalize() * force;
         }
 
         public Vector2D CalculateFlocking()
@@ -46,7 +46,7 @@ namespace AAI_assignment.behaviour
             for (int i = 0; i < Entities.Count; i++)
             {
                 double dist = Vector2D.DistanceSquared(ME.Pos, Entities[i].Pos);
-                if (dist < WorldParameters.AlignmentRadius * WorldParameters.AlignmentRadius && dist > 0)
+                if (dist < radius * radius && dist > 0)
                 {
                     Vector2D h = Entities[i].Velocity.Clone().Normalize();
                     averageHeading += h;
@@ -57,7 +57,7 @@ namespace AAI_assignment.behaviour
             {
                 averageHeading /= neighbourCount;
             }
-            return averageHeading.Normalize() * WorldParameters.AlignmentForce;
+            return averageHeading.Normalize() * force;
         }
     }
 }
