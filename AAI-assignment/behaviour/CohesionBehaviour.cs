@@ -45,8 +45,8 @@ namespace AAI_assignment.behaviour
             Vector2D centerOfMass = new Vector2D();
             Vector2D steeringForce = new Vector2D();
             int neighbourCount = 0;
-            float radius = WorldParameters.FlockingCohesionRadius;
-            float force = WorldParameters.FlockingCohesionForce;
+            float radius = WorldParameters.FlockingCohRadius;
+            float force = WorldParameters.FlockingCohForce;
 
             for (int i = 0; i < Entities.Count; i++)
             {

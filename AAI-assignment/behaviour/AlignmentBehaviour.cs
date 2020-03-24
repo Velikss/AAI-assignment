@@ -40,8 +40,8 @@ namespace AAI_assignment.behaviour
         {
             Vector2D averageHeading = new Vector2D();
             int neighbourCount = 0;
-            float radius = WorldParameters.FlockingAlignmentRadius;
-            float force = WorldParameters.FlockingAlignmentForce;
+            float radius = WorldParameters.FlockingAliRadius;
+            float force = WorldParameters.FlockingAliForce;
 
             for (int i = 0; i < Entities.Count; i++)
             {

@@ -1,6 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Controls;
 using System.Windows.Forms;
+using ComboBox = System.Windows.Forms.ComboBox;
+using Control = System.Windows.Forms.Control;
+using Label = System.Windows.Forms.Label;
+using Panel = System.Windows.Controls.Panel;
 
 namespace AAI_assignment
 {
@@ -10,11 +16,13 @@ namespace AAI_assignment
         System.Timers.Timer timer;
         public const float timeDelta = 0.8f;
         public int defaultWidth = 1920, defaultHeight = 980;
+        public List<Control> ControlList = new List<Control>(); 
 
         public Form1()
         {
             InitializeComponent();
-            PrepareSliderPanel();
+            //PrepareSliderPanel();
+            PopulateBehaviourBox();
 
             world = new World(w: worldPanel.Width, h: worldPanel.Height);
 
@@ -25,48 +33,62 @@ namespace AAI_assignment
 
         }
 
+        private void PopulateBehaviourBox()
+        {
+            behaviourBox.Items.Add("Arrive");
+            behaviourBox.Items.Add("Alignment");
+            behaviourBox.Items.Add("Cohesion");
+            behaviourBox.Items.Add("Seek");
+            behaviourBox.Items.Add("Separation");
+            behaviourBox.Items.Add("Wandering");
+            behaviourBox.Items.Add("Obstacle Separation");
+            behaviourBox.Items.Add("Flocking");
+        }
+
         private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             world.Update(timeDelta);
             worldPanel.Invalidate();
         }
 
-        private void PrepareSliderPanel()
+        private void PrepareSliderPanel(string behaviour)
         {
             var fields = typeof(WorldParameters).GetFields();
             int index = 0;
+            int box = 30;
             foreach (var field in fields)
             {
-                if (field.Name.Contains("Force") || field.Name.Contains("Radius"))
+                if (field.Name.Contains(behaviour.Split()[0]) && (field.Name.Contains("Force") || field.Name.Contains("Radius")))
                 {
-
                     Label l = new Label();
                     l.Text = field.Name.ToString();
                     l.Left = 5;
-                    l.Top = index * 65 + 10;
+                    l.Top = index * 65 + 10 + box;
                     l.Size = new System.Drawing.Size(150, 15);
                     sliderPage.Controls.Add(l);
-
+                    ControlList.Add(l);
                     if (field.FieldType.Equals(typeof(float)) || field.FieldType.Equals(typeof(int)))
                     {
                         TrackBar bar = new TrackBar();
                         bar.Left = 5;
-                        bar.Top = index * 65 + 25;
+                        bar.Width = 200;
+                        bar.Top = index * 65 + 25 + box;
                         bar.Minimum = 0;
                         bar.Maximum = 100;
                         bar.TickStyle = TickStyle.None;
                         bar.Name = field.Name;
                         bar.ValueChanged += (object sender, EventArgs e) =>
                         {
-                            Console.WriteLine(bar.Name + WorldParameters.FlockingSeparationForce);
+                            Console.WriteLine(bar.Name + WorldParameters.FlockingSepForce);
                             fields.First(o => o.Name == bar.Name).SetValue(null, bar.Value);
                         };
                         bar.Value = Convert.ToInt32(field.GetValue(null));
                         sliderPage.Controls.Add(bar);
+                        ControlList.Add(l);
                     }
                     else
                     {
-                        throw new Exception("non implemented type.");
+                        //throw new Exception("non implemented type.");
                     }
                     index++;
                 }
@@ -101,9 +123,9 @@ namespace AAI_assignment
             WorldParameters.cohesion = cohesionBox.Checked;
             WorldParameters.flocking = flockingBox.Checked;
             WorldParameters.seek = seekBox.Checked;
-            WorldParameters.separation = seperationBox.Checked;
+            WorldParameters.separation = separationBox.Checked;
             WorldParameters.wandering = wanderingBox.Checked;
-            WorldParameters.obstacleSeparation = obstacleSeperationBox.Checked;
+            WorldParameters.obstacleSeparation = obstacleSeparationBox.Checked;
 
             world.RefreshBehaviours();
 
@@ -135,6 +157,13 @@ namespace AAI_assignment
         {
             WorldParameters.ObstacleScale = obstacleScaleSlider.Value;
             world.UpdateObstacleScale();
+        }
+
+        private void behaviourBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            sliderPage.Controls.Clear();
+            sliderPage.Controls.Add(behaviourBox);
+            PrepareSliderPanel(behaviourBox.SelectedItem.ToString());
         }
 
         private void Form1_Resize(object sender, EventArgs e)

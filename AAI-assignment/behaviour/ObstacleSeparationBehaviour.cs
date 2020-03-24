@@ -15,8 +15,8 @@ namespace AAI_assignment.behaviour
         {
             Vector2D steeringForce = new Vector2D();
             int obstacleScale = WorldParameters.ObstacleScale;
-            float radius = WorldParameters.SeparationRadius;
-            float force = WorldParameters.SeparationForce;
+            float radius = WorldParameters.ObstacleSepRadius;
+            float force = WorldParameters.ObstacleSepForce;
 
             for (int i = 0; i < Entities.Count; i++)
             {

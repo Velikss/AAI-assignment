@@ -33,8 +33,8 @@ namespace AAI_assignment.behaviour
         public Vector2D CalculateFlocking()
         {
             Vector2D steeringForce = new Vector2D();
-            float radius = WorldParameters.FlockingSeparationRadius;
-            float force = WorldParameters.FlockingSeparationForce;
+            float radius = WorldParameters.FlockingSepRadius;
+            float force = WorldParameters.FlockingSepForce;
 
             for (int i = 0; i < Entities.Count; i++)
             {

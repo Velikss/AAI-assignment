@@ -45,11 +45,12 @@ namespace AAI_assignment
             this.seekBox = new System.Windows.Forms.CheckBox();
             this.entityUpDown = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
-            this.obstacleSeperationBox = new System.Windows.Forms.CheckBox();
-            this.seperationBox = new System.Windows.Forms.CheckBox();
+            this.obstacleSeparationBox = new System.Windows.Forms.CheckBox();
+            this.separationBox = new System.Windows.Forms.CheckBox();
             this.flockingBox = new System.Windows.Forms.CheckBox();
             this.wanderingBox = new System.Windows.Forms.CheckBox();
             this.sliderPage = new System.Windows.Forms.TabPage();
+            this.behaviourBox = new System.Windows.Forms.ComboBox();
             this.worldPanel = new AAI_assignment.DBPanel();
             this.menuPanel.SuspendLayout();
             this.behaviourPage.SuspendLayout();
@@ -57,6 +58,7 @@ namespace AAI_assignment
             ((System.ComponentModel.ISupportInitialize)(this.scaleSlider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.speedSlider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.entityUpDown)).BeginInit();
+            this.sliderPage.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuPanel
@@ -69,7 +71,7 @@ namespace AAI_assignment
             this.menuPanel.Size = new System.Drawing.Size(254, 768);
             this.menuPanel.TabIndex = 2;
             // 
-            // tabPage1
+            // behaviourPage
             // 
             this.behaviourPage.Controls.Add(this.label3);
             this.behaviourPage.Controls.Add(this.label2);
@@ -83,12 +85,12 @@ namespace AAI_assignment
             this.behaviourPage.Controls.Add(this.seekBox);
             this.behaviourPage.Controls.Add(this.entityUpDown);
             this.behaviourPage.Controls.Add(this.label1);
-            this.behaviourPage.Controls.Add(this.obstacleSeperationBox);
-            this.behaviourPage.Controls.Add(this.seperationBox);
+            this.behaviourPage.Controls.Add(this.obstacleSeparationBox);
+            this.behaviourPage.Controls.Add(this.separationBox);
             this.behaviourPage.Controls.Add(this.flockingBox);
             this.behaviourPage.Controls.Add(this.wanderingBox);
             this.behaviourPage.Location = new System.Drawing.Point(4, 22);
-            this.behaviourPage.Name = "tabPage1";
+            this.behaviourPage.Name = "behaviourPage";
             this.behaviourPage.Padding = new System.Windows.Forms.Padding(3);
             this.behaviourPage.Size = new System.Drawing.Size(246, 742);
             this.behaviourPage.TabIndex = 0;
@@ -236,27 +238,27 @@ namespace AAI_assignment
             this.label1.TabIndex = 7;
             this.label1.Text = "Entities";
             // 
-            // obstacleSeperationBox
+            // obstacleSeparationBox
             // 
-            this.obstacleSeperationBox.AutoSize = true;
-            this.obstacleSeperationBox.Location = new System.Drawing.Point(6, 143);
-            this.obstacleSeperationBox.Name = "obstacleSeperationBox";
-            this.obstacleSeperationBox.Size = new System.Drawing.Size(122, 17);
-            this.obstacleSeperationBox.TabIndex = 8;
-            this.obstacleSeperationBox.Text = "Obstacle Seperation";
-            this.obstacleSeperationBox.UseVisualStyleBackColor = true;
-            this.obstacleSeperationBox.CheckedChanged += new System.EventHandler(this.behaviourBox_CheckedChanged);
+            this.obstacleSeparationBox.AutoSize = true;
+            this.obstacleSeparationBox.Location = new System.Drawing.Point(6, 143);
+            this.obstacleSeparationBox.Name = "obstacleSeparationBox";
+            this.obstacleSeparationBox.Size = new System.Drawing.Size(122, 17);
+            this.obstacleSeparationBox.TabIndex = 8;
+            this.obstacleSeparationBox.Text = "Obstacle Separation";
+            this.obstacleSeparationBox.UseVisualStyleBackColor = true;
+            this.obstacleSeparationBox.CheckedChanged += new System.EventHandler(this.behaviourBox_CheckedChanged);
             // 
-            // seperationBox
+            // separationBox
             // 
-            this.seperationBox.AutoSize = true;
-            this.seperationBox.Location = new System.Drawing.Point(6, 98);
-            this.seperationBox.Name = "seperationBox";
-            this.seperationBox.Size = new System.Drawing.Size(77, 17);
-            this.seperationBox.TabIndex = 1;
-            this.seperationBox.Text = "Seperation";
-            this.seperationBox.UseVisualStyleBackColor = true;
-            this.seperationBox.CheckedChanged += new System.EventHandler(this.behaviourBox_CheckedChanged);
+            this.separationBox.AutoSize = true;
+            this.separationBox.Location = new System.Drawing.Point(6, 98);
+            this.separationBox.Name = "separationBox";
+            this.separationBox.Size = new System.Drawing.Size(77, 17);
+            this.separationBox.TabIndex = 1;
+            this.separationBox.Text = "Separation";
+            this.separationBox.UseVisualStyleBackColor = true;
+            this.separationBox.CheckedChanged += new System.EventHandler(this.behaviourBox_CheckedChanged);
             // 
             // flockingBox
             // 
@@ -283,6 +285,7 @@ namespace AAI_assignment
             // sliderPage
             // 
             this.sliderPage.AutoScroll = true;
+            this.sliderPage.Controls.Add(this.behaviourBox);
             this.sliderPage.Location = new System.Drawing.Point(4, 22);
             this.sliderPage.Name = "sliderPage";
             this.sliderPage.Padding = new System.Windows.Forms.Padding(3);
@@ -290,6 +293,15 @@ namespace AAI_assignment
             this.sliderPage.TabIndex = 1;
             this.sliderPage.Text = "Forces";
             this.sliderPage.UseVisualStyleBackColor = true;
+            // 
+            // behaviourBox
+            // 
+            this.behaviourBox.FormattingEnabled = true;
+            this.behaviourBox.Location = new System.Drawing.Point(7, 7);
+            this.behaviourBox.Name = "behaviourBox";
+            this.behaviourBox.Size = new System.Drawing.Size(210, 21);
+            this.behaviourBox.TabIndex = 0;
+            this.behaviourBox.SelectedIndexChanged += new System.EventHandler(this.behaviourBox_SelectedIndexChanged);
             // 
             // worldPanel
             // 
@@ -319,6 +331,7 @@ namespace AAI_assignment
             ((System.ComponentModel.ISupportInitialize)(this.scaleSlider)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.speedSlider)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.entityUpDown)).EndInit();
+            this.sliderPage.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -331,11 +344,11 @@ namespace AAI_assignment
         private System.Windows.Forms.CheckBox cohesionBox;
         private System.Windows.Forms.CheckBox flockingBox;
         private System.Windows.Forms.CheckBox seekBox;
-        private System.Windows.Forms.CheckBox seperationBox;
+        private System.Windows.Forms.CheckBox separationBox;
         private System.Windows.Forms.CheckBox wanderingBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.NumericUpDown entityUpDown;
-        private System.Windows.Forms.CheckBox obstacleSeperationBox;
+        private System.Windows.Forms.CheckBox obstacleSeparationBox;
         private System.Windows.Forms.TrackBar speedSlider;
         private System.Windows.Forms.Label speedLabel;
         private System.Windows.Forms.TrackBar scaleSlider;
@@ -345,6 +358,7 @@ namespace AAI_assignment
         private System.Windows.Forms.TabPage sliderPage;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox behaviourBox;
     }
 }
 

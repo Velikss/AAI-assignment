@@ -30,20 +30,20 @@ namespace AAI_assignment
         public static float SeekStopRadius = 10;
 
         // Flocking
-        public static float FlockingCohesionRadius = 75;
-        public static float FlockingSeparationRadius = 25;
-        public static float FlockingAlignmentRadius = 50;
-        public static float FlockingCohesionForce = 1.25f;
-        public static float FlockingSeparationForce = 25;
-        public static float FlockingAlignmentForce = 1;
+        public static float FlockingCohRadius = 75;
+        public static float FlockingSepRadius = 25;
+        public static float FlockingAliRadius = 50;
+        public static float FlockingCohForce = 1.25f;
+        public static float FlockingSepForce = 25;
+        public static float FlockingAliForce = 1;
 
-        // Seperation
+        // Separation
         public static float SeparationRadius = 25;
         public static float SeparationForce = 50;
 
-        // ObstacleSeperation
-        public static float ObstacleSeperationRadius = 10;
-        public static float ObstacleSeperationForce = 80;
+        // ObstacleSeparation
+        public static float ObstacleSepRadius = 15;
+        public static float ObstacleSepForce = 100;
 
         // Entity
         public static int EntityCount = 200;
@@ -51,7 +51,6 @@ namespace AAI_assignment
         public static int EntityMaxSpeed = 50;
 
         // Obstacle
-        public static bool ObstacleAvoidance = true;
         public static int ObstacleCount = 30;
         public static int ObstacleScale = 30;
 
