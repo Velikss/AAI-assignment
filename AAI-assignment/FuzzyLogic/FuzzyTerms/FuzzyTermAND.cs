@@ -6,7 +6,7 @@ namespace AAI_assignment.FuzzyLogic.FuzzyTerms
     {
         public FuzzySet t1, t2;
 
-        public FuzzyTermAND(FuzzySet t1, FuzzySet t2)
+        public FuzzyTermAND( ref FuzzySet t1, ref FuzzySet t2)
         {
             this.t1 = t1;
             this.t2 = t2;
@@ -19,9 +19,7 @@ namespace AAI_assignment.FuzzyLogic.FuzzyTerms
 
         public override double GetDom()
         {
-            double minDOM = 0.0;
-            if (t1.GetDOM() < minDOM)
-                minDOM = t1.GetDOM();
+            double minDOM = t1.GetDOM();
             if (t2.GetDOM() < minDOM)
                 minDOM = t2.GetDOM();
             return minDOM;
@@ -37,6 +35,16 @@ namespace AAI_assignment.FuzzyLogic.FuzzyTerms
         {
             t1.ORWithDOM(val);
             t2.ORWithDOM(val);
+        }
+
+        public override void SetDom(double val)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override string GetName()
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -44,7 +44,24 @@ namespace AAI_assignment.FuzzyLogic
 
         public double DeFuzzify(string key, DefuzzifyType method)
         {
-            throw new NotImplementedException();
+            // clear the DOMs of all consequents
+            map[key].ClearAllDOMValues();
+
+            // process the rules
+            foreach (FuzzyRule rule in _rule)
+            {
+                rule.Calculate();
+            }
+
+            switch (method)
+            {
+                case DefuzzifyType.max_av:
+                    return map[key].DeFuzzifyMaxAv();
+                case DefuzzifyType.centroid:
+                    return map[key].DeFuzzifyCentroid(10);
+                default:
+                    throw new NotImplementedException();
+            }
         }
 
         public double CalculateDesirability(double dist, double ammo)
@@ -53,10 +70,9 @@ namespace AAI_assignment.FuzzyLogic
             this.Fuzzify("DistToTarget", dist);
             this.Fuzzify("AmmoStatus", ammo);
 
-            return 0.0;
 
             //this method automatically processes the rules and defuzzifies the inferred conclusion
-            //return this.DeFuzzify("Desirability", DefuzzifyType.max_av);
+            return this.DeFuzzify("Desirability", DefuzzifyType.max_av);
         }
     }
 }

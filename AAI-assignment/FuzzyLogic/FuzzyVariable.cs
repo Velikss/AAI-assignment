@@ -58,9 +58,25 @@ namespace AAI_assignment.FuzzyLogic
             }
         }
 
+        public void ClearAllDOMValues()
+        {
+            foreach (KeyValuePair<string, FuzzySet> entry in _memberSets)
+                entry.Value.ClearDOM();
+        }
+
         public double DeFuzzifyMaxAv()
         {
-            throw new NotImplementedException();
+            double value = 0.0;
+            double divider = 0.0;
+            foreach (KeyValuePair<string, FuzzySet> entry in _memberSets)
+            {
+                Console.WriteLine("value = " + entry.Value.GetDOM() + "*" + entry.Value.GetRepresentativeVal());
+                Console.WriteLine("divider = " + entry.Value.GetDOM());
+                value += entry.Value.GetDOM() * entry.Value.GetRepresentativeVal();
+                divider += entry.Value.GetDOM();
+            }
+
+            return value / divider;
         }
 
         public double DeFuzzifyCentroid(int numSamples)

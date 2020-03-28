@@ -30,7 +30,7 @@ namespace AAI_assignment.FuzzyLogic
 
         public double GetRepresentativeVal()
         {
-            throw new NotImplementedException();
+            return RepresentativeValue;
         }
 
         public void ClearDOM() => this.DOM = 0.0;

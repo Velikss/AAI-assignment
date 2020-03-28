@@ -9,7 +9,7 @@ namespace AAI_assignment.FuzzyLogic.FuzzySets
     class FuzzyRightShoulder : FuzzySet
     {
         private double PeakPoint, LeftOffset, RightOffset;
-        public FuzzyRightShoulder(double peak, double left, double right) : base(((peak + right) + peak) / 2)
+        public FuzzyRightShoulder(double peak, double left, double right) : base(((peak + right) / 2))
         {
             this.PeakPoint = peak;
             this.LeftOffset = left;

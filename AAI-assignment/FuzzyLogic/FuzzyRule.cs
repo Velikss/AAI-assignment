@@ -18,7 +18,8 @@ namespace AAI_assignment.FuzzyLogic
 
         public void Calculate()
         {
-            throw new NotImplementedException();
+            double d =  Antecedent.GetDom();
+            Consequence.SetDom(d);
         }
     }
 }
