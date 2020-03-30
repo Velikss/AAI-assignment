@@ -227,11 +227,11 @@ namespace AAI_assignment
             FuzzyModule fm = new FuzzyModule();
 
             // Distance to target
-            FuzzyVariable DistToTarget = fm.CreateFLV("DistToTarget", 0, 500);
+            FuzzyVariable DistToTarget = fm.CreateFLV("DistToTarget", 0, 10000000);
 
-            FuzzySet Target_Close = DistToTarget.AddLeftShoulderSet("Target_Close", 0, 25, 150);
-            FuzzySet Target_Medium = DistToTarget.AddTriangularSet("Target_Medium", 25, 150, 300);
-            FuzzySet Target_Far = DistToTarget.AddRightShoulderSet("Target_Far", 150, 300, 500);
+            FuzzySet Target_Close = DistToTarget.AddLeftShoulderSet("Target_Close", 0, 2500000, 5000000);
+            FuzzySet Target_Medium = DistToTarget.AddTriangularSet("Target_Medium", 2500000, 5000000, 7500000);
+            FuzzySet Target_Far = DistToTarget.AddRightShoulderSet("Target_Far", 5000000, 7500000, 10000000);
 
             // Health Status
             FuzzyVariable HealthStatus = fm.CreateFLV("HealthStatus", 0, 100);
