@@ -60,6 +60,7 @@ namespace AAI_assignment
             this.drawNodesBox = new System.Windows.Forms.CheckBox();
             this.gridDrawBox = new System.Windows.Forms.CheckBox();
             this.worldPanel = new AAI_assignment.DBPanel();
+            this.TogglePauseButton = new System.Windows.Forms.Button();
             this.menuPanel.SuspendLayout();
             this.behaviourPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.obstacleScaleSlider)).BeginInit();
@@ -83,6 +84,7 @@ namespace AAI_assignment
             // 
             // behaviourPage
             // 
+            this.behaviourPage.Controls.Add(this.TogglePauseButton);
             this.behaviourPage.Controls.Add(this.label3);
             this.behaviourPage.Controls.Add(this.label2);
             this.behaviourPage.Controls.Add(this.obstacleScaleSlider);
@@ -414,6 +416,16 @@ namespace AAI_assignment
             this.worldPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.dbPanel1_Paint);
             this.worldPanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dbPanel1_MouseClick);
             // 
+            // TogglePauseButton
+            // 
+            this.TogglePauseButton.Location = new System.Drawing.Point(143, 52);
+            this.TogglePauseButton.Name = "TogglePauseButton";
+            this.TogglePauseButton.Size = new System.Drawing.Size(75, 23);
+            this.TogglePauseButton.TabIndex = 14;
+            this.TogglePauseButton.Text = "Pause";
+            this.TogglePauseButton.UseVisualStyleBackColor = true;
+            this.TogglePauseButton.Click += new System.EventHandler(this.TogglePauseButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -470,6 +482,7 @@ namespace AAI_assignment
         private System.Windows.Forms.CheckBox drawVisitedNodesBox;
         private System.Windows.Forms.CheckBox removePathBox;
         private System.Windows.Forms.Label gridLabel;
+        private System.Windows.Forms.Button TogglePauseButton;
     }
 }
 

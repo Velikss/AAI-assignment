@@ -70,6 +70,9 @@ namespace AAI_assignment
         public static float NumOfCells = 50;
         public static float PointScale = 6;
 
+        // Pause
+        public static bool Pause;
+
     }
 
     public class World

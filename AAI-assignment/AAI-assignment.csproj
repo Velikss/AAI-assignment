@@ -96,7 +96,6 @@
     <Compile Include="FuzzyLogic\FuzzySet.cs" />
     <Compile Include="FuzzyLogic\FuzzySets\FuzzyLeftShoulder.cs" />
     <Compile Include="FuzzyLogic\FuzzySets\FuzzyRightShoulder.cs" />
-    <Compile Include="FuzzyLogic\FuzzySets\FuzzySingleton.cs" />
     <Compile Include="FuzzyLogic\FuzzySets\FuzzyTriangle.cs" />
     <Compile Include="FuzzyLogic\FuzzyTerms\FuzzyTerm.cs" />
     <Compile Include="FuzzyLogic\FuzzyTerms\FuzzyTermAND.cs" />

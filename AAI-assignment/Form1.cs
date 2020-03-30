@@ -185,6 +185,21 @@ namespace AAI_assignment
 
         }
 
+        private void TogglePauseButton_Click(object sender, EventArgs e)
+        {
+            if (WorldParameters.Pause)
+            {
+                TogglePauseButton.Text = "Pause";
+                WorldParameters.Pause = false;
+                timer.Enabled = true;
+            } else
+            {
+                TogglePauseButton.Text = "Unpause";
+                WorldParameters.Pause = true;
+                timer.Enabled = false;
+            }
+        }
+
         private void Form1_Resize(object sender, EventArgs e)
         {
             try
