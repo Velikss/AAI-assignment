@@ -2,7 +2,7 @@
 
 namespace AAI_assignment.FuzzyLogic.FuzzyTerms
 {
-    class FuzzyTermAND : FuzzyTerm
+    public class FuzzyTermAND : FuzzyTerm
     {
         public FuzzySet t1, t2;
 

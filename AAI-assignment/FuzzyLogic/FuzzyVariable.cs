@@ -1,15 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using AAI_assignment.FuzzyLogic.FuzzySets;
-using AAI_assignment.FuzzyLogic.FuzzyTerms;
 
 namespace AAI_assignment.FuzzyLogic
 {
     using MemberSets = System.Collections.Generic.Dictionary<string, FuzzySet>;
-    class FuzzyVariable
+    public class FuzzyVariable
     {
         public MemberSets _memberSets = new MemberSets();
         public double MinRange, MaxRange;

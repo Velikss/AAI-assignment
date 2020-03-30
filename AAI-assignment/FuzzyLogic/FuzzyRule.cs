@@ -7,7 +7,7 @@ using AAI_assignment.FuzzyLogic.FuzzyTerms;
 
 namespace AAI_assignment.FuzzyLogic
 {
-    class FuzzyRule
+    public class FuzzyRule
     {
         public FuzzyTerm Antecedent, Consequence;
         public FuzzyRule(FuzzyTerm antecedent, FuzzyTerm consequence)

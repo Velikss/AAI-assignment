@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AAI_assignment.FuzzyLogic
 {
-    class FuzzySet
+    public class FuzzySet
     {
         protected double DOM;
         protected double RepresentativeValue;

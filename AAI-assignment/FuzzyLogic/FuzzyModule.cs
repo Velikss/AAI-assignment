@@ -7,7 +7,7 @@ using AAI_assignment.FuzzyLogic.FuzzyTerms;
 namespace AAI_assignment.FuzzyLogic
 {
     using VarMap = System.Collections.Generic.Dictionary<string, FuzzyVariable>;
-    class FuzzyModule
+    public class FuzzyModule
     {
         public enum DefuzzifyType
         {
