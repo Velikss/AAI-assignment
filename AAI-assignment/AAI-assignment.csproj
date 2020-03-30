@@ -104,6 +104,7 @@
     <Compile Include="FuzzyLogic\FuzzyVariable.cs" />
     <Compile Include="goal\AtomicGoal.cs" />
     <Compile Include="goal\CompositeGoal.cs" />
+    <Compile Include="goal\DestroyGoal.cs" />
     <Compile Include="goal\Goal.cs" />
     <Compile Include="goal\SeekAndDestroy_Goal.cs" />
     <Compile Include="graph\Edge.cs" />

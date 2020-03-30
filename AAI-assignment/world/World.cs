@@ -267,6 +267,10 @@ namespace AAI_assignment
             {
                 Entities[i].Update(timeElapsed);
             }
+            for (int i = 0; i < Agents.Count; i++)
+            {
+                Agents[i].Update(timeElapsed);
+            }
             Target.Update(timeElapsed);
         }
 

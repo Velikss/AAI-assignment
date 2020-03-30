@@ -13,6 +13,11 @@ namespace AAI_assignment
 
         public Agent agent;
 
+        public SeekAndDestroy_Goal(Agent a)
+        {
+            this.agent = a;
+        }
+
         public void Activate()
         {
             // set status to active (2)
@@ -54,15 +59,22 @@ namespace AAI_assignment
             throw new NotImplementedException();
         }
 
-        public int Process()
+        public override int Process()
         {
             // if inactive, activate goal
             if (status == 3)
                 Activate();
 
-            // check if target is reached
+            // check if target is within damage distance
+            /*
+            if (Vector2D.DistanceSquared(agent.Pos, agent.Target.Pos) < 10)
+            {
+                status = 1;
+                AddSubgoal(new DestroyGoal());
+            }
+            */
 
-
+            //ProcessSubGoals();
             agent.SteeringBehaviour.Calculate();
 
             return status;

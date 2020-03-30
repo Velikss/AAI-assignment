@@ -17,9 +17,9 @@ namespace AAI_assignment
     public abstract class Goal
     {
         // failed = 0, complete = 1, active = 2, inactive = 3
-        public int status;
+        public int status = 3;
         public void Activate() { }
-        public int Process() { return 0; }
+        public virtual int Process() { return 0; }
         public void Terminate() { }
 
         public bool HandleMessage()

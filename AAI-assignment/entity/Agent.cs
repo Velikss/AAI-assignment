@@ -20,11 +20,14 @@ namespace AAI_assignment
             this.Health = 100;
             this.MyWorld = w;
             this.Scale = WorldParameters.AgentScale;
+            this.MyGoal = new SeekAndDestroy_Goal(this);
         }
 
         public override void Update(float delta)
         {
             MyGoal.Process();
+
+            UpdatePosition(delta, SteeringBehaviour.Calculate());
         }
 
         private void UpdatePosition(float timeElapsed, Vector2D steeringForce)
@@ -41,13 +44,21 @@ namespace AAI_assignment
         {
             Agent nearest = null;
 
-            for (int i = 0; this.MyWorld.Agents.Count < i; i++)
+            for (int i = 0; this.MyWorld.Agents.Count > i; i++)
             {
                 Agent n = this.MyWorld.Agents[i];
+
+                if (this.Pos == n.Pos)
+                    continue; 
+
                 double dist = Vector2D.DistanceSquared(this.Pos, n.Pos);
 
-                if (nearest == null || dist < Vector2D.DistanceSquared(this.Pos, nearest.Pos))
+                if (nearest == null)
                     nearest = n;
+                else if (dist < Vector2D.DistanceSquared(this.Pos, nearest.Pos))
+                {
+                    nearest = n;
+                }
             }
 
             return nearest;

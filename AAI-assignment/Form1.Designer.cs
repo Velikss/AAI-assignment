@@ -106,7 +106,7 @@ namespace AAI_assignment
             this.behaviourPage.Padding = new System.Windows.Forms.Padding(3);
             this.behaviourPage.Size = new System.Drawing.Size(246, 742);
             this.behaviourPage.TabIndex = 0;
-            this.behaviourPage.Text = "Behaviour";
+            this.behaviourPage.Text = "Entities";
             this.behaviourPage.UseVisualStyleBackColor = true;
             // 
             // label3

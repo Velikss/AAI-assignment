@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AAI_assignment
 {
-    class AtomicGoal : Goal
+    public abstract class AtomicGoal : Goal
     {
         public void Activate()
         {
