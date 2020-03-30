@@ -64,6 +64,32 @@ namespace AAI_assignment
             return nearest;
         }
 
+        public Agent FindMostDesirableTarget()
+        {
+            Agent mostDesirable = null;
+            double highetsCrispValue = 0.0;
+
+            for (int i = 0; this.MyWorld.Agents.Count > i; i++)
+            {
+                Agent n = this.MyWorld.Agents[i];
+                double dist = Vector2D.DistanceSquared(this.Pos, n.Pos);
+                double crisp = this.MyWorld.SeekAndDestroyModule.CalculateDesirability(dist, 8); // health TODO
+
+                if (mostDesirable == null)
+                    mostDesirable = n;
+                if (crisp > highetsCrispValue && n != this)
+                {
+                    highetsCrispValue = crisp;
+                    mostDesirable = n;
+                }
+
+                //if (mostDesirable == null || dist < Vector2D.DistanceSquared(agent.Pos, mostDesirable.Pos))
+                //    mostDesirable = n;
+            }
+
+            return mostDesirable;
+        }
+
         public virtual void Render(Graphics g)
         {
             double leftCorner = Pos.X - Scale;
