@@ -23,11 +23,6 @@ namespace AAI_assignment.FuzzyLogic
             throw new NotImplementedException();
         }
 
-        public void ORWithDOM(double val)
-        {
-            throw new NotImplementedException();
-        }
-
         public double GetRepresentativeVal()
         {
             return RepresentativeValue;

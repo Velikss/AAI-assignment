@@ -12,11 +12,6 @@ namespace AAI_assignment.FuzzyLogic.FuzzyTerms
             this.t2 = t2;
         }
 
-        public override FuzzyTerm Clone()
-        {
-            throw new NotImplementedException();
-        }
-
         public override double GetDom()
         {
             double minDOM = t1.GetDOM();
@@ -31,18 +26,7 @@ namespace AAI_assignment.FuzzyLogic.FuzzyTerms
             t2.ClearDOM();
         }
 
-        public override void OrWithDom(double val)
-        {
-            t1.ORWithDOM(val);
-            t2.ORWithDOM(val);
-        }
-
         public override void SetDom(double val)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override string GetName()
         {
             throw new NotImplementedException();
         }

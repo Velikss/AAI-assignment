@@ -4,43 +4,33 @@ namespace AAI_assignment.FuzzyLogic.FuzzyTerms
 {
     class FuzzyTermSet : FuzzyTerm
     {
-        public FuzzySet Fts;
+        public FuzzySet FuzzyTerm;
         public string Name;
         public FuzzyTermSet(ref FuzzySet fs, string name) : base()
         {
-            Fts = fs;
+            FuzzyTerm = fs;
             Name = name;
-        }
-
-        public override FuzzyTerm Clone()
-        {
-            throw new System.NotImplementedException();
         }
 
         public override double GetDom()
         {
-            return Fts.GetDOM();
+            return FuzzyTerm.GetDOM();
         }
 
         public override void ClearDom()
         {
-            throw new System.NotImplementedException();
-        }
-
-        public override void OrWithDom(double val)
-        {
-            throw new System.NotImplementedException();
+            FuzzyTerm.ClearDOM();
         }
 
         public override void SetDom(double val)
         {
             Console.WriteLine(Name);
-            Console.WriteLine(Fts.GetDOM() + " < " + val);
-            if (Fts.GetDOM() < val)
-                Fts.SetDOM(val);
+            Console.WriteLine(FuzzyTerm.GetDOM() + " < " + val);
+            if (FuzzyTerm.GetDOM() < val)
+                FuzzyTerm.SetDOM(val);
         }
 
-        public override string GetName()
+        public string GetName()
         {
             return Name;
         }

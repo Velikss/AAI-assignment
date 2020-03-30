@@ -25,9 +25,9 @@ namespace AAI_assignment.FuzzyLogic
             _rule = new List<FuzzyRule>();
         }
 
-        public FuzzyVariable CreateFLV(string varName)
+        public FuzzyVariable CreateFLV(string varName, double minRange, double maxRange)
         {
-            FuzzyVariable v = new FuzzyVariable();
+            FuzzyVariable v = new FuzzyVariable(minRange, maxRange);
             map.Add(varName, v);
             return v;
         }
@@ -60,7 +60,7 @@ namespace AAI_assignment.FuzzyLogic
                 case DefuzzifyType.centroid:
                     return map[key].DeFuzzifyCentroid(10);
                 default:
-                    throw new NotImplementedException();
+                    return 0.0; // NotImplementedException();
             }
         }
 

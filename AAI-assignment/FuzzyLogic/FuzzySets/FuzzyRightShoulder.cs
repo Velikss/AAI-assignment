@@ -18,18 +18,6 @@ namespace AAI_assignment.FuzzyLogic.FuzzySets
 
         public override double CalculateDOM(double val)
         {
-            double midpoint = (PeakPoint + RightOffset) / 2;
-            //double midpoint = (((PeakPoint + RightOffset) + PeakPoint) / 2);
-            //double midpoint = (LeftOffset + RightOffset) / 2;
-            //if (LeftOffset == 0.0 && val == midpoint)
-            //    return 1.0;
-            //if (val <= midpoint && (val > (midpoint - LeftOffset)))
-            //    return (1.0 / LeftOffset) * (val - (midpoint - LeftOffset));
-            //else if (val > midpoint)
-            //    return 1.0;
-            //else
-            //    return 0.0;
-
             if (val >= PeakPoint && val <= RightOffset)
                 return 1.0;
             if (val <= PeakPoint && val > LeftOffset)

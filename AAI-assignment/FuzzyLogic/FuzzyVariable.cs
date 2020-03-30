@@ -14,15 +14,16 @@ namespace AAI_assignment.FuzzyLogic
         public MemberSets _memberSets = new MemberSets();
         public double MinRange, MaxRange;
 
-        public FuzzyVariable()
+        public FuzzyVariable(double minRange, double maxRange)
         {
-            this.MinRange = 0.0;
-            this.MaxRange = 0.0;
+            this.MinRange = minRange;
+            this.MaxRange = maxRange;
         }
 
         public FuzzySet AddLeftShoulderSet(string name, double minBound, double peak, double maxBound)
         {
-            //throw new NotImplementedException();
+            if(!InRange(minBound, maxBound))
+                throw new FuzzySetOutOfRangeException("FuzzySet min or max value is out of range");
             FuzzyLeftShoulder fls = new FuzzyLeftShoulder(peak, minBound, maxBound);
             _memberSets.Add(name, fls);
             return fls;
@@ -30,7 +31,8 @@ namespace AAI_assignment.FuzzyLogic
 
         public FuzzySet AddRightShoulderSet(string name, double minBound, double peak, double maxBound)
         {
-            //throw new NotImplementedException();
+            if (!InRange(minBound, maxBound))
+                throw new FuzzySetOutOfRangeException("FuzzySet min or max value is out of range");
             FuzzyRightShoulder frs = new FuzzyRightShoulder(peak, minBound, maxBound);
             _memberSets.Add(name, frs);
             return frs;
@@ -38,15 +40,11 @@ namespace AAI_assignment.FuzzyLogic
 
         public FuzzySet AddTriangularSet(string name, double minBound, double peak, double maxBound)
         {
-            //throw new NotImplementedException();
+            if (!InRange(minBound, maxBound))
+                throw new FuzzySetOutOfRangeException("FuzzySet min or max value is out of range");
             FuzzyTriangle ft = new FuzzyTriangle(peak, minBound, maxBound);
             _memberSets.Add(name, ft);
             return ft;
-        }
-
-        public FuzzySet AddSingletonSet(string name, double minBound, double peak, double maxBound)
-        {
-            throw new NotImplementedException();
         }
 
         public void Fuzzify(double val)
@@ -76,6 +74,9 @@ namespace AAI_assignment.FuzzyLogic
                 divider += entry.Value.GetDOM();
             }
 
+            if (divider == 0.0 || value == 0.0)
+                return 0.0;
+
             return value / divider;
         }
 
@@ -84,11 +85,20 @@ namespace AAI_assignment.FuzzyLogic
             throw new NotImplementedException();
         }
 
-        public void AdjustRangeToFit(double min, double max)
+        public bool InRange(double min, double max)
         {
-            throw new NotImplementedException();
+            if (min >= MinRange && max <= MaxRange)
+                return true;
+            return false;
         }
 
+    }
 
+    public class FuzzySetOutOfRangeException : Exception
+    {
+        public FuzzySetOutOfRangeException() { }
+
+        public FuzzySetOutOfRangeException(string message)
+            : base(message) { }
     }
 }
