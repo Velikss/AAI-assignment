@@ -6,6 +6,8 @@ using Huiswerk6;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using AAI_assignment.FuzzyLogic;
+using AAI_assignment.FuzzyLogic.FuzzyTerms;
 
 namespace AAI_assignment
 {
@@ -88,6 +90,7 @@ namespace AAI_assignment
         public Stack<Node> DrawnPath;
         public Stack<Node> Path;
         public bool Pathfinding;
+        public FuzzyModule SeekAndDestroyModule;
         public Vehicle Target { get; set; }
         public int TargetNodeX = 1;
         public int TargetNodeY = 1;
@@ -102,6 +105,7 @@ namespace AAI_assignment
             NavGrid = new NavigationGrid(this, WorldParameters.NumOfCells);
             CreateTarget();
             Pathfinding = true;
+            CreateFuzzyModuleSeekAndDestroy();
         }
 
         private void Populate()
@@ -215,6 +219,46 @@ namespace AAI_assignment
                 if (WorldParameters.obstacleSeparation)
                     Entities[i].SB.Add(new ObstacleSeparationBehaviour(Entities[i], Obstacles));
             }
+        }
+
+        public void CreateFuzzyModuleSeekAndDestroy()
+        {
+            // Fuzzy Module
+            FuzzyModule fm = new FuzzyModule();
+
+            // Distance to target
+            FuzzyVariable DistToTarget = fm.CreateFLV("DistToTarget", 0, 500);
+
+            FuzzySet Target_Close = DistToTarget.AddLeftShoulderSet("Target_Close", 0, 25, 150);
+            FuzzySet Target_Medium = DistToTarget.AddTriangularSet("Target_Medium", 25, 150, 300);
+            FuzzySet Target_Far = DistToTarget.AddRightShoulderSet("Target_Far", 150, 300, 500);
+
+            // Health Status
+            FuzzyVariable HealthStatus = fm.CreateFLV("HealthStatus", 0, 100);
+
+            FuzzySet Health_Low = HealthStatus.AddLeftShoulderSet("Health_Low", 0, 25, 50);
+            FuzzySet Health_Medium = HealthStatus.AddTriangularSet("Health_Medium", 25, 50, 75);
+            FuzzySet Health_High = HealthStatus.AddRightShoulderSet("Health_High", 50, 75, 100);
+
+            // Desirability
+            FuzzyVariable Desirablility = fm.CreateFLV("Desirability", 0, 100);
+
+            FuzzySet unDesirable = Desirablility.AddLeftShoulderSet("unDesirable", 0, 25, 50);
+            FuzzySet desirable = Desirablility.AddTriangularSet("desirable", 25, 50, 75);
+            FuzzySet veryDesirable = Desirablility.AddRightShoulderSet("veryDesirable", 50, 75, 100);
+
+            // Rules
+            fm.AddRule(new FuzzyTermAND(ref Target_Far, ref Health_High), new FuzzyTermSet(ref unDesirable, "unDesirable"));
+            fm.AddRule(new FuzzyTermAND(ref Target_Far, ref Health_Medium), new FuzzyTermSet(ref unDesirable, "unDesirable"));
+            fm.AddRule(new FuzzyTermAND(ref Target_Far, ref Health_Low), new FuzzyTermSet(ref desirable, "desirable"));
+            fm.AddRule(new FuzzyTermAND(ref Target_Medium, ref Health_High), new FuzzyTermSet(ref unDesirable, "unDesirable"));
+            fm.AddRule(new FuzzyTermAND(ref Target_Medium, ref Health_Medium), new FuzzyTermSet(ref desirable, "desirable"));
+            fm.AddRule(new FuzzyTermAND(ref Target_Medium, ref Health_Low), new FuzzyTermSet(ref veryDesirable, "veryDesirable"));
+            fm.AddRule(new FuzzyTermAND(ref Target_Close, ref Health_High), new FuzzyTermSet(ref desirable, "desirable"));
+            fm.AddRule(new FuzzyTermAND(ref Target_Close, ref Health_Medium), new FuzzyTermSet(ref veryDesirable, "veryDesirable"));
+            fm.AddRule(new FuzzyTermAND(ref Target_Close, ref Health_Low), new FuzzyTermSet(ref veryDesirable, "veryDesirable"));
+
+            SeekAndDestroyModule = fm;
         }
 
         public void Update(float timeElapsed)

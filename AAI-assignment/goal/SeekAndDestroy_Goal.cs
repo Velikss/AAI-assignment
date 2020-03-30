@@ -18,8 +18,35 @@ namespace AAI_assignment
             // set status to active (2)
             status = 2;
 
+            // Set most desirable target
+            agent.Target = FindMostDesirableTarget();
+
             // engage in seeking behaviour
-            agent.SteeringBehaviour = new SeekBehaviour(agent, agent.FindNearest().Pos);
+            agent.SteeringBehaviour = new SeekBehaviour(agent, agent.Target.Pos);
+        }
+
+        public BaseGameEntity FindMostDesirableTarget()
+        {
+            Agent mostDesirable = null;
+            double highetsCrispValue = 0.0;
+
+            for (int i = 0; agent.MyWorld.Agents.Count < i; i++)
+            {
+                Agent n = agent.MyWorld.Agents[i];
+                double dist = Vector2D.DistanceSquared(agent.Pos, n.Pos);
+                double crisp = agent.MyWorld.SeekAndDestroyModule.CalculateDesirability(dist, 8);
+
+                if (crisp > highetsCrispValue)
+                {
+                    highetsCrispValue = crisp;
+                    mostDesirable = agent;
+                }
+
+                //if (mostDesirable == null || dist < Vector2D.DistanceSquared(agent.Pos, mostDesirable.Pos))
+                //    mostDesirable = n;
+            }
+
+            return mostDesirable;
         }
 
         public bool HandleMessage()

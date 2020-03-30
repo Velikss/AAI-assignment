@@ -42,7 +42,7 @@ namespace Unit_Tests
             fm.AddRule(new FuzzyTermAND(ref Target_Far, ref Ammo_Low), new FuzzyTermSet(ref unDesirable, "unDesirable"));
 
             // Crisp value calculation
-            double crisp = fm.CalculateDesirability(200, 8);
+            double crisp = fm.CalculateDesirabilityTest(200, 8);
 
             Assert.AreEqual(Math.Round(crisp, 2), 60.42);
         }

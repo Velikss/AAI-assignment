@@ -43,7 +43,7 @@ namespace AAI_assignment
 
 
             // Crisp value calculation
-            double crisp = fm.CalculateDesirability(200, 8);
+            double crisp = fm.CalculateDesirabilityTest(200, 8);
             Console.WriteLine(crisp);
 
 

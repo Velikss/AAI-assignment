@@ -64,11 +64,22 @@ namespace AAI_assignment.FuzzyLogic
             }
         }
 
-        public double CalculateDesirability(double dist, double ammo)
+        public double CalculateDesirabilityTest(double dist, double ammo)
         {
             //fuzzify the inputs
             this.Fuzzify("DistToTarget", dist);
             this.Fuzzify("AmmoStatus", ammo);
+
+
+            //this method automatically processes the rules and defuzzifies the inferred conclusion
+            return this.DeFuzzify("Desirability", DefuzzifyType.max_av);
+        }
+
+        public double CalculateDesirability(double dist, double health)
+        {
+            //fuzzify the inputs
+            this.Fuzzify("DistToTarget", dist);
+            this.Fuzzify("HealthStatus", health);
 
 
             //this method automatically processes the rules and defuzzifies the inferred conclusion
