@@ -80,6 +80,7 @@
     <Compile Include="DBPanel.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="entity\Agent.cs" />
     <Compile Include="entity\BaseGameEntity.cs" />
     <Compile Include="entity\MovingEntity.cs" />
     <Compile Include="entity\Obstacle.cs" />
@@ -101,9 +102,10 @@
     <Compile Include="FuzzyLogic\FuzzyTerms\FuzzyTermAND.cs" />
     <Compile Include="FuzzyLogic\FuzzyTerms\FuzzyTermSet.cs" />
     <Compile Include="FuzzyLogic\FuzzyVariable.cs" />
-    <Compile Include="goaldriven\AtomicGoal.cs" />
-    <Compile Include="goaldriven\CompositeGoal.cs" />
-    <Compile Include="goaldriven\Goal.cs" />
+    <Compile Include="goal\AtomicGoal.cs" />
+    <Compile Include="goal\CompositeGoal.cs" />
+    <Compile Include="goal\Goal.cs" />
+    <Compile Include="goal\SeekAndDestroy_Goal.cs" />
     <Compile Include="graph\Edge.cs" />
     <Compile Include="graph\Graph.cs" />
     <Compile Include="graph\Node.cs" />

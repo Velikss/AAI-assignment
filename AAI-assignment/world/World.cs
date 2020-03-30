@@ -50,6 +50,10 @@ namespace AAI_assignment
         public static int EntityScale = 4;
         public static int EntityMaxSpeed = 50;
 
+        // Agent
+        public static int AgentCount = 20;
+        public static int AgentScale = 6;
+
         // Obstacle
         public static int ObstacleCount = 30;
         public static int ObstacleScale = 30;
@@ -79,6 +83,7 @@ namespace AAI_assignment
     {
         public List<MovingEntity> Entities = new List<MovingEntity>();
         public List<BaseGameEntity> Obstacles = new List<BaseGameEntity>();
+        public List<Agent> Agents = new List<Agent>();
         public NavigationGrid NavGrid;
         public Stack<Node> DrawnPath;
         public Stack<Node> Path;
@@ -103,9 +108,11 @@ namespace AAI_assignment
         {
             Entities.Clear();
             //Obstacles.Clear();
+            Agents.Clear();
 
             // Entities
-            AddEntities(WorldParameters.EntityCount);
+            //AddEntities(WorldParameters.EntityCount);
+            AddAgents(WorldParameters.AgentCount);
 
             // Obstacles
             for (int i = 0; i < WorldParameters.ObstacleCount; i++)
@@ -139,6 +146,18 @@ namespace AAI_assignment
             }
 
             RefreshBehaviours();
+        }
+
+        public void AddAgents(int n)
+        {
+            Random r = new Random();
+            for (int i = 0; i < n; i++)
+            {
+                Agent a = new Agent(Vector2D.CreateRandomPosition(Width, Height), this);
+                a.MaxSpeed = WorldParameters.EntityMaxSpeed;
+                a.VColor = Color.Blue;
+                Agents.Add(a);
+            }
         }
 
         public void RemoveEntities(int n)
@@ -262,6 +281,7 @@ namespace AAI_assignment
             Entities.ForEach(e => e.Render(g));
             Target.Render(g);
             Obstacles.ForEach(e => e.Render(g));
+            Agents.ForEach(e => e.Render(g));
         }
 
     }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace AAI_assignment.entity
+namespace AAI_assignment
 {
 
     public abstract class MovingEntity : BaseGameEntity

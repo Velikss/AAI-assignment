@@ -3,17 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AAI_assignment.behaviour;
 
-namespace AAI_assignment.goaldriven
+namespace AAI_assignment
 {
-    class CompositeGoal : Goal
+    class SeekAndDestroy_Goal : CompositeGoal
     {
         public Stack<Goal> SubGoals;
 
+        public Agent agent;
+
         public void Activate()
         {
-            throw new NotImplementedException();
-        }       
+            // set status to active (2)
+            status = 2;
+
+            // engage in seeking behaviour
+            agent.SteeringBehaviour = new SeekBehaviour(agent, agent.FindNearest().Pos);
+        }
 
         public bool HandleMessage()
         {
@@ -22,7 +29,14 @@ namespace AAI_assignment.goaldriven
 
         public int Process()
         {
-            int status = SubGoals.Pop().Process();
+            // if inactive, activate goal
+            if (status == 3)
+                Activate();
+
+            // check if target is reached
+
+
+            agent.SteeringBehaviour.Calculate();
 
             return status;
         }
@@ -32,7 +46,7 @@ namespace AAI_assignment.goaldriven
             throw new NotImplementedException();
         }
 
-        public void AddSubgoal(Goal g) 
+        public void AddSubgoal(Goal g)
         {
             SubGoals.Push(g);
         }
@@ -48,11 +62,11 @@ namespace AAI_assignment.goaldriven
         public int ProcessSubGoals()
         {
             // remove all completed and failed goals from the front
-            while(SubGoals.Count != 0 && (SubGoals.Peek().IsComplete() || SubGoals.Peek().HasFailed()))
+            while (SubGoals.Count != 0 && (SubGoals.Peek().IsComplete() || SubGoals.Peek().HasFailed()))
                 SubGoals.Pop().Terminate();
 
             // if any subgoals remain, start processing
-            if(SubGoals.Count != 0)
+            if (SubGoals.Count != 0)
             {
                 // grab the status of the frontmost goal
                 int StatusOfSubGoals = SubGoals.Peek().Process();
@@ -62,7 +76,7 @@ namespace AAI_assignment.goaldriven
                     return 2;
 
                 return StatusOfSubGoals;
-            } 
+            }
             // no more subgoals to proces - return 1 / completed
             else
             {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AAI_assignment.goaldriven
+namespace AAI_assignment
 {
     class AtomicGoal : Goal
     {
