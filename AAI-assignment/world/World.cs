@@ -72,7 +72,7 @@ namespace AAI_assignment
         // Navigation Grid
         public static bool DrawGrid;
         public static bool DrawNodes;
-        public static bool GridUpdate = false;
+        public static bool GridUpdate;
         public static float NumOfCells = 50;
         public static float PointScale = 6;
 
@@ -103,6 +103,7 @@ namespace AAI_assignment
             Height = h;
             Populate();
             NavGrid = new NavigationGrid(this, WorldParameters.NumOfCells);
+            WorldParameters.GridUpdate = true;
             CreateTarget();
             Pathfinding = true;
             CreateFuzzyModuleSeekAndDestroy();
@@ -229,9 +230,9 @@ namespace AAI_assignment
             // Distance to target
             FuzzyVariable DistToTarget = fm.CreateFLV("DistToTarget", 0, 10000000);
 
-            FuzzySet Target_Close = DistToTarget.AddLeftShoulderSet("Target_Close", 0, 2500000, 5000000);
-            FuzzySet Target_Medium = DistToTarget.AddTriangularSet("Target_Medium", 2500000, 5000000, 7500000);
-            FuzzySet Target_Far = DistToTarget.AddRightShoulderSet("Target_Far", 5000000, 7500000, 10000000);
+            FuzzySet Target_Close = DistToTarget.AddLeftShoulderSet("Target_Close", 0, 25000, 50000);
+            FuzzySet Target_Medium = DistToTarget.AddTriangularSet("Target_Medium", 25000, 50000, 75000);
+            FuzzySet Target_Far = DistToTarget.AddRightShoulderSet("Target_Far", 50000, 75000, 100000);
 
             // Health Status
             FuzzyVariable HealthStatus = fm.CreateFLV("HealthStatus", 0, 100);
@@ -277,7 +278,10 @@ namespace AAI_assignment
         public void DrawGrid(Graphics g)
         {
             if (WorldParameters.GridUpdate)
+            {
                 NavGrid = new NavigationGrid(this, WorldParameters.NumOfCells);
+                WorldParameters.GridUpdate = false;
+            }
             NavGrid.DrawGrid(g);
         }
 

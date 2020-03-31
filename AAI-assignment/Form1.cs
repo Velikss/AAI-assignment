@@ -200,6 +200,11 @@ namespace AAI_assignment
             }
         }
 
+        private void UpdateGridBtn_Click(object sender, EventArgs e)
+        {
+            WorldParameters.GridUpdate = true;
+        }
+
         private void Form1_Resize(object sender, EventArgs e)
         {
             try

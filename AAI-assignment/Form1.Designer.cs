@@ -33,6 +33,7 @@ namespace AAI_assignment
         {
             this.menuPanel = new System.Windows.Forms.TabControl();
             this.behaviourPage = new System.Windows.Forms.TabPage();
+            this.TogglePauseButton = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.obstacleScaleSlider = new System.Windows.Forms.TrackBar();
@@ -60,7 +61,7 @@ namespace AAI_assignment
             this.drawNodesBox = new System.Windows.Forms.CheckBox();
             this.gridDrawBox = new System.Windows.Forms.CheckBox();
             this.worldPanel = new AAI_assignment.DBPanel();
-            this.TogglePauseButton = new System.Windows.Forms.Button();
+            this.UpdateGridBtn = new System.Windows.Forms.Button();
             this.menuPanel.SuspendLayout();
             this.behaviourPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.obstacleScaleSlider)).BeginInit();
@@ -108,6 +109,16 @@ namespace AAI_assignment
             this.behaviourPage.TabIndex = 0;
             this.behaviourPage.Text = "Entities";
             this.behaviourPage.UseVisualStyleBackColor = true;
+            // 
+            // TogglePauseButton
+            // 
+            this.TogglePauseButton.Location = new System.Drawing.Point(143, 52);
+            this.TogglePauseButton.Name = "TogglePauseButton";
+            this.TogglePauseButton.Size = new System.Drawing.Size(75, 23);
+            this.TogglePauseButton.TabIndex = 14;
+            this.TogglePauseButton.Text = "Pause";
+            this.TogglePauseButton.UseVisualStyleBackColor = true;
+            this.TogglePauseButton.Click += new System.EventHandler(this.TogglePauseButton_Click);
             // 
             // label3
             // 
@@ -317,6 +328,7 @@ namespace AAI_assignment
             // 
             // gridPage
             // 
+            this.gridPage.Controls.Add(this.UpdateGridBtn);
             this.gridPage.Controls.Add(this.gridLabel);
             this.gridPage.Controls.Add(this.removePathBox);
             this.gridPage.Controls.Add(this.drawVisitedNodesBox);
@@ -416,15 +428,15 @@ namespace AAI_assignment
             this.worldPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.dbPanel1_Paint);
             this.worldPanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dbPanel1_MouseClick);
             // 
-            // TogglePauseButton
+            // UpdateGridBtn
             // 
-            this.TogglePauseButton.Location = new System.Drawing.Point(143, 52);
-            this.TogglePauseButton.Name = "TogglePauseButton";
-            this.TogglePauseButton.Size = new System.Drawing.Size(75, 23);
-            this.TogglePauseButton.TabIndex = 14;
-            this.TogglePauseButton.Text = "Pause";
-            this.TogglePauseButton.UseVisualStyleBackColor = true;
-            this.TogglePauseButton.Click += new System.EventHandler(this.TogglePauseButton_Click);
+            this.UpdateGridBtn.Location = new System.Drawing.Point(6, 173);
+            this.UpdateGridBtn.Name = "UpdateGridBtn";
+            this.UpdateGridBtn.Size = new System.Drawing.Size(75, 23);
+            this.UpdateGridBtn.TabIndex = 15;
+            this.UpdateGridBtn.Text = "Update Grid";
+            this.UpdateGridBtn.UseVisualStyleBackColor = true;
+            this.UpdateGridBtn.Click += new System.EventHandler(this.UpdateGridBtn_Click);
             // 
             // Form1
             // 
@@ -483,6 +495,7 @@ namespace AAI_assignment
         private System.Windows.Forms.CheckBox removePathBox;
         private System.Windows.Forms.Label gridLabel;
         private System.Windows.Forms.Button TogglePauseButton;
+        private System.Windows.Forms.Button UpdateGridBtn;
     }
 }
 

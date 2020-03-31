@@ -13,11 +13,11 @@ namespace AAI_assignment
         public Goal MyGoal { get; set; }
         public Color VColor { get; set; }
 
-
+        private static Random random = new Random();
         public Agent(Vector2D pos, World w) : base(pos, w)
         {
             this.Pos = pos;
-            this.Health = 100;
+            this.Health = (float)(random.NextDouble() * 100);
             this.MyWorld = w;
             this.Scale = WorldParameters.AgentScale;
             this.MyGoal = new SeekAndDestroy_Goal(this);
@@ -73,7 +73,7 @@ namespace AAI_assignment
             {
                 Agent n = this.MyWorld.Agents[i];
                 double dist = Vector2D.DistanceSquared(this.Pos, n.Pos);
-                double crisp = this.MyWorld.SeekAndDestroyModule.CalculateDesirability(dist, 8); // health TODO
+                double crisp = this.MyWorld.SeekAndDestroyModule.CalculateDesirability(dist, n.Health); // health TODO
 
                 if (mostDesirable == null)
                     mostDesirable = n;
@@ -82,9 +82,6 @@ namespace AAI_assignment
                     highetsCrispValue = crisp;
                     mostDesirable = n;
                 }
-
-                //if (mostDesirable == null || dist < Vector2D.DistanceSquared(agent.Pos, mostDesirable.Pos))
-                //    mostDesirable = n;
             }
 
             return mostDesirable;
