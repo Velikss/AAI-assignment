@@ -127,8 +127,13 @@ namespace AAI_assignment
             Pen p = new Pen(c, 2);
             SolidBrush b = new SolidBrush(c);
 
+            Pen pen = new Pen(Color.Black, 2f);
+            Font font = new Font("Arial", 10);
+            PointF point = new PointF((int)Pos.X, (int)Pos.Y);
+
             g.FillEllipse(b, entity);
             g.DrawLine(p, (int)Pos.X, (int)Pos.Y, (int)Pos.X + (int)(Velocity.X * 2), (int)Pos.Y + (int)(Velocity.Y * 2));
+            g.DrawString(ID.ToString(), font, Brushes.Green, point);
         }
     }
 }
