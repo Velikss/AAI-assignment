@@ -39,13 +39,13 @@ namespace AAI_assignment
 
                 if (Attackers.Count > 0)
                 {
-                    //this.DebugColor = Color.Purple;
                     this.Health -= 0.4f;
                 }
 
                 if (Health <= 0)
                 {
                     this.Dead = true;
+                    this.Target.Attackers.Remove(this);
                     MyGoal.Terminate();
                 }
 
