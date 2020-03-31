@@ -53,6 +53,7 @@ namespace AAI_assignment
             this.sliderPage = new System.Windows.Forms.TabPage();
             this.behaviourBox = new System.Windows.Forms.ComboBox();
             this.gridPage = new System.Windows.Forms.TabPage();
+            this.UpdateGridBtn = new System.Windows.Forms.Button();
             this.gridLabel = new System.Windows.Forms.Label();
             this.removePathBox = new System.Windows.Forms.CheckBox();
             this.drawVisitedNodesBox = new System.Windows.Forms.CheckBox();
@@ -60,8 +61,10 @@ namespace AAI_assignment
             this.pathfindingLabel = new System.Windows.Forms.Label();
             this.drawNodesBox = new System.Windows.Forms.CheckBox();
             this.gridDrawBox = new System.Windows.Forms.CheckBox();
+            this.agentPage = new System.Windows.Forms.TabPage();
+            this.debugcheckbox = new System.Windows.Forms.CheckBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.worldPanel = new AAI_assignment.DBPanel();
-            this.UpdateGridBtn = new System.Windows.Forms.Button();
             this.menuPanel.SuspendLayout();
             this.behaviourPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.obstacleScaleSlider)).BeginInit();
@@ -70,6 +73,7 @@ namespace AAI_assignment
             ((System.ComponentModel.ISupportInitialize)(this.entityUpDown)).BeginInit();
             this.sliderPage.SuspendLayout();
             this.gridPage.SuspendLayout();
+            this.agentPage.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuPanel
@@ -77,6 +81,7 @@ namespace AAI_assignment
             this.menuPanel.Controls.Add(this.behaviourPage);
             this.menuPanel.Controls.Add(this.sliderPage);
             this.menuPanel.Controls.Add(this.gridPage);
+            this.menuPanel.Controls.Add(this.agentPage);
             this.menuPanel.Location = new System.Drawing.Point(3, 11);
             this.menuPanel.Name = "menuPanel";
             this.menuPanel.SelectedIndex = 0;
@@ -344,6 +349,16 @@ namespace AAI_assignment
             this.gridPage.Text = "Grid";
             this.gridPage.UseVisualStyleBackColor = true;
             // 
+            // UpdateGridBtn
+            // 
+            this.UpdateGridBtn.Location = new System.Drawing.Point(6, 173);
+            this.UpdateGridBtn.Name = "UpdateGridBtn";
+            this.UpdateGridBtn.Size = new System.Drawing.Size(75, 23);
+            this.UpdateGridBtn.TabIndex = 15;
+            this.UpdateGridBtn.Text = "Update Grid";
+            this.UpdateGridBtn.UseVisualStyleBackColor = true;
+            this.UpdateGridBtn.Click += new System.EventHandler(this.UpdateGridBtn_Click);
+            // 
             // gridLabel
             // 
             this.gridLabel.AutoSize = true;
@@ -418,6 +433,38 @@ namespace AAI_assignment
             this.gridDrawBox.UseVisualStyleBackColor = true;
             this.gridDrawBox.CheckedChanged += new System.EventHandler(this.GridBox_CheckedChanged);
             // 
+            // tabPage1
+            // 
+            this.agentPage.Controls.Add(this.debugcheckbox);
+            this.agentPage.Controls.Add(this.label4);
+            this.agentPage.Location = new System.Drawing.Point(4, 22);
+            this.agentPage.Name = "agents";
+            this.agentPage.Padding = new System.Windows.Forms.Padding(3);
+            this.agentPage.Size = new System.Drawing.Size(246, 742);
+            this.agentPage.TabIndex = 3;
+            this.agentPage.Text = "Agents";
+            this.agentPage.UseVisualStyleBackColor = true;
+            // 
+            // debugcheckbox
+            // 
+            this.debugcheckbox.AutoSize = true;
+            this.debugcheckbox.Location = new System.Drawing.Point(9, 32);
+            this.debugcheckbox.Name = "debugcheckbox";
+            this.debugcheckbox.Size = new System.Drawing.Size(89, 17);
+            this.debugcheckbox.TabIndex = 2;
+            this.debugcheckbox.Text = "Debug colors";
+            this.debugcheckbox.UseVisualStyleBackColor = true;
+            this.debugcheckbox.CheckedChanged += new System.EventHandler(this.debugcheckbox_CheckedChanged);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 11);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(46, 13);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "Agents: ";
+            // 
             // worldPanel
             // 
             this.worldPanel.BackColor = System.Drawing.Color.White;
@@ -427,16 +474,6 @@ namespace AAI_assignment
             this.worldPanel.TabIndex = 0;
             this.worldPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.dbPanel1_Paint);
             this.worldPanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dbPanel1_MouseClick);
-            // 
-            // UpdateGridBtn
-            // 
-            this.UpdateGridBtn.Location = new System.Drawing.Point(6, 173);
-            this.UpdateGridBtn.Name = "UpdateGridBtn";
-            this.UpdateGridBtn.Size = new System.Drawing.Size(75, 23);
-            this.UpdateGridBtn.TabIndex = 15;
-            this.UpdateGridBtn.Text = "Update Grid";
-            this.UpdateGridBtn.UseVisualStyleBackColor = true;
-            this.UpdateGridBtn.Click += new System.EventHandler(this.UpdateGridBtn_Click);
             // 
             // Form1
             // 
@@ -459,6 +496,8 @@ namespace AAI_assignment
             this.sliderPage.ResumeLayout(false);
             this.gridPage.ResumeLayout(false);
             this.gridPage.PerformLayout();
+            this.agentPage.ResumeLayout(false);
+            this.agentPage.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -496,6 +535,9 @@ namespace AAI_assignment
         private System.Windows.Forms.Label gridLabel;
         private System.Windows.Forms.Button TogglePauseButton;
         private System.Windows.Forms.Button UpdateGridBtn;
+        private System.Windows.Forms.TabPage agentPage;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.CheckBox debugcheckbox;
     }
 }
 

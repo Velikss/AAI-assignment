@@ -19,7 +19,7 @@ namespace AAI_assignment
         public void Activate()
         {
             this.status = 2;
-            agent.Target.UnderAttack = true;
+            agent.Target.Attackers.Add(agent);
         }
 
         public bool HandleMessage()
@@ -40,7 +40,8 @@ namespace AAI_assignment
                 status = 1;
             else
             {
-                agent.Target.Health -= 0.5f;
+                // color to red (attacking)
+                agent.DebugColor = Color.Red;
             }
 
             return status;
@@ -48,7 +49,7 @@ namespace AAI_assignment
 
         public void Terminate()
         {
-            agent.Target.UnderAttack = false;
+            agent.Target.Attackers.Remove(agent);
         }
     }
 }

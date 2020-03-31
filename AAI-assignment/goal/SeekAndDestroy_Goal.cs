@@ -25,13 +25,15 @@ namespace AAI_assignment
             // Set most desirable target
             agent.Target = agent.FindMostDesirableTarget();
 
-            // engage in seeking behaviour
-            agent.SteeringBehaviour = new SeekBehaviour(agent, agent.Target.Pos);
+
+            // refresh behaviors
+            agent.RefreshBehaviours();
 
             // set status to active (2)
             status = 2;
 
-            agent.VColor = Color.Yellow;
+            // set debug to yellow (seeking)
+            agent.DebugColor = Color.Yellow;
         }
 
         public bool HandleMessage()
@@ -48,28 +50,37 @@ namespace AAI_assignment
             // if completed, process sub goals
             if (status == 1)
             {
-                agent.VColor = Color.Red;
                 ProcessSubGoals();
 
                 // if no subgoals left, start seeking new target
                 if (ProcessSubGoals() == 1)
-                    Activate();
+                {
+                    if (agent.MyWorld.Agents.Count == 1)
+                        agent.DefaultColor = Color.Gold;
+                    else
+                        Activate();
+                }
+                
             }
 
             // check if target is within damage distance
-            if (Vector2D.DistanceSquared(agent.Pos, agent.Target.Pos) < 100)
+            if (Vector2D.DistanceSquared(agent.Pos, agent.Target.Pos) < 1000)
             {
                 status = 1;
                 DestroyGoal g = new DestroyGoal(this.agent);
                 AddSubgoal(g);
             }
 
+            // check if target is still allive
+            if (agent.Target.Dead)
+                status = 1;
+
             return status;
         }
 
         public void Terminate()
         {
-            throw new NotImplementedException();
+            RemoveAllSubgoals();
         }
 
         public void AddSubgoal(Goal g)

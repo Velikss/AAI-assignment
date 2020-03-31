@@ -19,6 +19,7 @@ namespace AAI_assignment.behaviour
 
         public override Vector2D Calculate()
         {
+
             if (WorldParameters.SeekStop)
             {
                 if (!(ME.Pos.X >= target.X - WorldParameters.SeekStopRadius

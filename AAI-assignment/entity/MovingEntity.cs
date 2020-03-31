@@ -13,7 +13,6 @@ namespace AAI_assignment
         public float MaxSpeed { get; set; }
         public BaseGameEntity Target { get; set; }
         public List<SteeringBehaviour> SB = new List<SteeringBehaviour>();
-        public SteeringBehaviour SteeringBehaviour { get; set; }
 
         public MovingEntity(Vector2D pos, World w) : base(pos, w)
         {

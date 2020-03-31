@@ -16,15 +16,17 @@ namespace AAI_assignment
         System.Timers.Timer timer;
         public const float timeDelta = 0.8f;
         public int defaultWidth = 1920, defaultHeight = 980;
-        public List<Control> ControlList = new List<Control>(); 
+        public List<Control> ControlList = new List<Control>();
+        public List<Label> AgentLabels;
 
         public Form1()
         {
             InitializeComponent();
-            //PrepareSliderPanel();
-            PopulateBehaviourBox();
-
+            
             world = new World(w: worldPanel.Width, h: worldPanel.Height);
+
+            PopulateBehaviourBox();
+            PopulateAgentTab();
 
             timer = new System.Timers.Timer();
             timer.Elapsed += Timer_Elapsed;
@@ -35,7 +37,6 @@ namespace AAI_assignment
 
         private void PopulateBehaviourBox()
         {
-            behaviourBox.Items.Add("Arrive");
             behaviourBox.Items.Add("Alignment");
             behaviourBox.Items.Add("Cohesion");
             behaviourBox.Items.Add("Seek");
@@ -43,6 +44,30 @@ namespace AAI_assignment
             behaviourBox.Items.Add("Wandering");
             behaviourBox.Items.Add("Obstacle Separation");
             behaviourBox.Items.Add("Flocking");
+        }
+
+        private void PopulateAgentTab()
+        {
+           AgentLabels = new List<Label>();
+
+            for(int i = 0; i < world.Agents.Count; i++)
+            {
+                Label l = new Label();
+                l.Text = "Agent " + world.Agents[i].ID + ": " + world.Agents[i].Health;
+                l.Left = 5;
+                l.Top = i * 15 + 55;
+                l.Size = new System.Drawing.Size(150, 15);
+                agentPage.Controls.Add(l);
+                ControlList.Add(l);
+                AgentLabels.Add(l);
+            }
+        }
+        private void RefreshAgentLabels()
+        {
+            for(int i = 0; i < AgentLabels.Count; i++)
+            {
+                AgentLabels[i].Text = "Agent " + world.Agents[i].ID + ": " + (world.Agents[i].Health > 0f ? world.Agents[i].Health.ToString() : "Dead");
+            }
         }
 
         private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
@@ -98,6 +123,15 @@ namespace AAI_assignment
         private void dbPanel1_Paint(object sender, PaintEventArgs e)
         {
             world.Render(e.Graphics);
+
+            // Update panel
+            int alliveAgents = 0;
+            for(int i = 0; i < world.Agents.Count; i++)
+                if (!world.Agents[i].Dead)
+                    alliveAgents++;
+
+            this.label4.Text = "Agents: " + alliveAgents;
+            RefreshAgentLabels();
         }
 
         private void dbPanel1_MouseClick(object sender, MouseEventArgs e)
@@ -203,6 +237,14 @@ namespace AAI_assignment
         private void UpdateGridBtn_Click(object sender, EventArgs e)
         {
             WorldParameters.GridUpdate = true;
+        }
+
+        private void debugcheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (debugcheckbox.Checked)
+                WorldParameters.AgentDebugging = true;
+            else
+                WorldParameters.AgentDebugging = false;
         }
 
         private void Form1_Resize(object sender, EventArgs e)

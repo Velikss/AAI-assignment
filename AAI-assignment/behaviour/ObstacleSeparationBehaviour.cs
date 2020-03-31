@@ -5,10 +5,10 @@ namespace AAI_assignment.behaviour
 {
     class ObstacleSeparationBehaviour : SteeringBehaviour
     {
-        public List<BaseGameEntity> Entities;
-        public ObstacleSeparationBehaviour(MovingEntity me, List<BaseGameEntity> entities) : base(me)
+        public List<BaseGameEntity> Obstacles;
+        public ObstacleSeparationBehaviour(MovingEntity me, List<BaseGameEntity> obstacles) : base(me)
         {
-            this.Entities = entities;
+            this.Obstacles = obstacles;
         }
 
         public override Vector2D Calculate()
@@ -18,12 +18,12 @@ namespace AAI_assignment.behaviour
             float radius = WorldParameters.ObstacleSepRadius;
             float force = WorldParameters.ObstacleSepForce;
 
-            for (int i = 0; i < Entities.Count; i++)
+            for (int i = 0; i < Obstacles.Count; i++)
             {
-                double dist = Vector2D.DistanceSquared(ME.Pos, Entities[i].Pos);
+                double dist = Vector2D.DistanceSquared(ME.Pos, Obstacles[i].Pos);
                 if (dist < (radius + obstacleScale) * (radius + obstacleScale) && dist > 0)
                 {
-                    Vector2D separationForce = ME.Pos - Entities[i].Pos;
+                    Vector2D separationForce = ME.Pos - Obstacles[i].Pos;
                     steeringForce += separationForce / dist;
                 }
             }

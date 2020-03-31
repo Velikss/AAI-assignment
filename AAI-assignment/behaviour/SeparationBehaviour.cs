@@ -7,6 +7,7 @@ namespace AAI_assignment.behaviour
     class SeparationBehaviour : SteeringBehaviour
     {
         public List<MovingEntity> Entities;
+
         public SeparationBehaviour(MovingEntity me, List<MovingEntity> entities) : base(me)
         {
             this.Entities = entities;

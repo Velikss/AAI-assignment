@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AAI_assignment.behaviour;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -9,38 +10,51 @@ namespace AAI_assignment
 {
     public class Agent : MovingEntity
     {
+        public int ID { get; set; }
         public float Health { get; set; }
-        public bool UnderAttack { get; set; }
+        public List<Agent> Attackers { get; set; }
         public bool Dead { get; set; }
         public Agent Target { get; set; }
         public Goal MyGoal { get; set; }
-        public Color VColor { get; set; }
+        public Color DefaultColor { get; set; }
+        public Color DebugColor { get; set; }
 
         private static Random random = new Random();
-        public Agent(Vector2D pos, World w) : base(pos, w)
+        public Agent(Vector2D pos, World w, int i) : base(pos, w)
         {
+            this.ID = i;
             this.Pos = pos;
-            this.Health = (float)(random.NextDouble() * 100);
             this.MyWorld = w;
+            this.Health = 100;
             this.Scale = WorldParameters.AgentScale;
             this.MyGoal = new SeekAndDestroy_Goal(this);
+            this.Attackers = new List<Agent>();
         }
 
         public override void Update(float delta)
         {
-            MyGoal.Process();
-
-            UpdatePosition(delta, SteeringBehaviour.Calculate());
-
-            if(UnderAttack)
+            if (!Dead)
             {
-                this.VColor = Color.Purple;
-            }
+                MyGoal.Process();
 
-            if (Health <= 0)
-            {
-                this.Dead = true;
-                MyWorld.Agents.Remove(this);
+                if (Attackers.Count > 0)
+                {
+                    //this.DebugColor = Color.Purple;
+                    this.Health -= 0.4f;
+                }
+
+                if (Health <= 0)
+                {
+                    this.Dead = true;
+                    MyGoal.Terminate();
+                }
+
+                Vector2D steeringForce = new Vector2D();
+                for (int i = 0; i < SB.Count; i++)
+                {
+                    steeringForce += SB[i].Calculate();
+                }
+                UpdatePosition(delta, steeringForce);
             }
         }
 
@@ -53,31 +67,7 @@ namespace AAI_assignment
             Velocity *= 0.9;
             Pos.WrapAround(MyWorld.Width, MyWorld.Height);
         }
-
-        public Agent FindNearest()
-        {
-            Agent nearest = null;
-
-            for (int i = 0; this.MyWorld.Agents.Count > i; i++)
-            {
-                Agent n = this.MyWorld.Agents[i];
-
-                if (this.Pos == n.Pos)
-                    continue; 
-
-                double dist = Vector2D.DistanceSquared(this.Pos, n.Pos);
-
-                if (nearest == null)
-                    nearest = n;
-                else if (dist < Vector2D.DistanceSquared(this.Pos, nearest.Pos))
-                {
-                    nearest = n;
-                }
-            }
-
-            return nearest;
-        }
-
+        
         public Agent FindMostDesirableTarget()
         {
             Agent mostDesirable = null;
@@ -86,6 +76,9 @@ namespace AAI_assignment
             for (int i = 0; this.MyWorld.Agents.Count > i; i++)
             {
                 Agent n = this.MyWorld.Agents[i];
+
+                if (n.Dead)
+                    continue;
 
                 if (this.Pos == n.Pos)
                     continue;
@@ -105,6 +98,17 @@ namespace AAI_assignment
             return mostDesirable;
         }
 
+        public void RefreshBehaviours()
+        {
+            SB.Clear();
+
+            SB.Add(new SeekBehaviour(this, Target.Pos));
+
+            SB.Add(new SeparationBehaviour(this, MyWorld.Agents.Cast<MovingEntity>().ToList()));
+
+            SB.Add(new ObstacleSeparationBehaviour(this, MyWorld.Obstacles));
+        }
+
         public virtual void Render(Graphics g)
         {
             double leftCorner = Pos.X - Scale;
@@ -112,9 +116,16 @@ namespace AAI_assignment
             double size = Scale * 2;
 
             Rectangle entity = new Rectangle((int)leftCorner, (int)rightCorner, (int)size, (int)size);
+            
+            // Set color to debug color if debugging is enabled
+            Color c;
+            if (WorldParameters.AgentDebugging)
+                c = DebugColor;
+            else
+                c = DefaultColor;
 
-            Pen p = new Pen(VColor, 2);
-            SolidBrush b = new SolidBrush(VColor);
+            Pen p = new Pen(c, 2);
+            SolidBrush b = new SolidBrush(c);
 
             g.FillEllipse(b, entity);
             g.DrawLine(p, (int)Pos.X, (int)Pos.Y, (int)Pos.X + (int)(Velocity.X * 2), (int)Pos.Y + (int)(Velocity.Y * 2));

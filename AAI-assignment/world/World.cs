@@ -53,8 +53,9 @@ namespace AAI_assignment
         public static int EntityMaxSpeed = 10;
 
         // Agent
-        public static int AgentCount = 20;
-        public static int AgentScale = 6;
+        public static int AgentCount = 10;
+        public static int AgentScale = 16;
+        public static bool AgentDebugging = true;
 
         // Obstacle
         public static int ObstacleCount = 30;
@@ -158,9 +159,9 @@ namespace AAI_assignment
             Random r = new Random();
             for (int i = 0; i < n; i++)
             {
-                Agent a = new Agent(Vector2D.CreateRandomPosition(Width, Height), this);
+                Agent a = new Agent(Vector2D.CreateRandomPosition(Width, Height), this, i);
                 a.MaxSpeed = WorldParameters.EntityMaxSpeed;
-                a.VColor = Color.Blue;
+                a.DefaultColor = Color.Blue;
                 Agents.Add(a);
             }
         }
@@ -268,10 +269,14 @@ namespace AAI_assignment
             {
                 Entities[i].Update(timeElapsed);
             }
+            WorldParameters.EntityCount = Entities.Count;
+
             for (int i = 0; i < Agents.Count; i++)
             {
                 Agents[i].Update(timeElapsed);
             }
+            WorldParameters.AgentCount = Agents.Count;
+
             Target.Update(timeElapsed);
         }
 
