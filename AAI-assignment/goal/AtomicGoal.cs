@@ -18,7 +18,7 @@ namespace AAI_assignment
             throw new NotImplementedException();
         }
 
-        public int Process()
+        public override int Process()
         {
             throw new NotImplementedException();
         }

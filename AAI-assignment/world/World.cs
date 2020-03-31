@@ -333,7 +333,7 @@ namespace AAI_assignment
             Entities.ForEach(e => e.Render(g));
             Target.Render(g);
             Obstacles.ForEach(e => e.Render(g));
-            Agents.ForEach(e => e.Render(g));
+            Agents.ForEach(e => { if (!e.Dead) e.Render(g); });
         }
 
     }

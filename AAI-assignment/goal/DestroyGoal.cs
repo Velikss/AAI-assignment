@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,9 +9,17 @@ namespace AAI_assignment
 {
     class DestroyGoal : AtomicGoal
     {
+        public Agent agent;
+
+        public DestroyGoal(Agent a)
+        {
+            this.agent = a;
+        }
+
         public void Activate()
         {
-            throw new NotImplementedException();
+            this.status = 2;
+            agent.Target.UnderAttack = true;
         }
 
         public bool HandleMessage()
@@ -18,14 +27,28 @@ namespace AAI_assignment
             throw new NotImplementedException();
         }
 
-        public int Process()
+        public override int Process()
         {
-            throw new NotImplementedException();
+            // if inactive, activate goal
+            if (status == 3)
+            {
+                Activate();
+            }
+
+            // if target destroyed, set status to complete
+            if (agent.Target.Health <= 0)
+                status = 1;
+            else
+            {
+                agent.Target.Health -= 0.5f;
+            }
+
+            return status;
         }
 
         public void Terminate()
         {
-            throw new NotImplementedException();
+            agent.Target.UnderAttack = false;
         }
     }
 }

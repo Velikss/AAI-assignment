@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,18 +17,21 @@ namespace AAI_assignment
         public SeekAndDestroy_Goal(Agent a)
         {
             this.agent = a;
+            this.SubGoals = new Stack<Goal>();
         }
 
         public void Activate()
         {
             // Set most desirable target
-            Agent a = agent.FindMostDesirableTarget();
+            agent.Target = agent.FindMostDesirableTarget();
 
             // engage in seeking behaviour
-            agent.SteeringBehaviour = new SeekBehaviour(agent, a.Pos);
+            agent.SteeringBehaviour = new SeekBehaviour(agent, agent.Target.Pos);
 
             // set status to active (2)
             status = 2;
+
+            agent.VColor = Color.Yellow;
         }
 
         public bool HandleMessage()
@@ -41,17 +45,24 @@ namespace AAI_assignment
             if (status == 3)
                 Activate();
 
+            // if completed, process sub goals
+            if (status == 1)
+            {
+                agent.VColor = Color.Red;
+                ProcessSubGoals();
+
+                // if no subgoals left, start seeking new target
+                if (ProcessSubGoals() == 1)
+                    Activate();
+            }
+
             // check if target is within damage distance
-            /*
-            if (Vector2D.DistanceSquared(agent.Pos, agent.Target.Pos) < 10)
+            if (Vector2D.DistanceSquared(agent.Pos, agent.Target.Pos) < 100)
             {
                 status = 1;
-                AddSubgoal(new DestroyGoal());
+                DestroyGoal g = new DestroyGoal(this.agent);
+                AddSubgoal(g);
             }
-            */
-
-            //ProcessSubGoals();
-            //agent.SteeringBehaviour.Calculate();
 
             return status;
         }

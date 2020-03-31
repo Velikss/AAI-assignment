@@ -10,6 +10,9 @@ namespace AAI_assignment
     public class Agent : MovingEntity
     {
         public float Health { get; set; }
+        public bool UnderAttack { get; set; }
+        public bool Dead { get; set; }
+        public Agent Target { get; set; }
         public Goal MyGoal { get; set; }
         public Color VColor { get; set; }
 
@@ -28,6 +31,17 @@ namespace AAI_assignment
             MyGoal.Process();
 
             UpdatePosition(delta, SteeringBehaviour.Calculate());
+
+            if(UnderAttack)
+            {
+                this.VColor = Color.Purple;
+            }
+
+            if (Health <= 0)
+            {
+                this.Dead = true;
+                MyWorld.Agents.Remove(this);
+            }
         }
 
         private void UpdatePosition(float timeElapsed, Vector2D steeringForce)
@@ -72,6 +86,10 @@ namespace AAI_assignment
             for (int i = 0; this.MyWorld.Agents.Count > i; i++)
             {
                 Agent n = this.MyWorld.Agents[i];
+
+                if (this.Pos == n.Pos)
+                    continue;
+
                 double dist = Vector2D.DistanceSquared(this.Pos, n.Pos);
                 double crisp = this.MyWorld.SeekAndDestroyModule.CalculateDesirability(dist, n.Health); // health TODO
 
@@ -81,7 +99,7 @@ namespace AAI_assignment
                 {
                     highetsCrispValue = crisp;
                     mostDesirable = n;
-                }
+                } 
             }
 
             return mostDesirable;
