@@ -21,7 +21,7 @@ namespace AAI_assignment.behaviour
         public override Vector2D Calculate()
         {
 
-            Vector2D steeringForce = SB.CalculateFlocking() + AB.CalculateFlocking() + CB.CalculateFlocking();
+            Vector2D steeringForce = SB.Calculate() + AB.Calculate() + CB.Calculate();
 
             return steeringForce.SetMagnitude(ME.MaxSpeed);
         }

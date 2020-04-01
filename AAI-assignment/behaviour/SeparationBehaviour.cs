@@ -41,23 +41,5 @@ namespace AAI_assignment.behaviour
             }
             return steeringForce.Normalize() * force;
         }
-        // TODO make single function
-        public Vector2D CalculateFlocking()
-        {
-            Vector2D steeringForce = new Vector2D();
-            float radius = WorldParameters.FlockingSepRadius;
-            float force = WorldParameters.FlockingSepForce;
-
-            for (int i = 0; i < Entities.Count; i++)
-            {
-                double dist = Vector2D.DistanceSquared(ME.Pos, Entities[i].Pos);
-                if (dist < radius * radius && dist > 0)
-                {
-                    Vector2D separationForce = ME.Pos - Entities[i].Pos;
-                    steeringForce += separationForce / dist;
-                }
-            }
-            return steeringForce.Normalize() * force;
-        }
     }
 }
