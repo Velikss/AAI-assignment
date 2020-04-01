@@ -14,7 +14,7 @@ namespace Unit_Tests
             // Fuzzy Module
             FuzzyModule fm = new FuzzyModule();
 
-            // Distance to target
+            // Distance to Target
             FuzzyVariable DistToTarget = fm.CreateFLV("DistToTarget", 0, 500);
 
             FuzzySet Target_Close = DistToTarget.AddLeftShoulderSet("Target_Close", 0, 25, 150);

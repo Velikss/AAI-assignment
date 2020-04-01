@@ -6,17 +6,29 @@ namespace AAI_assignment.behaviour
     class SeparationBehaviour : SteeringBehaviour
     {
         public List<MovingEntity> Entities;
+        public bool Flocking;
 
-        public SeparationBehaviour(MovingEntity me, List<MovingEntity> entities) : base(me)
+        public SeparationBehaviour(MovingEntity me, List<MovingEntity> entities, bool flocking = false) : base(me)
         {
             this.Entities = entities;
+            Flocking = flocking;
         }
 
         public override Vector2D Calculate()
         {
             Vector2D steeringForce = new Vector2D();
-            float radius = WorldParameters.SeparationRadius;
-            float force = WorldParameters.SeparationForce;
+            float radius;
+            float force;
+            if (Flocking)
+            {
+                radius = WorldParameters.FlockingSepRadius;
+                force = WorldParameters.FlockingSepForce;
+            }
+            else
+            {
+                radius = WorldParameters.SeparationRadius;
+                force = WorldParameters.SeparationForce;
+            }
 
             for (int i = 0; i < Entities.Count; i++)
             {
@@ -29,7 +41,7 @@ namespace AAI_assignment.behaviour
             }
             return steeringForce.Normalize() * force;
         }
-
+        // TODO make single function
         public Vector2D CalculateFlocking()
         {
             Vector2D steeringForce = new Vector2D();

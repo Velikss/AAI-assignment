@@ -6,17 +6,29 @@ namespace AAI_assignment.behaviour
     class AlignmentBehaviour : SteeringBehaviour
     {
         public List<MovingEntity> Entities;
-        public AlignmentBehaviour(MovingEntity me, List<MovingEntity> entities) : base(me)
+        public bool Flocking;
+        public AlignmentBehaviour(MovingEntity me, List<MovingEntity> entities, bool flocking = false) : base(me)
         {
             this.Entities = entities;
+            Flocking = flocking;
         }
 
         public override Vector2D Calculate()
         {
             Vector2D averageHeading = new Vector2D();
             int neighbourCount = 0;
-            float radius = WorldParameters.AlignmentRadius;
-            float force = WorldParameters.AlignmentForce;
+            float radius;
+            float force;
+            if (Flocking)
+            {
+                radius = WorldParameters.FlockingAliRadius;
+                force = WorldParameters.FlockingAliForce;
+            }
+            else
+            {
+                radius = WorldParameters.AlignmentRadius;
+                force = WorldParameters.AlignmentForce;
+            }
 
             for (int i = 0; i < Entities.Count; i++)
             {

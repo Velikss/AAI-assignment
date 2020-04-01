@@ -6,22 +6,22 @@ namespace AAI_assignment.behaviour
     class FlockingBehaviour : SteeringBehaviour
     {
         public List<MovingEntity> Entities;
-        private SeparationBehaviour sB;
-        private AlignmentBehaviour aB;
-        private CohesionBehaviour cB;
+        private SeparationBehaviour SB;
+        private AlignmentBehaviour AB;
+        private CohesionBehaviour CB;
         public FlockingBehaviour(MovingEntity me, List<MovingEntity> entities) : base(me)
 
         {
             this.Entities = entities;
-            sB = new SeparationBehaviour(ME, Entities);
-            aB = new AlignmentBehaviour(ME, Entities);
-            cB = new CohesionBehaviour(ME, Entities);
+            SB = new SeparationBehaviour(ME, Entities, true);
+            AB = new AlignmentBehaviour(ME, Entities, true);
+            CB = new CohesionBehaviour(ME, Entities, true);
         }
 
         public override Vector2D Calculate()
         {
 
-            Vector2D steeringForce = sB.CalculateFlocking() + aB.CalculateFlocking() + cB.CalculateFlocking();
+            Vector2D steeringForce = SB.CalculateFlocking() + AB.CalculateFlocking() + CB.CalculateFlocking();
 
             return steeringForce.SetMagnitude(ME.MaxSpeed);
         }

@@ -11,15 +11,11 @@ namespace AAI_assignment.behaviour
 
     class ArriveBehaviour : SteeringBehaviour
     {
-        MovingEntity me;
-        public ArriveBehaviour(MovingEntity me) : base(me)
-        {
-            this.me = me;
-        }
+        public ArriveBehaviour(MovingEntity me) : base(me) { }
 
         public override Vector2D Calculate()
         {
-            Vector2D ToTarget = me.MyWorld.Target.Pos - ME.Pos;
+            Vector2D ToTarget = ME.MyWorld.Target.Pos - ME.Pos;
 
             double dist = ToTarget.Length();
 

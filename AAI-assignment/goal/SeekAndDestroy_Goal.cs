@@ -54,7 +54,7 @@ namespace AAI_assignment
             {
                 ProcessSubGoals();
 
-                // if no subgoals left, deactivate goal
+                // if no subgoals left, start seeking new target
                 if (ProcessSubGoals() == 1)
                     status = 3;
 
@@ -69,18 +69,17 @@ namespace AAI_assignment
                     Activate();
                 }
 
-                // check if target is within damage distance
-                if (Vector2D.DistanceSquared(agent.Pos, agent.Target.Pos) < 1000)
-                {
-                    status = 1;
-                    DestroyGoal g = new DestroyGoal(this.agent);
-                    AddSubgoal(g);
-                }
-
-                // check if target is still allive
-                if (agent.Target.Dead)
-                    status = 1;
+            // check if target is within damage distance
+            if (Vector2D.DistanceSquared(agent.Pos, agent.Target.Pos) < 1000)
+            {
+                status = 1;
+                DestroyGoal g = new DestroyGoal(this.agent);
+                AddSubgoal(g);
             }
+
+            // check if target is still allive
+            if (agent.Target.Dead)
+                status = 1;
 
             return status;
         }

@@ -231,7 +231,7 @@ namespace AAI_assignment
             // Fuzzy Module
             FuzzyModule fm = new FuzzyModule();
 
-            // Distance to target
+            // Distance to Target
             FuzzyVariable DistToTarget = fm.CreateFLV("DistToTarget", 0, 10000000);
 
             FuzzySet Target_Close = DistToTarget.AddLeftShoulderSet("Target_Close", 0, 25000, 50000);
