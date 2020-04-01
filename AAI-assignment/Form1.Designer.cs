@@ -530,7 +530,6 @@
             this.DoubleBuffered = true;
             this.Name = "Form1";
             this.Text = "Steering";
-            //this.Resize += new System.EventHandler(this.Form1_Resize);
             this.menuPanel.ResumeLayout(false);
             this.behaviourPage.ResumeLayout(false);
             this.behaviourPage.PerformLayout();

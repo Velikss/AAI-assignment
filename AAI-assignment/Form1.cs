@@ -172,11 +172,21 @@ namespace AAI_assignment
 
         private void entityUpDown_ValueChanged(object sender, EventArgs e)
         {
+            // first, pause the entities to prevent crashes
+            WorldParameters.EntitiesPaused = true;
+            PlayPauseEntitiesButton.Text = "Play";
+
+            // Remove or add entities
             int current = WorldParameters.EntityCount;
 
             if (current > (int)entityUpDown.Value) world.RemoveEntities(current - (int)entityUpDown.Value); else world.AddEntities((int)entityUpDown.Value - current);
 
             WorldParameters.EntityCount = (int)entityUpDown.Value;
+
+            // lastly, unpause the entities
+            WorldParameters.EntitiesPaused = false;
+            PlayPauseEntitiesButton.Text = "Pause";
+
         }
 
         private void speedSlider_Scroll(object sender, EventArgs e)

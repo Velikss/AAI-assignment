@@ -171,10 +171,7 @@ namespace AAI_assignment
 
         public void RemoveEntities(int n)
         {
-            for (int i = 0; i < n; i++)
-            {
-                Entities.RemoveRange(Entities.Count - n, n);
-            }
+            Entities.RemoveRange(0, n);
         }
 
         public void UpdateSpeed()
