@@ -24,8 +24,6 @@ namespace AAI_assignment
 
         public override void Update(float timeElapsed)
         {
-            //Console.WriteLine(SB.Count);
-            //Vector2D steeringForce = SteeringBehaviour.Calculate();
             Vector2D steeringForce = new Vector2D();
             for (int i = 0; i < SB.Count; i++)
             {
@@ -39,8 +37,6 @@ namespace AAI_assignment
             Vector2D acceleration = steeringForce.Divide(Mass);
             Velocity += acceleration * timeElapsed;
             Velocity.Truncate(MaxSpeed);
-            //Velocity *= 2;
-            //Pos.Add(Velocity.Multiply(timeElapsed));
             Pos.Add(Velocity * timeElapsed);
             Velocity *= 0.9;
             Pos.WrapAround(MyWorld.Width, MyWorld.Height);
