@@ -52,7 +52,7 @@ namespace AAI_assignment
                 Label l = new Label();
                 l.Text = "Agent " + world.Agents[i].ID + ": " + world.Agents[i].Health;
                 l.Left = 5;
-                l.Top = i * 15 + 55;
+                l.Top = i * 15 + 75;
                 l.Size = new System.Drawing.Size(150, 15);
                 agentPage.Controls.Add(l);
                 ControlList.Add(l);
@@ -251,6 +251,56 @@ namespace AAI_assignment
                 WorldParameters.ShowAgentGoals = true;
             else
                 WorldParameters.ShowAgentGoals = false;
+        }
+
+        private void PlayPauseAgentsButton_Click(object sender, EventArgs e)
+        {
+            if (WorldParameters.AgentsPaused)
+            {
+                WorldParameters.AgentsPaused = false;
+                PlayPauseAgentsButton.Text = "Pause";
+            }
+            else
+            {
+                WorldParameters.AgentsPaused = true;
+                PlayPauseAgentsButton.Text = "Play";
+            }
+        }
+
+        private void ResetAgentsButton_Click(object sender, EventArgs e)
+        {
+            // Clear and remake agents
+            world.Agents.Clear();
+            world.AddAgents(WorldParameters.AgentCount);
+
+            // dont start the simulation yet
+            WorldParameters.AgentsPaused = true;
+            PlayPauseAgentsButton.Text = "Play";
+        }
+
+        private void PlayPauseEntitiesButton_Click(object sender, EventArgs e)
+        {
+            if (WorldParameters.EntitiesPaused)
+            {
+                WorldParameters.EntitiesPaused = false;
+                PlayPauseEntitiesButton.Text = "Pause";
+            }
+            else
+            {
+                WorldParameters.EntitiesPaused = true;
+                PlayPauseEntitiesButton.Text = "Play";
+            }
+        }
+
+        private void ResetEntitiesButton_Click(object sender, EventArgs e)
+        {
+            // Clear and remake entities
+            world.Entities.Clear();
+            world.AddEntities(WorldParameters.EntityCount);
+
+            // dont start the simulation yet
+            WorldParameters.EntitiesPaused = true;
+            PlayPauseEntitiesButton.Text = "Play";
         }
 
         private void Form1_Resize(object sender, EventArgs e)

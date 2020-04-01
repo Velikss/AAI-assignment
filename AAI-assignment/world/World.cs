@@ -51,12 +51,14 @@ namespace AAI_assignment
         public static int EntityCount = 200;
         public static int EntityScale = 4;
         public static int EntityMaxSpeed = 10;
+        public static bool EntitiesPaused = true;
 
         // Agent
         public static int AgentCount = 5;
         public static int AgentScale = 16;
         public static bool AgentDebugging = false;
         public static bool ShowAgentGoals = true;
+        public static bool AgentsPaused = true;
 
         // Obstacle
         public static int ObstacleCount = 30;
@@ -118,7 +120,7 @@ namespace AAI_assignment
             Agents.Clear();
 
             // Entities
-            //AddEntities(WorldParameters.EntityCount);
+            AddEntities(WorldParameters.EntityCount);
             AddAgents(WorldParameters.AgentCount);
 
             // Obstacles
@@ -266,17 +268,23 @@ namespace AAI_assignment
 
         public void Update(float timeElapsed)
         {
-            for (int i = 0; i < Entities.Count; i++)
+            if (!WorldParameters.EntitiesPaused)
             {
-                Entities[i].Update(timeElapsed);
+                for (int i = 0; i < Entities.Count; i++)
+                {
+                    Entities[i].Update(timeElapsed);
+                }
+                WorldParameters.EntityCount = Entities.Count;
             }
-            WorldParameters.EntityCount = Entities.Count;
 
-            for (int i = 0; i < Agents.Count; i++)
+            if (!WorldParameters.AgentsPaused)
             {
-                Agents[i].Update(timeElapsed);
+                for (int i = 0; i < Agents.Count; i++)
+                {
+                    Agents[i].Update(timeElapsed);
+                }
+                WorldParameters.AgentCount = Agents.Count;
             }
-            WorldParameters.AgentCount = Agents.Count;
 
             Target.Update(timeElapsed);
         }
@@ -339,7 +347,9 @@ namespace AAI_assignment
             Entities.ForEach(e => e.Render(g));
             Target.Render(g);
             Obstacles.ForEach(e => e.Render(g));
-            Agents.ForEach(e => { if (!e.Dead) e.Render(g); });
+
+            //if(!WorldParameters.AgentsPaused)
+                Agents.ForEach(e => { if (!e.Dead) e.Render(g); });
         }
 
     }

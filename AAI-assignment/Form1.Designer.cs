@@ -1,7 +1,4 @@
-﻿using System;
-using System.Drawing;
-
-namespace AAI_assignment
+﻿namespace AAI_assignment
 {
     partial class Form1
     {
@@ -33,6 +30,8 @@ namespace AAI_assignment
         {
             this.menuPanel = new System.Windows.Forms.TabControl();
             this.behaviourPage = new System.Windows.Forms.TabPage();
+            this.PlayPauseEntitiesButton = new System.Windows.Forms.Button();
+            this.ResetEntitiesButton = new System.Windows.Forms.Button();
             this.TogglePauseButton = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -62,6 +61,8 @@ namespace AAI_assignment
             this.drawNodesBox = new System.Windows.Forms.CheckBox();
             this.gridDrawBox = new System.Windows.Forms.CheckBox();
             this.agentPage = new System.Windows.Forms.TabPage();
+            this.ResetAgentsButton = new System.Windows.Forms.Button();
+            this.PlayPauseAgentsButton = new System.Windows.Forms.Button();
             this.showAgentInfoCheckbox = new System.Windows.Forms.CheckBox();
             this.debugcheckbox = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -91,6 +92,8 @@ namespace AAI_assignment
             // 
             // behaviourPage
             // 
+            this.behaviourPage.Controls.Add(this.PlayPauseEntitiesButton);
+            this.behaviourPage.Controls.Add(this.ResetEntitiesButton);
             this.behaviourPage.Controls.Add(this.TogglePauseButton);
             this.behaviourPage.Controls.Add(this.label3);
             this.behaviourPage.Controls.Add(this.label2);
@@ -116,9 +119,29 @@ namespace AAI_assignment
             this.behaviourPage.Text = "Entities";
             this.behaviourPage.UseVisualStyleBackColor = true;
             // 
+            // PlayPauseEntitiesButton
+            // 
+            this.PlayPauseEntitiesButton.Location = new System.Drawing.Point(33, 6);
+            this.PlayPauseEntitiesButton.Name = "PlayPauseEntitiesButton";
+            this.PlayPauseEntitiesButton.Size = new System.Drawing.Size(75, 23);
+            this.PlayPauseEntitiesButton.TabIndex = 0;
+            this.PlayPauseEntitiesButton.Text = "Play";
+            this.PlayPauseEntitiesButton.UseVisualStyleBackColor = true;
+            this.PlayPauseEntitiesButton.Click += new System.EventHandler(this.PlayPauseEntitiesButton_Click);
+            // 
+            // ResetEntitiesButton
+            // 
+            this.ResetEntitiesButton.Location = new System.Drawing.Point(126, 6);
+            this.ResetEntitiesButton.Name = "ResetEntitiesButton";
+            this.ResetEntitiesButton.Size = new System.Drawing.Size(75, 23);
+            this.ResetEntitiesButton.TabIndex = 1;
+            this.ResetEntitiesButton.Text = "Reset";
+            this.ResetEntitiesButton.UseVisualStyleBackColor = true;
+            this.ResetEntitiesButton.Click += new System.EventHandler(this.ResetEntitiesButton_Click);
+            // 
             // TogglePauseButton
             // 
-            this.TogglePauseButton.Location = new System.Drawing.Point(143, 52);
+            this.TogglePauseButton.Location = new System.Drawing.Point(140, 80);
             this.TogglePauseButton.Name = "TogglePauseButton";
             this.TogglePauseButton.Size = new System.Drawing.Size(75, 23);
             this.TogglePauseButton.TabIndex = 14;
@@ -129,7 +152,7 @@ namespace AAI_assignment
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(72, 323);
+            this.label3.Location = new System.Drawing.Point(69, 351);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(70, 13);
             this.label3.TabIndex = 13;
@@ -138,7 +161,7 @@ namespace AAI_assignment
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(83, 263);
+            this.label2.Location = new System.Drawing.Point(80, 291);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(54, 13);
             this.label2.TabIndex = 3;
@@ -146,7 +169,7 @@ namespace AAI_assignment
             // 
             // obstacleScaleSlider
             // 
-            this.obstacleScaleSlider.Location = new System.Drawing.Point(8, 347);
+            this.obstacleScaleSlider.Location = new System.Drawing.Point(5, 375);
             this.obstacleScaleSlider.Margin = new System.Windows.Forms.Padding(2);
             this.obstacleScaleSlider.Maximum = 500;
             this.obstacleScaleSlider.Minimum = 5;
@@ -160,7 +183,7 @@ namespace AAI_assignment
             // arriveBox
             // 
             this.arriveBox.AutoSize = true;
-            this.arriveBox.Location = new System.Drawing.Point(6, 6);
+            this.arriveBox.Location = new System.Drawing.Point(3, 34);
             this.arriveBox.Name = "arriveBox";
             this.arriveBox.Size = new System.Drawing.Size(53, 17);
             this.arriveBox.TabIndex = 0;
@@ -170,7 +193,7 @@ namespace AAI_assignment
             // 
             // scaleSlider
             // 
-            this.scaleSlider.Location = new System.Drawing.Point(8, 276);
+            this.scaleSlider.Location = new System.Drawing.Point(5, 304);
             this.scaleSlider.Margin = new System.Windows.Forms.Padding(2);
             this.scaleSlider.Maximum = 300;
             this.scaleSlider.Minimum = 4;
@@ -184,7 +207,7 @@ namespace AAI_assignment
             // alignmentBox
             // 
             this.alignmentBox.AutoSize = true;
-            this.alignmentBox.Location = new System.Drawing.Point(6, 29);
+            this.alignmentBox.Location = new System.Drawing.Point(3, 57);
             this.alignmentBox.Name = "alignmentBox";
             this.alignmentBox.Size = new System.Drawing.Size(72, 17);
             this.alignmentBox.TabIndex = 5;
@@ -194,7 +217,7 @@ namespace AAI_assignment
             // 
             // speedSlider
             // 
-            this.speedSlider.Location = new System.Drawing.Point(8, 215);
+            this.speedSlider.Location = new System.Drawing.Point(5, 243);
             this.speedSlider.Maximum = 500;
             this.speedSlider.Minimum = 10;
             this.speedSlider.Name = "speedSlider";
@@ -207,7 +230,7 @@ namespace AAI_assignment
             // cohesionBox
             // 
             this.cohesionBox.AutoSize = true;
-            this.cohesionBox.Location = new System.Drawing.Point(6, 52);
+            this.cohesionBox.Location = new System.Drawing.Point(3, 80);
             this.cohesionBox.Name = "cohesionBox";
             this.cohesionBox.Size = new System.Drawing.Size(70, 17);
             this.cohesionBox.TabIndex = 4;
@@ -218,7 +241,7 @@ namespace AAI_assignment
             // speedLabel
             // 
             this.speedLabel.AutoSize = true;
-            this.speedLabel.Location = new System.Drawing.Point(72, 199);
+            this.speedLabel.Location = new System.Drawing.Point(69, 227);
             this.speedLabel.Name = "speedLabel";
             this.speedLabel.Size = new System.Drawing.Size(65, 13);
             this.speedLabel.TabIndex = 9;
@@ -227,7 +250,7 @@ namespace AAI_assignment
             // seekBox
             // 
             this.seekBox.AutoSize = true;
-            this.seekBox.Location = new System.Drawing.Point(6, 75);
+            this.seekBox.Location = new System.Drawing.Point(3, 103);
             this.seekBox.Name = "seekBox";
             this.seekBox.Size = new System.Drawing.Size(65, 17);
             this.seekBox.TabIndex = 2;
@@ -237,7 +260,7 @@ namespace AAI_assignment
             // 
             // entityUpDown
             // 
-            this.entityUpDown.Location = new System.Drawing.Point(143, 6);
+            this.entityUpDown.Location = new System.Drawing.Point(140, 34);
             this.entityUpDown.Maximum = new decimal(new int[] {
             1200,
             0,
@@ -261,7 +284,7 @@ namespace AAI_assignment
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(96, 8);
+            this.label1.Location = new System.Drawing.Point(93, 36);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(41, 13);
             this.label1.TabIndex = 7;
@@ -270,7 +293,7 @@ namespace AAI_assignment
             // obstacleSeparationBox
             // 
             this.obstacleSeparationBox.AutoSize = true;
-            this.obstacleSeparationBox.Location = new System.Drawing.Point(6, 143);
+            this.obstacleSeparationBox.Location = new System.Drawing.Point(3, 171);
             this.obstacleSeparationBox.Name = "obstacleSeparationBox";
             this.obstacleSeparationBox.Size = new System.Drawing.Size(122, 17);
             this.obstacleSeparationBox.TabIndex = 8;
@@ -281,7 +304,7 @@ namespace AAI_assignment
             // separationBox
             // 
             this.separationBox.AutoSize = true;
-            this.separationBox.Location = new System.Drawing.Point(6, 98);
+            this.separationBox.Location = new System.Drawing.Point(3, 126);
             this.separationBox.Name = "separationBox";
             this.separationBox.Size = new System.Drawing.Size(77, 17);
             this.separationBox.TabIndex = 1;
@@ -292,7 +315,7 @@ namespace AAI_assignment
             // flockingBox
             // 
             this.flockingBox.AutoSize = true;
-            this.flockingBox.Location = new System.Drawing.Point(5, 166);
+            this.flockingBox.Location = new System.Drawing.Point(2, 194);
             this.flockingBox.Name = "flockingBox";
             this.flockingBox.Size = new System.Drawing.Size(66, 17);
             this.flockingBox.TabIndex = 3;
@@ -303,7 +326,7 @@ namespace AAI_assignment
             // wanderingBox
             // 
             this.wanderingBox.AutoSize = true;
-            this.wanderingBox.Location = new System.Drawing.Point(6, 120);
+            this.wanderingBox.Location = new System.Drawing.Point(3, 148);
             this.wanderingBox.Name = "wanderingBox";
             this.wanderingBox.Size = new System.Drawing.Size(78, 17);
             this.wanderingBox.TabIndex = 0;
@@ -436,6 +459,8 @@ namespace AAI_assignment
             // 
             // agentPage
             // 
+            this.agentPage.Controls.Add(this.ResetAgentsButton);
+            this.agentPage.Controls.Add(this.PlayPauseAgentsButton);
             this.agentPage.Controls.Add(this.showAgentInfoCheckbox);
             this.agentPage.Controls.Add(this.debugcheckbox);
             this.agentPage.Controls.Add(this.label4);
@@ -447,12 +472,32 @@ namespace AAI_assignment
             this.agentPage.Text = "Agents";
             this.agentPage.UseVisualStyleBackColor = true;
             // 
+            // ResetAgentsButton
+            // 
+            this.ResetAgentsButton.Location = new System.Drawing.Point(126, 6);
+            this.ResetAgentsButton.Name = "ResetAgentsButton";
+            this.ResetAgentsButton.Size = new System.Drawing.Size(75, 23);
+            this.ResetAgentsButton.TabIndex = 5;
+            this.ResetAgentsButton.Text = "Reset";
+            this.ResetAgentsButton.UseVisualStyleBackColor = true;
+            this.ResetAgentsButton.Click += new System.EventHandler(this.ResetAgentsButton_Click);
+            // 
+            // PlayPauseAgentsButton
+            // 
+            this.PlayPauseAgentsButton.Location = new System.Drawing.Point(33, 6);
+            this.PlayPauseAgentsButton.Name = "PlayPauseAgentsButton";
+            this.PlayPauseAgentsButton.Size = new System.Drawing.Size(75, 23);
+            this.PlayPauseAgentsButton.TabIndex = 4;
+            this.PlayPauseAgentsButton.Text = "Play";
+            this.PlayPauseAgentsButton.UseVisualStyleBackColor = true;
+            this.PlayPauseAgentsButton.Click += new System.EventHandler(this.PlayPauseAgentsButton_Click);
+            // 
             // showAgentInfoCheckbox
             // 
             this.showAgentInfoCheckbox.AutoSize = true;
             this.showAgentInfoCheckbox.Checked = true;
             this.showAgentInfoCheckbox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.showAgentInfoCheckbox.Location = new System.Drawing.Point(104, 32);
+            this.showAgentInfoCheckbox.Location = new System.Drawing.Point(101, 53);
             this.showAgentInfoCheckbox.Name = "showAgentInfoCheckbox";
             this.showAgentInfoCheckbox.Size = new System.Drawing.Size(73, 17);
             this.showAgentInfoCheckbox.TabIndex = 3;
@@ -463,9 +508,9 @@ namespace AAI_assignment
             // debugcheckbox
             // 
             this.debugcheckbox.AutoSize = true;
-            this.debugcheckbox.Checked = WorldParameters.AgentDebugging;
+            this.debugcheckbox.Checked = true;
             this.debugcheckbox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.debugcheckbox.Location = new System.Drawing.Point(9, 32);
+            this.debugcheckbox.Location = new System.Drawing.Point(6, 53);
             this.debugcheckbox.Name = "debugcheckbox";
             this.debugcheckbox.Size = new System.Drawing.Size(89, 17);
             this.debugcheckbox.TabIndex = 2;
@@ -476,7 +521,7 @@ namespace AAI_assignment
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 11);
+            this.label4.Location = new System.Drawing.Point(6, 33);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(46, 13);
             this.label4.TabIndex = 0;
@@ -556,6 +601,10 @@ namespace AAI_assignment
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.CheckBox debugcheckbox;
         private System.Windows.Forms.CheckBox showAgentInfoCheckbox;
+        private System.Windows.Forms.Button ResetAgentsButton;
+        private System.Windows.Forms.Button PlayPauseAgentsButton;
+        private System.Windows.Forms.Button PlayPauseEntitiesButton;
+        private System.Windows.Forms.Button ResetEntitiesButton;
     }
 }
 
