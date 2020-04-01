@@ -114,7 +114,7 @@
             this.behaviourPage.Padding = new System.Windows.Forms.Padding(3);
             this.behaviourPage.Size = new System.Drawing.Size(246, 742);
             this.behaviourPage.TabIndex = 0;
-            this.behaviourPage.Text = "Entities";
+            this.behaviourPage.Text = "Simulator";
             this.behaviourPage.UseVisualStyleBackColor = true;
             // 
             // PlayPauseEntitiesButton
@@ -456,7 +456,7 @@
             this.agentPage.Padding = new System.Windows.Forms.Padding(3);
             this.agentPage.Size = new System.Drawing.Size(246, 742);
             this.agentPage.TabIndex = 3;
-            this.agentPage.Text = "Agents";
+            this.agentPage.Text = "Battle Royale";
             this.agentPage.UseVisualStyleBackColor = true;
             // 
             // ResetAgentsButton
