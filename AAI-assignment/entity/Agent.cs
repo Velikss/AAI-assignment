@@ -27,6 +27,8 @@ namespace AAI_assignment
             this.Scale = WorldParameters.AgentScale;
             this.MyGoal = new SeekAndDestroy_Goal(this);
             this.Attackers = new List<Agent>();
+            this.DebugColor = Color.Blue;
+            this.DefaultColor = Color.Blue;
         }
 
         public override void Update(float delta)

@@ -57,7 +57,7 @@ namespace AAI_assignment
         public static int AgentCount = 5;
         public static int AgentScale = 16;
         public static bool AgentDebugging = false;
-        public static bool ShowAgentGoals = true;
+        public static bool ShowAgentGoals = false;
         public static bool AgentsPaused = true;
 
         // Obstacle

@@ -297,21 +297,5 @@ namespace AAI_assignment
             PlayPauseEntitiesButton.Text = "Play";
         }
 
-        private void Form1_Resize(object sender, EventArgs e)
-        {
-            try
-            {
-                this.menuPanel.Height = this.Height - 100;
-                this.worldPanel.Height = this.Height;
-                this.world.Height = this.Height;
-
-                this.worldPanel.Width = this.Width;
-                this.world.Width = this.Width;
-            }
-            catch (NullReferenceException)
-            {
-                Console.WriteLine($"Could not resize ({this.Width} x {this.Height})");
-            }
-        }
     }
 }

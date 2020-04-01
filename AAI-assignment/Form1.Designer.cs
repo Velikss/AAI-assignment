@@ -482,8 +482,6 @@
             // showAgentInfoCheckbox
             // 
             this.showAgentInfoCheckbox.AutoSize = true;
-            this.showAgentInfoCheckbox.Checked = true;
-            this.showAgentInfoCheckbox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.showAgentInfoCheckbox.Location = new System.Drawing.Point(101, 53);
             this.showAgentInfoCheckbox.Name = "showAgentInfoCheckbox";
             this.showAgentInfoCheckbox.Size = new System.Drawing.Size(73, 17);
@@ -495,8 +493,6 @@
             // debugcheckbox
             // 
             this.debugcheckbox.AutoSize = true;
-            this.debugcheckbox.Checked = true;
-            this.debugcheckbox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.debugcheckbox.Location = new System.Drawing.Point(6, 53);
             this.debugcheckbox.Name = "debugcheckbox";
             this.debugcheckbox.Size = new System.Drawing.Size(89, 17);
@@ -517,9 +513,9 @@
             // worldPanel
             // 
             this.worldPanel.BackColor = System.Drawing.Color.White;
-            this.worldPanel.Location = new System.Drawing.Point(260, 0);
+            this.worldPanel.Location = new System.Drawing.Point(263, -3);
             this.worldPanel.Name = "worldPanel";
-            this.worldPanel.Size = new System.Drawing.Size(1640, 980);
+            this.worldPanel.Size = new System.Drawing.Size(1182, 861);
             this.worldPanel.TabIndex = 0;
             this.worldPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.dbPanel1_Paint);
             this.worldPanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dbPanel1_MouseClick);
@@ -534,7 +530,7 @@
             this.DoubleBuffered = true;
             this.Name = "Form1";
             this.Text = "Steering";
-            this.Resize += new System.EventHandler(this.Form1_Resize);
+            //this.Resize += new System.EventHandler(this.Form1_Resize);
             this.menuPanel.ResumeLayout(false);
             this.behaviourPage.ResumeLayout(false);
             this.behaviourPage.PerformLayout();
