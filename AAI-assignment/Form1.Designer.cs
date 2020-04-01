@@ -62,6 +62,7 @@ namespace AAI_assignment
             this.drawNodesBox = new System.Windows.Forms.CheckBox();
             this.gridDrawBox = new System.Windows.Forms.CheckBox();
             this.agentPage = new System.Windows.Forms.TabPage();
+            this.showAgentInfoCheckbox = new System.Windows.Forms.CheckBox();
             this.debugcheckbox = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
             this.worldPanel = new AAI_assignment.DBPanel();
@@ -433,21 +434,37 @@ namespace AAI_assignment
             this.gridDrawBox.UseVisualStyleBackColor = true;
             this.gridDrawBox.CheckedChanged += new System.EventHandler(this.GridBox_CheckedChanged);
             // 
-            // tabPage1
+            // agentPage
             // 
+            this.agentPage.Controls.Add(this.showAgentInfoCheckbox);
             this.agentPage.Controls.Add(this.debugcheckbox);
             this.agentPage.Controls.Add(this.label4);
             this.agentPage.Location = new System.Drawing.Point(4, 22);
-            this.agentPage.Name = "agents";
+            this.agentPage.Name = "agentPage";
             this.agentPage.Padding = new System.Windows.Forms.Padding(3);
             this.agentPage.Size = new System.Drawing.Size(246, 742);
             this.agentPage.TabIndex = 3;
             this.agentPage.Text = "Agents";
             this.agentPage.UseVisualStyleBackColor = true;
             // 
+            // showAgentInfoCheckbox
+            // 
+            this.showAgentInfoCheckbox.AutoSize = true;
+            this.showAgentInfoCheckbox.Checked = true;
+            this.showAgentInfoCheckbox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.showAgentInfoCheckbox.Location = new System.Drawing.Point(104, 32);
+            this.showAgentInfoCheckbox.Name = "showAgentInfoCheckbox";
+            this.showAgentInfoCheckbox.Size = new System.Drawing.Size(73, 17);
+            this.showAgentInfoCheckbox.TabIndex = 3;
+            this.showAgentInfoCheckbox.Text = "Show info";
+            this.showAgentInfoCheckbox.UseVisualStyleBackColor = true;
+            this.showAgentInfoCheckbox.CheckedChanged += new System.EventHandler(this.showAgentInfoCheckbox_CheckedChanged);
+            // 
             // debugcheckbox
             // 
             this.debugcheckbox.AutoSize = true;
+            this.debugcheckbox.Checked = WorldParameters.AgentDebugging;
+            this.debugcheckbox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.debugcheckbox.Location = new System.Drawing.Point(9, 32);
             this.debugcheckbox.Name = "debugcheckbox";
             this.debugcheckbox.Size = new System.Drawing.Size(89, 17);
@@ -538,6 +555,7 @@ namespace AAI_assignment
         private System.Windows.Forms.TabPage agentPage;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.CheckBox debugcheckbox;
+        private System.Windows.Forms.CheckBox showAgentInfoCheckbox;
     }
 }
 

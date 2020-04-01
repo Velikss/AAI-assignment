@@ -1,13 +1,13 @@
 ﻿using AAI_assignment.behaviour;
 using AAI_assignment.entity;
+using AAI_assignment.FuzzyLogic;
+using AAI_assignment.FuzzyLogic.FuzzyTerms;
 using AAI_assignment.util;
 using AAI_assignment.world;
 using Huiswerk6;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using AAI_assignment.FuzzyLogic;
-using AAI_assignment.FuzzyLogic.FuzzyTerms;
 
 namespace AAI_assignment
 {
@@ -53,9 +53,10 @@ namespace AAI_assignment
         public static int EntityMaxSpeed = 10;
 
         // Agent
-        public static int AgentCount = 10;
+        public static int AgentCount = 5;
         public static int AgentScale = 16;
-        public static bool AgentDebugging = true;
+        public static bool AgentDebugging = false;
+        public static bool ShowAgentGoals = true;
 
         // Obstacle
         public static int ObstacleCount = 30;

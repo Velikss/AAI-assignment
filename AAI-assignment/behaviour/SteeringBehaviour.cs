@@ -1,6 +1,4 @@
-﻿using AAI_assignment.entity;
-
-namespace AAI_assignment
+﻿namespace AAI_assignment
 {
     public abstract class SteeringBehaviour
     {

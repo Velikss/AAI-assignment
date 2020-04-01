@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AAI_assignment
 {
     public abstract class AtomicGoal : Goal
     {
-        public void Activate()
+        public override void Activate()
         {
             throw new NotImplementedException();
         }
@@ -23,7 +19,7 @@ namespace AAI_assignment
             throw new NotImplementedException();
         }
 
-        public void Terminate()
+        public override void Terminate()
         {
             throw new NotImplementedException();
         }

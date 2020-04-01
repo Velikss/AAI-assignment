@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AAI_assignment
 {
@@ -16,7 +12,7 @@ namespace AAI_assignment
             this.agent = a;
         }
 
-        public void Activate()
+        public override void Activate()
         {
             this.status = 2;
             agent.Target.Attackers.Add(agent);
@@ -36,20 +32,34 @@ namespace AAI_assignment
             }
 
             // if target destroyed, set status to complete
-            if (agent.Target.Health <= 0)
+            if (agent.Target.Dead)
+            {
+                agent.Target.Attackers.Remove(agent);
                 status = 1;
+            }
             else
             {
                 // color to red (attacking)
                 agent.DebugColor = Color.Red;
             }
 
+            // if target is out of range the destroying has failed
+            if (Vector2D.DistanceSquared(agent.Pos, agent.Target.Pos) > 2000)
+            {
+                status = 0;
+            }
+
             return status;
         }
 
-        public void Terminate()
+        public override void Terminate()
         {
             agent.Target.Attackers.Remove(agent);
+        }
+
+        public override string ToString()
+        {
+            return "Destroy";
         }
     }
 }

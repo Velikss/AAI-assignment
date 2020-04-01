@@ -1,13 +1,10 @@
-﻿using AAI_assignment.entity;
-
-
-namespace AAI_assignment.behaviour
+﻿namespace AAI_assignment.behaviour
 {
     public class SeekBehaviour : SteeringBehaviour
     {
         Vector2D target;
 
-        public SeekBehaviour(MovingEntity me) : base(me) 
+        public SeekBehaviour(MovingEntity me) : base(me)
         {
             this.target = me.MyWorld.Target.Pos;
         }

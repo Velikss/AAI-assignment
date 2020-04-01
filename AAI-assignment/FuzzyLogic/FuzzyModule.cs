@@ -1,8 +1,5 @@
-﻿
-using System;
-using System.CodeDom;
+﻿using AAI_assignment.FuzzyLogic.FuzzyTerms;
 using System.Collections.Generic;
-using AAI_assignment.FuzzyLogic.FuzzyTerms;
 
 namespace AAI_assignment.FuzzyLogic
 {

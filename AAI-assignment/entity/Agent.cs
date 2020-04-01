@@ -3,19 +3,17 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AAI_assignment
 {
     public class Agent : MovingEntity
     {
         public int ID { get; set; }
-        public float Health { get; set; }
+        public double Health { get; set; }
         public List<Agent> Attackers { get; set; }
         public bool Dead { get; set; }
         public Agent Target { get; set; }
-        public Goal MyGoal { get; set; }
+        public CompositeGoal MyGoal { get; set; }
         public Color DefaultColor { get; set; }
         public Color DebugColor { get; set; }
 
@@ -39,7 +37,7 @@ namespace AAI_assignment
 
                 if (Attackers.Count > 0)
                 {
-                    this.Health -= 0.4f;
+                    this.Health -= Attackers.Count * (random.NextDouble() * 0.4);
                 }
 
                 if (Health <= 0)
@@ -67,7 +65,7 @@ namespace AAI_assignment
             Velocity *= 0.9;
             Pos.WrapAround(MyWorld.Width, MyWorld.Height);
         }
-        
+
         public Agent FindMostDesirableTarget()
         {
             Agent mostDesirable = null;
@@ -92,7 +90,7 @@ namespace AAI_assignment
                 {
                     highetsCrispValue = crisp;
                     mostDesirable = n;
-                } 
+                }
             }
 
             return mostDesirable;
@@ -116,7 +114,7 @@ namespace AAI_assignment
             double size = Scale * 2;
 
             Rectangle entity = new Rectangle((int)leftCorner, (int)rightCorner, (int)size, (int)size);
-            
+
             // Set color to debug color if debugging is enabled
             Color c;
             if (WorldParameters.AgentDebugging)
@@ -127,13 +125,31 @@ namespace AAI_assignment
             Pen p = new Pen(c, 2);
             SolidBrush b = new SolidBrush(c);
 
-            Pen pen = new Pen(Color.Black, 2f);
             Font font = new Font("Arial", 10);
-            PointF point = new PointF((int)Pos.X, (int)Pos.Y);
+            PointF point = new PointF((int)Pos.X - 5, (int)Pos.Y -5);
 
             g.FillEllipse(b, entity);
             g.DrawLine(p, (int)Pos.X, (int)Pos.Y, (int)Pos.X + (int)(Velocity.X * 2), (int)Pos.Y + (int)(Velocity.Y * 2));
-            g.DrawString(ID.ToString(), font, Brushes.Green, point);
+            g.DrawString(ID.ToString(), font, Brushes.White, point);
+
+            // Draw goal names if needed, the subgoal list is a stack so this is gonne be some ugly code
+            if (WorldParameters.ShowAgentGoals)
+            {
+                // Draw main goal
+                PointF point1 = new PointF((int)Pos.X, (int)Pos.Y + 5);
+                g.DrawString(MyGoal.ToString(), font, Brushes.Green, point1);
+
+                // Draw subgoals
+                List<Goal> temp = new List<Goal>();
+                temp = MyGoal.SubGoals.ToList<Goal>();
+
+                for (int i = 0; i < temp.Count; i++)
+                {
+                    PointF point2 = new PointF((int)Pos.X, (int)Pos.Y + (17 + (i * 17)));
+                    g.DrawString(temp[i].ToString(), font, Brushes.Green, point2);
+                }
+            }
+
         }
     }
 }

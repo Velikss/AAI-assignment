@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AAI_assignment
+﻿namespace AAI_assignment
 {
     public enum Status
     {
         failed = 0,
         complete = 1,
-        active  = 2,
+        active = 2,
         inactive = 3
 
     }
@@ -18,13 +12,14 @@ namespace AAI_assignment
     {
         // failed = 0, complete = 1, active = 2, inactive = 3
         public int status = 3;
-        public void Activate() { }
+        public virtual void Activate() { }
         public virtual int Process() { return 0; }
-        public void Terminate() { }
+        public virtual void Terminate() { }
 
         public bool HandleMessage()
         {
-            return true;  }
+            return true;
+        }
 
         public bool IsActive()
         {

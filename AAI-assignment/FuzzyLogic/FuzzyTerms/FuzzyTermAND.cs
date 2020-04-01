@@ -6,7 +6,7 @@ namespace AAI_assignment.FuzzyLogic.FuzzyTerms
     {
         public FuzzySet t1, t2;
 
-        public FuzzyTermAND( ref FuzzySet t1, ref FuzzySet t2)
+        public FuzzyTermAND(ref FuzzySet t1, ref FuzzySet t2)
         {
             this.t1 = t1;
             this.t2 = t2;

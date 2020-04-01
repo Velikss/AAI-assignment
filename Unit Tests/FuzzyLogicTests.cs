@@ -1,7 +1,7 @@
-﻿using System;
-using AAI_assignment.FuzzyLogic;
+﻿using AAI_assignment.FuzzyLogic;
 using AAI_assignment.FuzzyLogic.FuzzyTerms;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace Unit_Tests
 {

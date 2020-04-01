@@ -1,6 +1,6 @@
-﻿using System;
+﻿using AAI_assignment.FuzzyLogic.FuzzySets;
+using System;
 using System.Collections.Generic;
-using AAI_assignment.FuzzyLogic.FuzzySets;
 
 namespace AAI_assignment.FuzzyLogic
 {
@@ -18,7 +18,7 @@ namespace AAI_assignment.FuzzyLogic
 
         public FuzzySet AddLeftShoulderSet(string name, double minBound, double peak, double maxBound)
         {
-            if(!InRange(minBound, maxBound))
+            if (!InRange(minBound, maxBound))
                 throw new FuzzySetOutOfRangeException("FuzzySet min or max value is out of range");
             FuzzyLeftShoulder fls = new FuzzyLeftShoulder(peak, minBound, maxBound);
             _memberSets.Add(name, fls);

@@ -1,7 +1,7 @@
-﻿using System;
-using System.Windows.Forms;
-using AAI_assignment.FuzzyLogic;
+﻿using AAI_assignment.FuzzyLogic;
 using AAI_assignment.FuzzyLogic.FuzzyTerms;
+using System;
+using System.Windows.Forms;
 
 namespace AAI_assignment
 {

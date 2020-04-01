@@ -2,16 +2,11 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AAI_assignment.behaviour;
 
 namespace AAI_assignment
 {
     class SeekAndDestroy_Goal : CompositeGoal
     {
-        public Stack<Goal> SubGoals;
-
         public Agent agent;
 
         public SeekAndDestroy_Goal(Agent a)
@@ -20,20 +15,27 @@ namespace AAI_assignment
             this.SubGoals = new Stack<Goal>();
         }
 
-        public void Activate()
+        public override void Activate()
         {
+            // set debug to yellow (seeking)
+            agent.DebugColor = Color.Yellow;
+
             // Set most desirable target
             agent.Target = agent.FindMostDesirableTarget();
 
+            if (agent.Target != null)
+            {
+                // refresh behaviors
+                agent.RefreshBehaviours();
 
-            // refresh behaviors
-            agent.RefreshBehaviours();
+                // set status to active (2)
+                status = 2;
 
-            // set status to active (2)
-            status = 2;
-
-            // set debug to yellow (seeking)
-            agent.DebugColor = Color.Yellow;
+            }
+            else
+            {
+                agent.DefaultColor = Color.Gold;
+            }
         }
 
         public bool HandleMessage()
@@ -52,43 +54,43 @@ namespace AAI_assignment
             {
                 ProcessSubGoals();
 
-                // if no subgoals left, start seeking new target
+                // if no subgoals left, deactivate goal
                 if (ProcessSubGoals() == 1)
-                {
-                    if (agent.MyWorld.Agents.Count == 1)
-                        agent.DefaultColor = Color.Gold;
-                    else
-                        Activate();
-                }
-                
+                    status = 3;
+
             }
 
-            // check if target is within damage distance
-            if (Vector2D.DistanceSquared(agent.Pos, agent.Target.Pos) < 1000)
+            // if active, check if goal is reached
+            if (status == 2)
             {
-                status = 1;
-                DestroyGoal g = new DestroyGoal(this.agent);
-                AddSubgoal(g);
-            }
+                // check if current target is still most desirable target
+                if (agent.Target != agent.FindMostDesirableTarget())
+                {
+                    Activate();
+                }
 
-            // check if target is still allive
-            if (agent.Target.Dead)
-                status = 1;
+                // check if target is within damage distance
+                if (Vector2D.DistanceSquared(agent.Pos, agent.Target.Pos) < 1000)
+                {
+                    status = 1;
+                    DestroyGoal g = new DestroyGoal(this.agent);
+                    AddSubgoal(g);
+                }
+
+                // check if target is still allive
+                if (agent.Target.Dead)
+                    status = 1;
+            }
 
             return status;
         }
 
-        public void Terminate()
-        {
-            RemoveAllSubgoals();
-        }
-
-        public void AddSubgoal(Goal g)
+        public override void AddSubgoal(Goal g)
         {
             SubGoals.Push(g);
         }
 
-        public void RemoveAllSubgoals()
+        public override void RemoveAllSubgoals()
         {
             foreach (Goal g in SubGoals)
                 g.Terminate();
@@ -96,7 +98,7 @@ namespace AAI_assignment
             SubGoals.Clear();
         }
 
-        public int ProcessSubGoals()
+        public override int ProcessSubGoals()
         {
             // remove all completed and failed goals from the front
             while (SubGoals.Count != 0 && (SubGoals.Peek().IsComplete() || SubGoals.Peek().HasFailed()))
@@ -119,6 +121,17 @@ namespace AAI_assignment
             {
                 return 1;
             }
+        }
+
+        public override void Terminate()
+        {
+            RemoveAllSubgoals();
+        }
+
+
+        public override string ToString()
+        {
+            return "Seek";
         }
     }
 }

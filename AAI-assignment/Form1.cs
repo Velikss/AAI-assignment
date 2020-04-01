@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Windows.Controls;
 using System.Windows.Forms;
-using ComboBox = System.Windows.Forms.ComboBox;
 using Control = System.Windows.Forms.Control;
 using Label = System.Windows.Forms.Label;
-using Panel = System.Windows.Controls.Panel;
 
 namespace AAI_assignment
 {
@@ -22,7 +19,7 @@ namespace AAI_assignment
         public Form1()
         {
             InitializeComponent();
-            
+
             world = new World(w: worldPanel.Width, h: worldPanel.Height);
 
             PopulateBehaviourBox();
@@ -48,9 +45,9 @@ namespace AAI_assignment
 
         private void PopulateAgentTab()
         {
-           AgentLabels = new List<Label>();
+            AgentLabels = new List<Label>();
 
-            for(int i = 0; i < world.Agents.Count; i++)
+            for (int i = 0; i < world.Agents.Count; i++)
             {
                 Label l = new Label();
                 l.Text = "Agent " + world.Agents[i].ID + ": " + world.Agents[i].Health;
@@ -64,9 +61,9 @@ namespace AAI_assignment
         }
         private void RefreshAgentLabels()
         {
-            for(int i = 0; i < AgentLabels.Count; i++)
+            for (int i = 0; i < AgentLabels.Count; i++)
             {
-                AgentLabels[i].Text = "Agent " + world.Agents[i].ID + ": " + (world.Agents[i].Health > 0f ? world.Agents[i].Health.ToString() : "Dead");
+                AgentLabels[i].Text = "Agent " + world.Agents[i].ID + ": " + (world.Agents[i].Health > 0f ? world.Agents[i].Health.ToString("0.00") : "Dead") + " " + world.Agents[i].Attackers.Count;
             }
         }
 
@@ -126,7 +123,7 @@ namespace AAI_assignment
 
             // Update panel
             int alliveAgents = 0;
-            for(int i = 0; i < world.Agents.Count; i++)
+            for (int i = 0; i < world.Agents.Count; i++)
                 if (!world.Agents[i].Dead)
                     alliveAgents++;
 
@@ -226,7 +223,8 @@ namespace AAI_assignment
                 TogglePauseButton.Text = "Pause";
                 WorldParameters.Pause = false;
                 timer.Enabled = true;
-            } else
+            }
+            else
             {
                 TogglePauseButton.Text = "Unpause";
                 WorldParameters.Pause = true;
@@ -245,6 +243,14 @@ namespace AAI_assignment
                 WorldParameters.AgentDebugging = true;
             else
                 WorldParameters.AgentDebugging = false;
+        }
+
+        private void showAgentInfoCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (showAgentInfoCheckbox.Checked)
+                WorldParameters.ShowAgentGoals = true;
+            else
+                WorldParameters.ShowAgentGoals = false;
         }
 
         private void Form1_Resize(object sender, EventArgs e)

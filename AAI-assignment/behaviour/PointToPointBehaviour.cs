@@ -1,5 +1,4 @@
-﻿using AAI_assignment.entity;
-using Huiswerk6;
+﻿using Huiswerk6;
 using System;
 using System.Collections.Generic;
 
@@ -21,9 +20,9 @@ namespace AAI_assignment.behaviour
             if (Target == null)
                 Target = Path.Pop();
 
-            if (!(ME.Pos.X >= Target.Pos.X - WorldParameters.TargetStopRange 
-                  && ME.Pos.X <= Target.Pos.X + WorldParameters.TargetStopRange 
-                  && ME.Pos.Y >= Target.Pos.Y - WorldParameters.TargetStopRange 
+            if (!(ME.Pos.X >= Target.Pos.X - WorldParameters.TargetStopRange
+                  && ME.Pos.X <= Target.Pos.X + WorldParameters.TargetStopRange
+                  && ME.Pos.Y >= Target.Pos.Y - WorldParameters.TargetStopRange
                   && ME.Pos.Y <= Target.Pos.Y + WorldParameters.TargetStopRange))
             {
                 Vector2D Tpos = Target.Pos.Clone();
