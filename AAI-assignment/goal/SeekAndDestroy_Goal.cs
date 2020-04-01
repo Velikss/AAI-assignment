@@ -69,18 +69,18 @@ namespace AAI_assignment
                     Activate();
                 }
 
-            // check if target is within damage distance
-            if (Vector2D.DistanceSquared(agent.Pos, agent.Target.Pos) < 1000)
-            {
-                status = 1;
-                DestroyGoal g = new DestroyGoal(this.agent);
-                AddSubgoal(g);
-            }
-
+                // check if target is within damage distance
+                if (Vector2D.DistanceSquared(agent.Pos, agent.Target.Pos) < 1000)
+                {
+                    status = 1;
+                    DestroyGoal g = new DestroyGoal(this.agent);
+                    AddSubgoal(g);
+                }
             // check if target is still allive
             if (agent.Target.Dead)
                 status = 1;
 
+            }
             return status;
         }
 

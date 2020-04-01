@@ -14,7 +14,7 @@ namespace AAI_assignment
     public struct WorldParameters
     {
         // Behaviours
-        public static bool alignment, arrive, cohesion, flocking, seek, separation, wandering, obstacleSeparation;
+        public static bool alignment, arrive, cohesion, flocking, seek, separation, obstacleSeparation;
 
         // Alignment
         public static int AlignmentRadius = 2;
@@ -219,8 +219,6 @@ namespace AAI_assignment
                     Entities[i].SB.Add(new SeekBehaviour(Entities[i]));
                 if (WorldParameters.separation)
                     Entities[i].SB.Add(new SeparationBehaviour(Entities[i], Entities));
-                if (WorldParameters.wandering)
-                    Entities[i].SB.Add(new WanderingBehaviour(Entities[i]));
                 if (WorldParameters.obstacleSeparation)
                     Entities[i].SB.Add(new ObstacleSeparationBehaviour(Entities[i], Obstacles));
             }
@@ -349,7 +347,7 @@ namespace AAI_assignment
             Obstacles.ForEach(e => e.Render(g));
 
             //if(!WorldParameters.AgentsPaused)
-                Agents.ForEach(e => { if (!e.Dead) e.Render(g); });
+            Agents.ForEach(e => { if (!e.Dead) e.Render(g); });
         }
 
     }

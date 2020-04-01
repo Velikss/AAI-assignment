@@ -89,29 +89,24 @@ namespace AAI_assignment
                     l.Size = new System.Drawing.Size(150, 15);
                     sliderPage.Controls.Add(l);
                     ControlList.Add(l);
-                    if (field.FieldType.Equals(typeof(float)) || field.FieldType.Equals(typeof(int)))
+
+                    TrackBar bar = new TrackBar();
+                    bar.Left = 5;
+                    bar.Width = 200;
+                    bar.Top = index * 65 + 25 + box;
+                    bar.Minimum = 0;
+                    bar.Maximum = 100;
+                    bar.TickStyle = TickStyle.None;
+                    bar.Name = field.Name;
+                    bar.ValueChanged += (object sender, EventArgs e) =>
                     {
-                        TrackBar bar = new TrackBar();
-                        bar.Left = 5;
-                        bar.Width = 200;
-                        bar.Top = index * 65 + 25 + box;
-                        bar.Minimum = 0;
-                        bar.Maximum = 100;
-                        bar.TickStyle = TickStyle.None;
-                        bar.Name = field.Name;
-                        bar.ValueChanged += (object sender, EventArgs e) =>
-                        {
-                            Console.WriteLine(bar.Name + WorldParameters.FlockingSepForce);
-                            fields.First(o => o.Name == bar.Name).SetValue(null, bar.Value);
-                        };
-                        bar.Value = Convert.ToInt32(field.GetValue(null));
-                        sliderPage.Controls.Add(bar);
-                        ControlList.Add(l);
-                    }
-                    else
-                    {
-                        //throw new Exception("non implemented type.");
-                    }
+                        Console.WriteLine(bar.Name + WorldParameters.FlockingSepForce);
+                        fields.First(o => o.Name == bar.Name).SetValue(null, bar.Value);
+                    };
+                    bar.Value = Convert.ToInt32(field.GetValue(null));
+                    sliderPage.Controls.Add(bar);
+                    ControlList.Add(l);
+
                     index++;
                 }
             }
@@ -155,7 +150,6 @@ namespace AAI_assignment
             WorldParameters.flocking = flockingBox.Checked;
             WorldParameters.seek = seekBox.Checked;
             WorldParameters.separation = separationBox.Checked;
-            WorldParameters.wandering = wanderingBox.Checked;
             WorldParameters.obstacleSeparation = obstacleSeparationBox.Checked;
 
             world.RefreshBehaviours();

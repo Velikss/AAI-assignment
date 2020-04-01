@@ -48,7 +48,6 @@
             this.obstacleSeparationBox = new System.Windows.Forms.CheckBox();
             this.separationBox = new System.Windows.Forms.CheckBox();
             this.flockingBox = new System.Windows.Forms.CheckBox();
-            this.wanderingBox = new System.Windows.Forms.CheckBox();
             this.sliderPage = new System.Windows.Forms.TabPage();
             this.behaviourBox = new System.Windows.Forms.ComboBox();
             this.gridPage = new System.Windows.Forms.TabPage();
@@ -110,7 +109,6 @@
             this.behaviourPage.Controls.Add(this.obstacleSeparationBox);
             this.behaviourPage.Controls.Add(this.separationBox);
             this.behaviourPage.Controls.Add(this.flockingBox);
-            this.behaviourPage.Controls.Add(this.wanderingBox);
             this.behaviourPage.Location = new System.Drawing.Point(4, 22);
             this.behaviourPage.Name = "behaviourPage";
             this.behaviourPage.Padding = new System.Windows.Forms.Padding(3);
@@ -293,7 +291,7 @@
             // obstacleSeparationBox
             // 
             this.obstacleSeparationBox.AutoSize = true;
-            this.obstacleSeparationBox.Location = new System.Drawing.Point(3, 171);
+            this.obstacleSeparationBox.Location = new System.Drawing.Point(3, 149);
             this.obstacleSeparationBox.Name = "obstacleSeparationBox";
             this.obstacleSeparationBox.Size = new System.Drawing.Size(122, 17);
             this.obstacleSeparationBox.TabIndex = 8;
@@ -315,24 +313,13 @@
             // flockingBox
             // 
             this.flockingBox.AutoSize = true;
-            this.flockingBox.Location = new System.Drawing.Point(2, 194);
+            this.flockingBox.Location = new System.Drawing.Point(3, 172);
             this.flockingBox.Name = "flockingBox";
             this.flockingBox.Size = new System.Drawing.Size(66, 17);
             this.flockingBox.TabIndex = 3;
             this.flockingBox.Text = "Flocking";
             this.flockingBox.UseVisualStyleBackColor = true;
             this.flockingBox.CheckedChanged += new System.EventHandler(this.behaviourBox_CheckedChanged);
-            // 
-            // wanderingBox
-            // 
-            this.wanderingBox.AutoSize = true;
-            this.wanderingBox.Location = new System.Drawing.Point(3, 148);
-            this.wanderingBox.Name = "wanderingBox";
-            this.wanderingBox.Size = new System.Drawing.Size(78, 17);
-            this.wanderingBox.TabIndex = 0;
-            this.wanderingBox.Text = "Wandering";
-            this.wanderingBox.UseVisualStyleBackColor = true;
-            this.wanderingBox.CheckedChanged += new System.EventHandler(this.behaviourBox_CheckedChanged);
             // 
             // sliderPage
             // 
@@ -573,7 +560,6 @@
         private System.Windows.Forms.CheckBox flockingBox;
         private System.Windows.Forms.CheckBox seekBox;
         private System.Windows.Forms.CheckBox separationBox;
-        private System.Windows.Forms.CheckBox wanderingBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.NumericUpDown entityUpDown;
         private System.Windows.Forms.CheckBox obstacleSeparationBox;

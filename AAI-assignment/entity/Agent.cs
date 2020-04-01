@@ -126,7 +126,7 @@ namespace AAI_assignment
             SolidBrush b = new SolidBrush(c);
 
             Font font = new Font("Arial", 10);
-            PointF point = new PointF((int)Pos.X - 5, (int)Pos.Y -5);
+            PointF point = new PointF((int)Pos.X - 5, (int)Pos.Y - 5);
 
             g.FillEllipse(b, entity);
             g.DrawLine(p, (int)Pos.X, (int)Pos.Y, (int)Pos.X + (int)(Velocity.X * 2), (int)Pos.Y + (int)(Velocity.Y * 2));
