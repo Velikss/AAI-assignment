@@ -87,8 +87,8 @@ namespace AAI_assignment
                 double dist = Vector2D.DistanceSquared(this.Pos, n.Pos);
                 double crisp = this.MyWorld.SeekAndDestroyModule.CalculateDesirability(dist, n.Health); // health TODO
 
-                if (mostDesirable == null)
-                    mostDesirable = n;
+                //if (mostDesirable == null)
+                //    mostDesirable = n;
                 if (crisp > highetsCrispValue && n != this)
                 {
                     highetsCrispValue = crisp;

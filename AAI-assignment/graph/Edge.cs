@@ -4,20 +4,20 @@ namespace Huiswerk6
 {
     public class Edge : IComparable<Edge>
     {
-        public Node dest;
-        public double cost;
+        public Node Dest;
+        public double Cost;
 
-        public Edge(Node d, double c)
+        public Edge(Node dest, double cost)
         {
-            dest = d;
-            cost = c;
+            Dest = dest;
+            Cost = cost;
         }
 
         public int CompareTo(Edge obj)
         {
             if (obj == null) return 0;
 
-            return cost.CompareTo(obj.cost);
+            return Cost.CompareTo(obj.Cost);
         }
     }
 }

@@ -172,7 +172,7 @@ namespace AAI_assignment.util
 
                 foreach (var Edge in current.Adj)
                 {
-                    Node node = Edge.dest;
+                    Node node = Edge.Dest;
                     // if this adjacent square is already in the closed list, ignore it
                     if (closedList.FirstOrDefault(l => l.Pos.X == node.Pos.X
                                                        && l.Pos.Y == node.Pos.Y) != null)

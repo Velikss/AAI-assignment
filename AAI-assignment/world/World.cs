@@ -8,6 +8,7 @@ using Huiswerk6;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Runtime.InteropServices;
 
 namespace AAI_assignment
 {
@@ -65,6 +66,7 @@ namespace AAI_assignment
         public static bool AgentDebugging = false;
         public static bool ShowAgentGoals = false;
         public static bool AgentsPaused = true;
+        public static float AgentSeekDistance = 100;
 
         // Obstacle
         public static int ObstacleCount = 30;
@@ -237,13 +239,17 @@ namespace AAI_assignment
         {
             // Fuzzy Module
             FuzzyModule fm = new FuzzyModule();
-
+            float radiusSquared = WorldParameters.AgentSeekDistance * WorldParameters.AgentSeekDistance;
             // Distance to Target
             FuzzyVariable DistToTarget = fm.CreateFLV("DistToTarget", 0, 10000000);
 
-            FuzzySet Target_Close = DistToTarget.AddLeftShoulderSet("Target_Close", 0, 25000, 50000);
-            FuzzySet Target_Medium = DistToTarget.AddTriangularSet("Target_Medium", 25000, 50000, 75000);
-            FuzzySet Target_Far = DistToTarget.AddRightShoulderSet("Target_Far", 50000, 75000, 100000);
+            //FuzzySet Target_Close = DistToTarget.AddLeftShoulderSet("Target_Close", 0, 25000, 50000);
+            //FuzzySet Target_Medium = DistToTarget.AddTriangularSet("Target_Medium", 25000, 50000, 75000);
+            //FuzzySet Target_Far = DistToTarget.AddRightShoulderSet("Target_Far", 50000, 75000, 100000);
+
+            FuzzySet Target_Close = DistToTarget.AddLeftShoulderSet("Target_Close", 0, radiusSquared * 0.25, radiusSquared * 0.5);
+            FuzzySet Target_Medium = DistToTarget.AddTriangularSet("Target_Medium", radiusSquared * 0.25, radiusSquared * 0.5, radiusSquared * 0.75);
+            FuzzySet Target_Far = DistToTarget.AddRightShoulderSet("Target_Far", radiusSquared * 0.5, radiusSquared * 0.75, radiusSquared);
 
             // Health Status
             FuzzyVariable HealthStatus = fm.CreateFLV("HealthStatus", 0, 100);
