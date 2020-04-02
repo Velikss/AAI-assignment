@@ -50,7 +50,7 @@ namespace AAI_assignment
         // Entity
         public static int EntityCount = 200;
         public static int EntityScale = 4;
-        public static int EntityMaxSpeed = 10;
+        public static int EntityMaxSpeed = 30;
         public static bool EntitiesPaused = true;
 
         // Agent
