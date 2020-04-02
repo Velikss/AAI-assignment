@@ -1,4 +1,4 @@
-﻿namespace AAI_assignment.FuzzyLogic.FuzzyTerms
+﻿namespace AAI_assignment
 {
     public abstract class FuzzyTerm
     {

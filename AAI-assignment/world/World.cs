@@ -1,14 +1,8 @@
 ﻿using AAI_assignment.behaviour;
-using AAI_assignment.entity;
-using AAI_assignment.FuzzyLogic;
-using AAI_assignment.FuzzyLogic.FuzzyTerms;
-using AAI_assignment.util;
-using AAI_assignment.world;
 using Huiswerk6;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Runtime.InteropServices;
 
 namespace AAI_assignment
 {
@@ -49,8 +43,8 @@ namespace AAI_assignment
         public static float ObstacleSepForce = 100;
 
         // Wandering
-        public static float WanderingRadius = 100;
-        public static float WanderingDistance = 120;
+        public static float WanderingRadius = 60;
+        public static float WanderingDistance = 80;
         public static float WanderingJitter = 3;
 
         // Entity
@@ -123,11 +117,9 @@ namespace AAI_assignment
 
         private void Populate()
         {
+            // Entities & Agents
             Entities.Clear();
-            //Obstacles.Clear();
             Agents.Clear();
-
-            // Entities
             AddEntities(WorldParameters.EntityCount);
             AddAgents(WorldParameters.AgentCount);
 
@@ -230,7 +222,7 @@ namespace AAI_assignment
                     Entities[i].SB.Add(new SeparationBehaviour(Entities[i], Entities));
                 if (WorldParameters.obstacleSeparation)
                     Entities[i].SB.Add(new ObstacleSeparationBehaviour(Entities[i], Obstacles));
-                if(WorldParameters.wandering)
+                if (WorldParameters.wandering)
                     Entities[i].SB.Add(new WanderBehaviour(Entities[i]));
             }
         }
@@ -242,10 +234,6 @@ namespace AAI_assignment
             float radiusSquared = WorldParameters.AgentSeekDistance * WorldParameters.AgentSeekDistance;
             // Distance to Target
             FuzzyVariable DistToTarget = fm.CreateFLV("DistToTarget", 0, 10000000);
-
-            //FuzzySet Target_Close = DistToTarget.AddLeftShoulderSet("Target_Close", 0, 25000, 50000);
-            //FuzzySet Target_Medium = DistToTarget.AddTriangularSet("Target_Medium", 25000, 50000, 75000);
-            //FuzzySet Target_Far = DistToTarget.AddRightShoulderSet("Target_Far", 50000, 75000, 100000);
 
             FuzzySet Target_Close = DistToTarget.AddLeftShoulderSet("Target_Close", 0, radiusSquared * 0.25, radiusSquared * 0.5);
             FuzzySet Target_Medium = DistToTarget.AddTriangularSet("Target_Medium", radiusSquared * 0.25, radiusSquared * 0.5, radiusSquared * 0.75);
@@ -357,11 +345,10 @@ namespace AAI_assignment
                 DrawGrid(g);
             if (WorldParameters.DrawPath && DrawnPath != null)
                 DrawPath(g);
+
             Entities.ForEach(e => e.Render(g));
             Target.Render(g);
             Obstacles.ForEach(e => e.Render(g));
-
-            //if(!WorldParameters.AgentsPaused)
             Agents.ForEach(e => { if (!e.Dead) e.Render(g); });
         }
 

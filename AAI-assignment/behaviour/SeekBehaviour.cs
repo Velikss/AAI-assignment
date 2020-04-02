@@ -1,4 +1,4 @@
-﻿namespace AAI_assignment.behaviour
+﻿namespace AAI_assignment
 {
     public class SeekBehaviour : SteeringBehaviour
     {

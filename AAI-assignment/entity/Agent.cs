@@ -72,7 +72,7 @@ namespace AAI_assignment
         public Agent FindMostDesirableTarget()
         {
             Agent mostDesirable = null;
-            double highetsCrispValue = 0.0;
+            double highestCrispValue = 0.0;
 
             for (int i = 0; this.MyWorld.Agents.Count > i; i++)
             {
@@ -85,13 +85,11 @@ namespace AAI_assignment
                     continue;
 
                 double dist = Vector2D.DistanceSquared(this.Pos, n.Pos);
-                double crisp = this.MyWorld.SeekAndDestroyModule.CalculateDesirability(dist, n.Health); // health TODO
+                double crisp = this.MyWorld.SeekAndDestroyModule.CalculateDesirability(dist, n.Health);
 
-                //if (mostDesirable == null)
-                //    mostDesirable = n;
-                if (crisp > highetsCrispValue && n != this)
+                if (crisp > highestCrispValue && n != this)
                 {
-                    highetsCrispValue = crisp;
+                    highestCrispValue = crisp;
                     mostDesirable = n;
                 }
             }
@@ -102,7 +100,7 @@ namespace AAI_assignment
         public void RefreshBehaviours(bool seek, bool wander)
         {
             SB.Clear();
-            
+
             SB.Add(new SeparationBehaviour(this, MyWorld.Agents.Cast<MovingEntity>().ToList()));
 
             SB.Add(new ObstacleSeparationBehaviour(this, MyWorld.Obstacles));

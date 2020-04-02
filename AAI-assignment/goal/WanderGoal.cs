@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AAI_assignment
 {
@@ -37,7 +33,7 @@ namespace AAI_assignment
             }
 
             // if target can be found, wander is complete
-            if(agent.FindMostDesirableTarget() != null)
+            if (agent.FindMostDesirableTarget() != null)
             {
                 status = 1;
             }

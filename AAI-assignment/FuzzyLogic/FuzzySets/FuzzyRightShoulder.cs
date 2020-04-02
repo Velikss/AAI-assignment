@@ -1,4 +1,4 @@
-﻿namespace AAI_assignment.FuzzyLogic.FuzzySets
+﻿namespace AAI_assignment
 {
     class FuzzyRightShoulder : FuzzySet
     {

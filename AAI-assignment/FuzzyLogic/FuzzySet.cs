@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AAI_assignment.FuzzyLogic
+namespace AAI_assignment
 {
     public class FuzzySet
     {

@@ -40,7 +40,7 @@ namespace AAI_assignment
             Velocity.Truncate(MaxSpeed);
             Pos.Add(Velocity * timeElapsed);
             Velocity *= 0.9;
-            if(WrapAround)
+            if (WrapAround)
                 Pos.WrapAround(MyWorld.Width, MyWorld.Height);
         }
 

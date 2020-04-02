@@ -24,7 +24,7 @@ namespace AAI_assignment
 
             PopulateBehaviourBox();
             PopulateAgentTab();
-                
+
             timer = new System.Timers.Timer();
             timer.Elapsed += Timer_Elapsed;
             timer.Interval = 20;

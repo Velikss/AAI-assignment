@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Windows;
 
 namespace AAI_assignment
 {
@@ -122,7 +121,7 @@ namespace AAI_assignment
             Y = (Y + yMax) % yMax;
             return this;
         }
-        
+
         public Vector2D Invert()
         {
             Vector2D n = new Vector2D(X * -1, Y * -1);

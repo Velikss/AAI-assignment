@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AAI_assignment.behaviour
+namespace AAI_assignment
 {
     public enum Deceleration
     {

@@ -1,7 +1,7 @@
 ﻿using Huiswerk6;
 using System.Drawing;
 
-namespace AAI_assignment.entity
+namespace AAI_assignment
 {
     public class Target : MovingEntity
     {

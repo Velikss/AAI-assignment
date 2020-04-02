@@ -2,7 +2,7 @@
 using System.Drawing;
 
 
-namespace AAI_assignment.world
+namespace AAI_assignment
 {
     public class Obstacle : BaseGameEntity
     {

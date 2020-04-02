@@ -1,7 +1,6 @@
-﻿using AAI_assignment.FuzzyLogic.FuzzyTerms;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace AAI_assignment.FuzzyLogic
+namespace AAI_assignment
 {
     using VarMap = System.Collections.Generic.Dictionary<string, FuzzyVariable>;
     public class FuzzyModule

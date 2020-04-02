@@ -1,8 +1,7 @@
-﻿using AAI_assignment.FuzzyLogic.FuzzySets;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
-namespace AAI_assignment.FuzzyLogic
+namespace AAI_assignment
 {
     using MemberSets = System.Collections.Generic.Dictionary<string, FuzzySet>;
     public class FuzzyVariable

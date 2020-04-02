@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 
 
-namespace AAI_assignment.behaviour
+namespace AAI_assignment
 {
     class AlignmentBehaviour : SteeringBehaviour
     {

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AAI_assignment.Properties
+namespace AAI_assignment
 {
 
 

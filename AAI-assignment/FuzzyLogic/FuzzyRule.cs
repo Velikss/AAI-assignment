@@ -1,6 +1,4 @@
-﻿using AAI_assignment.FuzzyLogic.FuzzyTerms;
-
-namespace AAI_assignment.FuzzyLogic
+﻿namespace AAI_assignment
 {
     public class FuzzyRule
     {

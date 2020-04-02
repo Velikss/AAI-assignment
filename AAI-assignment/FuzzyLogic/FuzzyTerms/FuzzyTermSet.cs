@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AAI_assignment.FuzzyLogic.FuzzyTerms
+namespace AAI_assignment
 {
     public class FuzzyTermSet : FuzzyTerm
     {

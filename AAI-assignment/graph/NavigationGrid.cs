@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 
-namespace AAI_assignment.util
+namespace AAI_assignment
 {
     public class NavigationGrid
     {
