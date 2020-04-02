@@ -14,7 +14,7 @@ namespace AAI_assignment
     public struct WorldParameters
     {
         // Behaviours
-        public static bool alignment, arrive, cohesion, flocking, seek, separation, obstacleSeparation;
+        public static bool alignment, arrive, cohesion, flocking, seek, separation, obstacleSeparation, wandering;
 
         // Alignment
         public static int AlignmentRadius = 2;
@@ -47,6 +47,11 @@ namespace AAI_assignment
         public static float ObstacleSepRadius = 15;
         public static float ObstacleSepForce = 100;
 
+        // Wandering
+        public static float WanderingRadius = 100;
+        public static float WanderingDistance = 120;
+        public static float WanderingJitter = 3;
+
         // Entity
         public static int EntityCount = 200;
         public static int EntityScale = 4;
@@ -55,6 +60,7 @@ namespace AAI_assignment
 
         // Agent
         public static int AgentCount = 5;
+        public static int AlliveAgents = AgentCount;
         public static int AgentScale = 16;
         public static bool AgentDebugging = false;
         public static bool ShowAgentGoals = false;
@@ -126,7 +132,7 @@ namespace AAI_assignment
             // Obstacles
             for (int i = 0; i < WorldParameters.ObstacleCount; i++)
             {
-                Obstacle v = new Obstacle(Vector2D.CreateRandomPosition(Width, Height), this, WorldParameters.ObstacleScale);
+                Obstacle v = new Obstacle(Vector2D.CreateRandomWorldPosition(Width, Height), this, WorldParameters.ObstacleScale);
                 Obstacles.Add(v);
             }
         }
@@ -149,7 +155,7 @@ namespace AAI_assignment
             Random r = new Random();
             for (int i = 0; i < n; i++)
             {
-                Vehicle v = new Vehicle(Vector2D.CreateRandomPosition(Width, Height), this, WorldParameters.EntityScale);
+                Vehicle v = new Vehicle(Vector2D.CreateRandomWorldPosition(Width, Height), this, WorldParameters.EntityScale);
                 v.VColor = Color.FromArgb(r.Next(1, 255), r.Next(1, 255), r.Next(1, 255));
                 v.MaxSpeed = WorldParameters.EntityMaxSpeed;
                 Entities.Add(v);
@@ -160,14 +166,17 @@ namespace AAI_assignment
 
         public void AddAgents(int n)
         {
-            Random r = new Random();
             for (int i = 0; i < n; i++)
             {
-                Agent a = new Agent(Vector2D.CreateRandomPosition(Width, Height), this, i);
+                Agent a = new Agent(Vector2D.CreateRandomWorldPosition(Width, Height), this, i);
                 a.MaxSpeed = WorldParameters.EntityMaxSpeed;
                 a.DefaultColor = Color.Blue;
                 Agents.Add(a);
             }
+
+            // Make sure agent counts is still correct
+            WorldParameters.AgentCount = Agents.Count;
+            WorldParameters.AlliveAgents = WorldParameters.AgentCount;
         }
 
         public void RemoveEntities(int n)
@@ -219,6 +228,8 @@ namespace AAI_assignment
                     Entities[i].SB.Add(new SeparationBehaviour(Entities[i], Entities));
                 if (WorldParameters.obstacleSeparation)
                     Entities[i].SB.Add(new ObstacleSeparationBehaviour(Entities[i], Obstacles));
+                if(WorldParameters.wandering)
+                    Entities[i].SB.Add(new WanderBehaviour(Entities[i]));
             }
         }
 

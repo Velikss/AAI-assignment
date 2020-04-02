@@ -66,6 +66,7 @@
             this.debugcheckbox = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
             this.worldPanel = new AAI_assignment.DBPanel();
+            this.wanderBox = new System.Windows.Forms.CheckBox();
             this.menuPanel.SuspendLayout();
             this.behaviourPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.obstacleScaleSlider)).BeginInit();
@@ -91,6 +92,7 @@
             // 
             // behaviourPage
             // 
+            this.behaviourPage.Controls.Add(this.wanderBox);
             this.behaviourPage.Controls.Add(this.PlayPauseEntitiesButton);
             this.behaviourPage.Controls.Add(this.ResetEntitiesButton);
             this.behaviourPage.Controls.Add(this.TogglePauseButton);
@@ -420,7 +422,6 @@
             this.pathfindingLabel.Size = new System.Drawing.Size(69, 13);
             this.pathfindingLabel.TabIndex = 10;
             this.pathfindingLabel.Text = "Path finding: ";
-            this.pathfindingLabel.Click += new System.EventHandler(this.pathfindingLabel_Click);
             // 
             // drawNodesBox
             // 
@@ -520,6 +521,18 @@
             this.worldPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.dbPanel1_Paint);
             this.worldPanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dbPanel1_MouseClick);
             // 
+            // checkBox1
+            // 
+            this.wanderBox.AutoSize = true;
+            this.wanderBox.Location = new System.Drawing.Point(3, 195);
+            this.wanderBox.Name = "Wandering";
+            this.wanderBox.Size = new System.Drawing.Size(66, 17);
+            this.wanderBox.TabIndex = 15;
+            this.wanderBox.Text = "Wandering";
+            this.wanderBox.UseVisualStyleBackColor = true;
+            this.wanderBox.CheckedChanged += new System.EventHandler(this.behaviourBox_CheckedChanged);
+            this.wanderBox.Checked = WorldParameters.wandering;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -586,6 +599,7 @@
         private System.Windows.Forms.Button PlayPauseAgentsButton;
         private System.Windows.Forms.Button PlayPauseEntitiesButton;
         private System.Windows.Forms.Button ResetEntitiesButton;
+        private System.Windows.Forms.CheckBox wanderBox;
     }
 }
 

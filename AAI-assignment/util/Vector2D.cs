@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 
 namespace AAI_assignment
 {
@@ -121,13 +122,29 @@ namespace AAI_assignment
             Y = (Y + yMax) % yMax;
             return this;
         }
+        
+        public Vector2D Invert()
+        {
+            Vector2D n = new Vector2D(X * -1, Y * -1);
 
-        public static Vector2D CreateRandomPosition(double xMax, double yMax)
+            return n;
+        }
+
+        public static Vector2D CreateRandomWorldPosition(double xMax, double yMax)
         {
             double x = random.NextDouble();
             double y = random.NextDouble();
             Vector2D newVector = new Vector2D(x, y).Multiply(xMax, yMax);
             return newVector;
+
+        }
+
+        public static Vector2D CreateRandomVector()
+        {
+            double x = random.NextDouble() - 0.5;
+            double y = random.NextDouble() - 0.5;
+
+            return new Vector2D(x, y).Normalize();
         }
 
         public Vector2D Clone()

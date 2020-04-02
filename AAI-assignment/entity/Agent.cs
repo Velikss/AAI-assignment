@@ -47,6 +47,7 @@ namespace AAI_assignment
                     this.Dead = true;
                     this.Target.Attackers.Remove(this);
                     MyGoal.Terminate();
+                    WorldParameters.AlliveAgents--;
                 }
 
                 Vector2D steeringForce = new Vector2D();
@@ -98,15 +99,19 @@ namespace AAI_assignment
             return mostDesirable;
         }
 
-        public void RefreshBehaviours()
+        public void RefreshBehaviours(bool seek, bool wander)
         {
             SB.Clear();
-
-            SB.Add(new SeekBehaviour(this, Target.Pos));
-
+            
             SB.Add(new SeparationBehaviour(this, MyWorld.Agents.Cast<MovingEntity>().ToList()));
 
             SB.Add(new ObstacleSeparationBehaviour(this, MyWorld.Obstacles));
+
+            if (seek)
+                SB.Add(new SeekBehaviour(this, Target.Pos));
+
+            if (wander)
+                SB.Add(new WanderBehaviour(this));
         }
 
         public virtual void Render(Graphics g)

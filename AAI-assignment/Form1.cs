@@ -38,9 +38,9 @@ namespace AAI_assignment
             behaviourBox.Items.Add("Cohesion");
             behaviourBox.Items.Add("Seek");
             behaviourBox.Items.Add("Separation");
-            behaviourBox.Items.Add("Wandering");
             behaviourBox.Items.Add("Obstacle Separation");
             behaviourBox.Items.Add("Flocking");
+            behaviourBox.Items.Add("Wandering");
         }
 
         private void PopulateAgentTab()
@@ -80,7 +80,7 @@ namespace AAI_assignment
             int box = 30;
             foreach (var field in fields)
             {
-                if (field.Name.Contains(behaviour.Split()[0]) && (field.Name.Contains("Force") || field.Name.Contains("Radius")))
+                if (field.Name.Contains(behaviour.Split()[0]) && (field.Name.Contains("Force") || field.Name.Contains("Radius") || field.Name.Contains("Jitter") || field.Name.Contains("Distance")))
                 {
                     Label l = new Label();
                     l.Text = field.Name.ToString();
@@ -95,7 +95,7 @@ namespace AAI_assignment
                     bar.Width = 200;
                     bar.Top = index * 65 + 25 + box;
                     bar.Minimum = 0;
-                    bar.Maximum = 100;
+                    bar.Maximum = 200;
                     bar.TickStyle = TickStyle.None;
                     bar.Name = field.Name;
                     bar.ValueChanged += (object sender, EventArgs e) =>
@@ -117,12 +117,7 @@ namespace AAI_assignment
             world.Render(e.Graphics);
 
             // Update panel
-            int alliveAgents = 0;
-            for (int i = 0; i < world.Agents.Count; i++)
-                if (!world.Agents[i].Dead)
-                    alliveAgents++;
-
-            this.label4.Text = "Agents: " + alliveAgents;
+            this.label4.Text = "Agents: " + WorldParameters.AlliveAgents;
             RefreshAgentLabels();
         }
 
@@ -151,6 +146,7 @@ namespace AAI_assignment
             WorldParameters.seek = seekBox.Checked;
             WorldParameters.separation = separationBox.Checked;
             WorldParameters.obstacleSeparation = obstacleSeparationBox.Checked;
+            WorldParameters.wandering = wanderBox.Checked;
 
             world.RefreshBehaviours();
         }
@@ -213,11 +209,6 @@ namespace AAI_assignment
             sliderPage.Controls.Clear();
             sliderPage.Controls.Add(behaviourBox);
             PrepareSliderPanel(behaviourBox.SelectedItem.ToString());
-        }
-
-        private void pathfindingLabel_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void TogglePauseButton_Click(object sender, EventArgs e)

@@ -26,7 +26,7 @@ namespace AAI_assignment
             if (agent.Target != null)
             {
                 // refresh behaviors
-                agent.RefreshBehaviours();
+                agent.RefreshBehaviours(true, false);
 
                 // set status to active (2)
                 status = 2;
@@ -34,7 +34,15 @@ namespace AAI_assignment
             }
             else
             {
-                agent.DefaultColor = Color.Gold;
+                // no target found so we either won or we can start wandering to come closer to other targets
+                if (WorldParameters.AlliveAgents == 1)
+                    agent.DefaultColor = Color.Gold;
+                else
+                {
+                    AddSubgoal(new WanderGoal(agent));
+                    status = 1;
+                }
+
             }
         }
 
