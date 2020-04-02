@@ -34,7 +34,6 @@ namespace AAI_assignment.util
             {
                 for (int y = 0; y <= NumOfCells; y++)
                 {
-                    bool obstacle = false;
                     Vector2D v = new Vector2D(x * CellSize, y * CellSize);
                     if (!InsideObstacle(v))
                     {

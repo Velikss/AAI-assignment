@@ -141,6 +141,7 @@ namespace AAI_assignment
             Target = new Vehicle(new Vector2D(TargetNodeX * NavGrid.CellSize, TargetNodeX * NavGrid.CellSize), this, 8);
             Target.VColor = Color.DarkRed;
             Target.MaxSpeed = WorldParameters.TargetMaxSpeed;
+            Target.WrapAround = false;
         }
 
         public void AddEntities(int n)

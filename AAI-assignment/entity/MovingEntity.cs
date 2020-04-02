@@ -13,6 +13,7 @@ namespace AAI_assignment
         public float MaxSpeed { get; set; }
         public BaseGameEntity Target { get; set; }
         public List<SteeringBehaviour> SB = new List<SteeringBehaviour>();
+        public bool WrapAround = true;
 
         public MovingEntity(Vector2D pos, World w) : base(pos, w)
         {
@@ -39,7 +40,8 @@ namespace AAI_assignment
             Velocity.Truncate(MaxSpeed);
             Pos.Add(Velocity * timeElapsed);
             Velocity *= 0.9;
-            Pos.WrapAround(MyWorld.Width, MyWorld.Height);
+            if(WrapAround)
+                Pos.WrapAround(MyWorld.Width, MyWorld.Height);
         }
 
         public override string ToString()
