@@ -16,7 +16,7 @@
 
         public override Vector2D Calculate()
         {
-
+            // It's the same as seek but inverted ;)
             if (WorldParameters.SeekStop)
             {
                 if (!(ME.Pos.X >= Target.X - WorldParameters.SeekStopRadius

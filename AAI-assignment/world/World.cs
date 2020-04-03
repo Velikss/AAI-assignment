@@ -9,7 +9,7 @@ namespace AAI_assignment
     public struct WorldParameters
     {
         // Behaviours
-        public static bool alignment, arrive, cohesion, flocking, seek, separation, obstacleSeparation, wandering;
+        public static bool alignment, arrive, cohesion, flocking, seek, separation, obstacleSeparation, wandering, fleeing;
 
         // Alignment
         public static int AlignmentRadius = 2;
@@ -224,6 +224,8 @@ namespace AAI_assignment
                     Entities[i].SB.Add(new ObstacleSeparationBehaviour(Entities[i], Obstacles));
                 if (WorldParameters.wandering)
                     Entities[i].SB.Add(new WanderBehaviour(Entities[i]));
+                if (WorldParameters.fleeing)
+                    Entities[i].SB.Add(new FleeBehaviour(Entities[i]));
             }
         }
 

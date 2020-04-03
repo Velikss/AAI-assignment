@@ -30,6 +30,7 @@
         {
             this.menuPanel = new System.Windows.Forms.TabControl();
             this.behaviourPage = new System.Windows.Forms.TabPage();
+            this.wanderBox = new System.Windows.Forms.CheckBox();
             this.PlayPauseEntitiesButton = new System.Windows.Forms.Button();
             this.ResetEntitiesButton = new System.Windows.Forms.Button();
             this.TogglePauseButton = new System.Windows.Forms.Button();
@@ -49,7 +50,7 @@
             this.separationBox = new System.Windows.Forms.CheckBox();
             this.flockingBox = new System.Windows.Forms.CheckBox();
             this.sliderPage = new System.Windows.Forms.TabPage();
-            this.behaviourBox = new System.Windows.Forms.ComboBox();
+            this.behaviourDropdownBox = new System.Windows.Forms.ComboBox();
             this.gridPage = new System.Windows.Forms.TabPage();
             this.UpdateGridBtn = new System.Windows.Forms.Button();
             this.gridLabel = new System.Windows.Forms.Label();
@@ -66,7 +67,7 @@
             this.debugcheckbox = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
             this.worldPanel = new AAI_assignment.DBPanel();
-            this.wanderBox = new System.Windows.Forms.CheckBox();
+            this.fleeBox = new System.Windows.Forms.CheckBox();
             this.menuPanel.SuspendLayout();
             this.behaviourPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.obstacleScaleSlider)).BeginInit();
@@ -92,6 +93,7 @@
             // 
             // behaviourPage
             // 
+            this.behaviourPage.Controls.Add(this.fleeBox);
             this.behaviourPage.Controls.Add(this.wanderBox);
             this.behaviourPage.Controls.Add(this.PlayPauseEntitiesButton);
             this.behaviourPage.Controls.Add(this.ResetEntitiesButton);
@@ -118,6 +120,17 @@
             this.behaviourPage.TabIndex = 0;
             this.behaviourPage.Text = "Simulator";
             this.behaviourPage.UseVisualStyleBackColor = true;
+            // 
+            // wanderBox
+            // 
+            this.wanderBox.AutoSize = true;
+            this.wanderBox.Location = new System.Drawing.Point(3, 195);
+            this.wanderBox.Name = "wanderBox";
+            this.wanderBox.Size = new System.Drawing.Size(78, 17);
+            this.wanderBox.TabIndex = 15;
+            this.wanderBox.Text = "Wandering";
+            this.wanderBox.UseVisualStyleBackColor = true;
+            this.wanderBox.CheckedChanged += new System.EventHandler(this.behaviourBox_CheckedChanged);
             // 
             // PlayPauseEntitiesButton
             // 
@@ -152,7 +165,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(69, 351);
+            this.label3.Location = new System.Drawing.Point(70, 379);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(70, 13);
             this.label3.TabIndex = 13;
@@ -161,7 +174,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(80, 291);
+            this.label2.Location = new System.Drawing.Point(81, 319);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(54, 13);
             this.label2.TabIndex = 3;
@@ -169,7 +182,7 @@
             // 
             // obstacleScaleSlider
             // 
-            this.obstacleScaleSlider.Location = new System.Drawing.Point(5, 375);
+            this.obstacleScaleSlider.Location = new System.Drawing.Point(6, 403);
             this.obstacleScaleSlider.Margin = new System.Windows.Forms.Padding(2);
             this.obstacleScaleSlider.Maximum = 500;
             this.obstacleScaleSlider.Minimum = 5;
@@ -193,7 +206,7 @@
             // 
             // scaleSlider
             // 
-            this.scaleSlider.Location = new System.Drawing.Point(5, 304);
+            this.scaleSlider.Location = new System.Drawing.Point(6, 332);
             this.scaleSlider.Margin = new System.Windows.Forms.Padding(2);
             this.scaleSlider.Maximum = 300;
             this.scaleSlider.Minimum = 4;
@@ -217,7 +230,7 @@
             // 
             // speedSlider
             // 
-            this.speedSlider.Location = new System.Drawing.Point(5, 243);
+            this.speedSlider.Location = new System.Drawing.Point(6, 271);
             this.speedSlider.Maximum = 500;
             this.speedSlider.Minimum = 10;
             this.speedSlider.Name = "speedSlider";
@@ -241,7 +254,7 @@
             // speedLabel
             // 
             this.speedLabel.AutoSize = true;
-            this.speedLabel.Location = new System.Drawing.Point(69, 227);
+            this.speedLabel.Location = new System.Drawing.Point(70, 255);
             this.speedLabel.Name = "speedLabel";
             this.speedLabel.Size = new System.Drawing.Size(65, 13);
             this.speedLabel.TabIndex = 9;
@@ -326,7 +339,7 @@
             // sliderPage
             // 
             this.sliderPage.AutoScroll = true;
-            this.sliderPage.Controls.Add(this.behaviourBox);
+            this.sliderPage.Controls.Add(this.behaviourDropdownBox);
             this.sliderPage.Location = new System.Drawing.Point(4, 22);
             this.sliderPage.Name = "sliderPage";
             this.sliderPage.Padding = new System.Windows.Forms.Padding(3);
@@ -337,12 +350,12 @@
             // 
             // behaviourBox
             // 
-            this.behaviourBox.FormattingEnabled = true;
-            this.behaviourBox.Location = new System.Drawing.Point(7, 7);
-            this.behaviourBox.Name = "behaviourBox";
-            this.behaviourBox.Size = new System.Drawing.Size(210, 21);
-            this.behaviourBox.TabIndex = 0;
-            this.behaviourBox.SelectedIndexChanged += new System.EventHandler(this.behaviourBox_SelectedIndexChanged);
+            this.behaviourDropdownBox.FormattingEnabled = true;
+            this.behaviourDropdownBox.Location = new System.Drawing.Point(7, 7);
+            this.behaviourDropdownBox.Name = "behaviourBox";
+            this.behaviourDropdownBox.Size = new System.Drawing.Size(210, 21);
+            this.behaviourDropdownBox.TabIndex = 0;
+            this.behaviourDropdownBox.SelectedIndexChanged += new System.EventHandler(this.behaviourBox_SelectedIndexChanged);
             // 
             // gridPage
             // 
@@ -523,15 +536,15 @@
             // 
             // checkBox1
             // 
-            this.wanderBox.AutoSize = true;
-            this.wanderBox.Location = new System.Drawing.Point(3, 195);
-            this.wanderBox.Name = "Wandering";
-            this.wanderBox.Size = new System.Drawing.Size(66, 17);
-            this.wanderBox.TabIndex = 15;
-            this.wanderBox.Text = "Wandering";
-            this.wanderBox.UseVisualStyleBackColor = true;
-            this.wanderBox.CheckedChanged += new System.EventHandler(this.behaviourBox_CheckedChanged);
-            this.wanderBox.Checked = WorldParameters.wandering;
+            this.fleeBox.AutoSize = true;
+            this.fleeBox.Location = new System.Drawing.Point(3, 218);
+            this.fleeBox.Name = "flee";
+            this.fleeBox.Size = new System.Drawing.Size(78, 17);
+            this.fleeBox.TabIndex = 16;
+            this.fleeBox.Text = "Flee";
+            this.fleeBox.UseVisualStyleBackColor = true;
+            this.fleeBox.Checked = WorldParameters.fleeing;
+            this.fleeBox.CheckedChanged += new System.EventHandler(this.behaviourBox_CheckedChanged);
             // 
             // Form1
             // 
@@ -580,7 +593,7 @@
         private System.Windows.Forms.TabPage sliderPage;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox behaviourBox;
+        private System.Windows.Forms.ComboBox behaviourDropdownBox;
         private System.Windows.Forms.TabPage gridPage;
         private System.Windows.Forms.CheckBox gridDrawBox;
         private System.Windows.Forms.CheckBox drawNodesBox;
@@ -600,6 +613,7 @@
         private System.Windows.Forms.Button PlayPauseEntitiesButton;
         private System.Windows.Forms.Button ResetEntitiesButton;
         private System.Windows.Forms.CheckBox wanderBox;
+        private System.Windows.Forms.CheckBox fleeBox;
     }
 }
 

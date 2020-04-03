@@ -34,13 +34,13 @@ namespace AAI_assignment
 
         private void PopulateBehaviourBox()
         {
-            behaviourBox.Items.Add("Alignment");
-            behaviourBox.Items.Add("Cohesion");
-            behaviourBox.Items.Add("Seek");
-            behaviourBox.Items.Add("Separation");
-            behaviourBox.Items.Add("Obstacle Separation");
-            behaviourBox.Items.Add("Flocking");
-            behaviourBox.Items.Add("Wandering");
+            behaviourDropdownBox.Items.Add("Alignment");
+            behaviourDropdownBox.Items.Add("Cohesion");
+            behaviourDropdownBox.Items.Add("Seek");
+            behaviourDropdownBox.Items.Add("Separation");
+            behaviourDropdownBox.Items.Add("Obstacle Separation");
+            behaviourDropdownBox.Items.Add("Flocking");
+            behaviourDropdownBox.Items.Add("Wandering");
         }
 
         private void PopulateAgentTab()
@@ -147,6 +147,7 @@ namespace AAI_assignment
             WorldParameters.separation = separationBox.Checked;
             WorldParameters.obstacleSeparation = obstacleSeparationBox.Checked;
             WorldParameters.wandering = wanderBox.Checked;
+            WorldParameters.fleeing = fleeBox.Checked;
 
             world.RefreshBehaviours();
         }
@@ -207,8 +208,8 @@ namespace AAI_assignment
         private void behaviourBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             sliderPage.Controls.Clear();
-            sliderPage.Controls.Add(behaviourBox);
-            PrepareSliderPanel(behaviourBox.SelectedItem.ToString());
+            sliderPage.Controls.Add(behaviourDropdownBox);
+            PrepareSliderPanel(behaviourDropdownBox.SelectedItem.ToString());
         }
 
         private void TogglePauseButton_Click(object sender, EventArgs e)
