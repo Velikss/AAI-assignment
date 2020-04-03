@@ -5,17 +5,17 @@ namespace AAI_assignment
 {
     class DestroyGoal : AtomicGoal
     {
-        public Agent agent;
+        public Agent Agent;
 
         public DestroyGoal(Agent a)
         {
-            this.agent = a;
+            this.Agent = a;
         }
 
         public override void Activate()
         {
-            this.status = 2;
-            agent.Target.Attackers.Add(agent);
+            this.Status = 2;
+            Agent.Target.Attackers.Add(Agent);
         }
 
         public bool HandleMessage()
@@ -26,35 +26,35 @@ namespace AAI_assignment
         public override int Process()
         {
             // if inactive, activate goal
-            if (status == 3)
+            if (Status == 3)
             {
                 Activate();
             }
 
-            // if target destroyed, set status to complete
-            if (agent.Target.Dead)
+            // if target destroyed, set Status to complete
+            if (Agent.Target.Dead)
             {
-                agent.Target.Attackers.Remove(agent);
-                status = 1;
+                Agent.Target.Attackers.Remove(Agent);
+                Status = 1;
             }
             else
             {
                 // color to red (attacking)
-                agent.DebugColor = Color.Red;
+                Agent.DebugColor = Color.Red;
             }
 
             // if target is out of range the destroying has failed
-            if (Vector2D.DistanceSquared(agent.Pos, agent.Target.Pos) > 2000)
+            if (Vector2D.DistanceSquared(Agent.Pos, Agent.Target.Pos) > 2000)
             {
-                status = 0;
+                Status = 0;
             }
 
-            return status;
+            return Status;
         }
 
         public override void Terminate()
         {
-            agent.Target.Attackers.Remove(agent);
+            Agent.Target.Attackers.Remove(Agent);
         }
 
         public override string ToString()

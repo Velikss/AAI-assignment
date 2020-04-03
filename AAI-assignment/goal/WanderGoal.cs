@@ -5,18 +5,18 @@ namespace AAI_assignment
 {
     class WanderGoal : AtomicGoal
     {
-        public Agent agent;
+        public Agent Agent;
 
         public WanderGoal(Agent a)
         {
-            this.agent = a;
+            this.Agent = a;
         }
 
         public override void Activate()
         {
-            this.status = 2;
-            agent.RefreshBehaviours(false, true);
-            agent.DebugColor = Color.Green;
+            this.Status = 2;
+            Agent.RefreshBehaviours(false, true);
+            Agent.DebugColor = Color.Green;
         }
 
         public bool HandleMessage()
@@ -27,23 +27,23 @@ namespace AAI_assignment
         public override int Process()
         {
             // if inactive, activate goal
-            if (status == 3)
+            if (Status == 3)
             {
                 Activate();
             }
 
             // if target can be found, wander is complete
-            if (agent.FindMostDesirableTarget() != null)
+            if (Agent.FindMostDesirableTarget() != null)
             {
-                status = 1;
+                Status = 1;
             }
 
-            return status;
+            return Status;
         }
 
         public override void Terminate()
         {
-            agent.RefreshBehaviours(false, false);
+            Agent.RefreshBehaviours(false, false);
         }
 
         public override string ToString()

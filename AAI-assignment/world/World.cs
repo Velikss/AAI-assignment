@@ -168,7 +168,7 @@ namespace AAI_assignment
                 Agents.Add(a);
             }
 
-            // Make sure agent counts is still correct
+            // Make sure Agent counts is still correct
             WorldParameters.AgentCount = Agents.Count;
             WorldParameters.AlliveAgents = WorldParameters.AgentCount;
         }

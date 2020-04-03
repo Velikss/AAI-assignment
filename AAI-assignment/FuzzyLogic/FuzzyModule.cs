@@ -60,6 +60,7 @@ namespace AAI_assignment
             }
         }
 
+        // Function for unit-test 
         public double CalculateDesirabilityTest(double dist, double ammo)
         {
             //fuzzify the inputs

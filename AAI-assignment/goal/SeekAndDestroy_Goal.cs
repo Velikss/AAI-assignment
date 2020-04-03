@@ -7,40 +7,40 @@ namespace AAI_assignment
 {
     class SeekAndDestroy_Goal : CompositeGoal
     {
-        public Agent agent;
+        public Agent Agent;
 
         public SeekAndDestroy_Goal(Agent a)
         {
-            this.agent = a;
+            this.Agent = a;
             this.SubGoals = new Stack<Goal>();
         }
 
         public override void Activate()
         {
             // set debug to yellow (seeking)
-            agent.DebugColor = Color.Yellow;
+            Agent.DebugColor = Color.Yellow;
 
             // Set most desirable target
-            agent.Target = agent.FindMostDesirableTarget();
+            Agent.Target = Agent.FindMostDesirableTarget();
 
-            if (agent.Target != null)
+            if (Agent.Target != null)
             {
                 // refresh behaviors
-                agent.RefreshBehaviours(true, false);
+                Agent.RefreshBehaviours(true, false);
 
-                // set status to active (2)
-                status = 2;
+                // set Status to active (2)
+                Status = 2;
 
             }
             else
             {
                 // no target found so we either won or we can start wandering to come closer to other targets
                 if (WorldParameters.AlliveAgents == 1)
-                    agent.DefaultColor = Color.Gold;
+                    Agent.DefaultColor = Color.Gold;
                 else
                 {
-                    AddSubgoal(new WanderGoal(agent));
-                    status = 1;
+                    AddSubGoal(new WanderGoal(Agent));
+                    Status = 1;
                 }
 
             }
@@ -54,52 +54,52 @@ namespace AAI_assignment
         public override int Process()
         {
             // if inactive, activate goal
-            if (status == 3)
+            if (Status == 3)
                 Activate();
 
             // if completed, process sub goals
-            if (status == 1)
+            if (Status == 1)
             {
                 ProcessSubGoals();
 
                 // if no subgoals left, start seeking new target
                 if (ProcessSubGoals() == 1)
-                    status = 3;
+                    Status = 3;
 
             }
 
             // if active, check if goal is reached
-            if (status == 2)
+            if (Status == 2)
             {
                 // check if current target is still most desirable target
-                if (agent.Target != agent.FindMostDesirableTarget())
+                if (Agent.Target != Agent.FindMostDesirableTarget())
                 {
                     Activate();
                 }
 
                 // check if target is still allive
-                if (agent.Target.Dead)
-                    status = 1;
+                if (Agent.Target.Dead)
+                    Status = 1;
                 else
                 {
                     // check if target is within damage distance
-                    if (Vector2D.DistanceSquared(agent.Pos, agent.Target.Pos) < 1000)
+                    if (Vector2D.DistanceSquared(Agent.Pos, Agent.Target.Pos) < 1000)
                     {
-                        status = 1;
-                        DestroyGoal g = new DestroyGoal(this.agent);
-                        AddSubgoal(g);
+                        Status = 1;
+                        DestroyGoal g = new DestroyGoal(this.Agent);
+                        AddSubGoal(g);
                     }
                 }
             }
-            return status;
+            return Status;
         }
 
-        public override void AddSubgoal(Goal g)
+        public override void AddSubGoal(Goal g)
         {
             SubGoals.Push(g);
         }
 
-        public override void RemoveAllSubgoals()
+        public override void RemoveAllSubGoals()
         {
             foreach (Goal g in SubGoals)
                 g.Terminate();
@@ -116,7 +116,7 @@ namespace AAI_assignment
             // if any subgoals remain, start processing
             if (SubGoals.Count != 0)
             {
-                // grab the status of the frontmost goal
+                // grab the Status of the frontmost goal
                 int StatusOfSubGoals = SubGoals.Peek().Process();
 
                 // we have to test for the special case where the frontmost subgoal reports completed and the subgoal list contains additional goals
@@ -134,7 +134,7 @@ namespace AAI_assignment
 
         public override void Terminate()
         {
-            RemoveAllSubgoals();
+            RemoveAllSubGoals();
         }
 
 

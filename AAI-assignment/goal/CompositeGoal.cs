@@ -30,12 +30,12 @@ namespace AAI_assignment
             throw new NotImplementedException();
         }
 
-        public virtual void AddSubgoal(Goal g)
+        public virtual void AddSubGoal(Goal g)
         {
             SubGoals.Push(g);
         }
 
-        public virtual void RemoveAllSubgoals()
+        public virtual void RemoveAllSubGoals()
         {
             foreach (Goal g in SubGoals)
                 g.Terminate();
@@ -52,7 +52,7 @@ namespace AAI_assignment
             // if any subgoals remain, start processing
             if (SubGoals.Count != 0)
             {
-                // grab the status of the frontmost goal
+                // grab the Status of the frontmost goal
                 int StatusOfSubGoals = SubGoals.Peek().Process();
 
                 // we have to test for the special case where the frontmost subgoal reports completed and the subgoal list contains additional goals
