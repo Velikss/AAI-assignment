@@ -9,10 +9,10 @@ namespace AAI_assignment
 {
     public partial class Form1 : Form
     {
-        public World world;
-        System.Timers.Timer timer;
-        public const float timeDelta = 0.8f;
-        public int defaultWidth = 1920, defaultHeight = 980;
+        public World World;
+        System.Timers.Timer Timer;
+        public const float TimeDelta = 0.8f;
+        public int DefaultWidth = 1920, DefaultHeight = 980;
         public List<Control> ControlList = new List<Control>();
         public List<Label> AgentLabels;
 
@@ -20,15 +20,15 @@ namespace AAI_assignment
         {
             InitializeComponent();
 
-            world = new World(w: worldPanel.Width, h: worldPanel.Height);
+            World = new World(w: worldPanel.Width, h: worldPanel.Height);
 
             PopulateBehaviourBox();
             PopulateAgentTab();
 
-            timer = new System.Timers.Timer();
-            timer.Elapsed += Timer_Elapsed;
-            timer.Interval = 20;
-            timer.Enabled = true;
+            Timer = new System.Timers.Timer();
+            Timer.Elapsed += Timer_Elapsed;
+            Timer.Interval = 20;
+            Timer.Enabled = true;
 
         }
 
@@ -47,10 +47,10 @@ namespace AAI_assignment
         {
             AgentLabels = new List<Label>();
 
-            for (int i = 0; i < world.Agents.Count; i++)
+            for (int i = 0; i < World.Agents.Count; i++)
             {
                 Label l = new Label();
-                l.Text = "Agent " + world.Agents[i].ID + ": " + world.Agents[i].Health;
+                l.Text = "Agent " + World.Agents[i].ID + ": " + World.Agents[i].Health;
                 l.Left = 5;
                 l.Top = i * 15 + 75;
                 l.Size = new System.Drawing.Size(150, 15);
@@ -63,13 +63,13 @@ namespace AAI_assignment
         {
             for (int i = 0; i < AgentLabels.Count; i++)
             {
-                AgentLabels[i].Text = "Agent " + world.Agents[i].ID + ": " + (world.Agents[i].Health > 0f ? world.Agents[i].Health.ToString("0.00") : "Dead") + " " + world.Agents[i].Attackers.Count;
+                AgentLabels[i].Text = "Agent " + World.Agents[i].ID + ": " + (World.Agents[i].Health > 0f ? World.Agents[i].Health.ToString("0.00") : "Dead") + " " + World.Agents[i].Attackers.Count;
             }
         }
 
         private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            world.Update(timeDelta);
+            World.Update(TimeDelta);
             worldPanel.Invalidate();
         }
 
@@ -114,7 +114,7 @@ namespace AAI_assignment
 
         private void dbPanel1_Paint(object sender, PaintEventArgs e)
         {
-            world.Render(e.Graphics);
+            World.Render(e.Graphics);
 
             // Update panel
             this.label4.Text = "Agents: " + WorldParameters.AlliveAgents;
@@ -123,7 +123,7 @@ namespace AAI_assignment
 
         private void dbPanel1_MouseClick(object sender, MouseEventArgs e)
         {
-            world.PathFinding(e.X, e.Y);
+            World.PathFinding(e.X, e.Y);
         }
 
         private void menuButton_Click(object sender, EventArgs e)
@@ -148,7 +148,7 @@ namespace AAI_assignment
             WorldParameters.obstacleSeparation = obstacleSeparationBox.Checked;
             WorldParameters.wandering = wanderBox.Checked;
 
-            world.RefreshBehaviours();
+            World.RefreshBehaviours();
         }
 
         private void GridBox_CheckedChanged(object sender, EventArgs e)
@@ -168,18 +168,18 @@ namespace AAI_assignment
 
         private void entityUpDown_ValueChanged(object sender, EventArgs e)
         {
-            // first, pause the entities to prevent crashes
+            // First, pause the entities to prevent crashes
             WorldParameters.EntitiesPaused = true;
             PlayPauseEntitiesButton.Text = "Play";
 
             // Remove or add entities
             int current = WorldParameters.EntityCount;
 
-            if (current > (int)entityUpDown.Value) world.RemoveEntities(current - (int)entityUpDown.Value); else world.AddEntities((int)entityUpDown.Value - current);
+            if (current > (int)entityUpDown.Value) World.RemoveEntities(current - (int)entityUpDown.Value); else World.AddEntities((int)entityUpDown.Value - current);
 
             WorldParameters.EntityCount = (int)entityUpDown.Value;
 
-            // lastly, unpause the entities
+            // Lastly, unpause the entities
             WorldParameters.EntitiesPaused = false;
             PlayPauseEntitiesButton.Text = "Pause";
 
@@ -189,19 +189,19 @@ namespace AAI_assignment
         {
             WorldParameters.EntityMaxSpeed = speedSlider.Value;
             speedLabel.Text = "Max speed: " + WorldParameters.EntityMaxSpeed;
-            world.UpdateSpeed();
+            World.UpdateSpeed();
         }
 
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
             WorldParameters.EntityScale = scaleSlider.Value;
-            world.UpdateScale();
+            World.UpdateScale();
         }
 
         private void trackBar2_Scroll(object sender, EventArgs e)
         {
             WorldParameters.ObstacleScale = obstacleScaleSlider.Value;
-            world.UpdateObstacleScale();
+            World.UpdateObstacleScale();
         }
 
         private void behaviourBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -217,13 +217,13 @@ namespace AAI_assignment
             {
                 TogglePauseButton.Text = "Pause";
                 WorldParameters.Pause = false;
-                timer.Enabled = true;
+                Timer.Enabled = true;
             }
             else
             {
                 TogglePauseButton.Text = "Unpause";
                 WorldParameters.Pause = true;
-                timer.Enabled = false;
+                Timer.Enabled = false;
             }
         }
 
@@ -265,10 +265,10 @@ namespace AAI_assignment
         private void ResetAgentsButton_Click(object sender, EventArgs e)
         {
             // Clear and remake agents
-            world.Agents.Clear();
-            world.AddAgents(WorldParameters.AgentCount);
+            World.Agents.Clear();
+            World.AddAgents(WorldParameters.AgentCount);
 
-            // dont start the simulation yet
+            // Don't start the simulation yet
             WorldParameters.AgentsPaused = true;
             PlayPauseAgentsButton.Text = "Play";
         }
@@ -290,10 +290,10 @@ namespace AAI_assignment
         private void ResetEntitiesButton_Click(object sender, EventArgs e)
         {
             // Clear and remake entities
-            world.Entities.Clear();
-            world.AddEntities(WorldParameters.EntityCount);
+            World.Entities.Clear();
+            World.AddEntities(WorldParameters.EntityCount);
 
-            // dont start the simulation yet
+            // Don't start the simulation yet
             WorldParameters.EntitiesPaused = true;
             PlayPauseEntitiesButton.Text = "Play";
         }
